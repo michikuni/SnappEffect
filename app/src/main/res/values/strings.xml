@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SnapEffect</string>
+    <!--top_menu-->
+    <string name="menu_open_title">Open</string>
+    <string name="menu_history_title">History</string>
+    <string name="menu_save_title">Title</string>
+    <string name="menu_more_vert_title">More vert</string>
+    <!--bottom_navigation-->
+    <string name="menu_filters">Hiệu ứng</string>
+    <string name="menu_tools">Công cụ</string>
+    <string name="icon_width">32dp</string>
+    <string name="icon_height">32dp</string>
+</resources>
