@@ -17,7 +17,7 @@ import java.util.List;
 public class BottomNavAdapter extends RecyclerView.Adapter<BottomNavAdapter.ViewHolder> {
 
     public interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClick(int position) throws InterruptedException;
     }
 
     private final List<BottomNavItem> items;
@@ -40,7 +40,13 @@ public class BottomNavAdapter extends RecyclerView.Adapter<BottomNavAdapter.View
         public void bind(final BottomNavItem bottomNavItem, final int position, final OnItemClickListener listener) {
             icon.setImageResource(bottomNavItem.iconRes);
             label.setText(bottomNavItem.label);
-            itemView.setOnClickListener(v -> listener.onItemClick(position));
+            itemView.setOnClickListener(v -> {
+                try {
+                    listener.onItemClick(position);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
     }
 

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -19,35 +20,58 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="@string/app_name" />
 
-    <LinearLayout
+    <!-- GPUImageView chiếm toàn bộ không gian còn lại giữa Toolbar và BottomNav -->
+    <FrameLayout
+        android:id="@+id/frame_gpu"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/nav_host_fragment"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
+        <jp.co.cyberagent.android.gpuimage.GPUImageView
+            android:id="@+id/content_edit"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/photo_edit_content"
-            android:contentDescription="Unknow_photo"
-            android:scaleType="centerInside"
-            android:src="@drawable/image_24px"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"/>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
 
-        <TextView
-            android:id="@+id/text_unknow_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vui lòng chọn ảnh"
-            android:textSize="20sp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+        <!-- Placeholder: Hiển thị khi chưa có ảnh -->
+        <LinearLayout
+            android:id="@+id/nav_host_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/white"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/photo_edit_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_24px"
+                android:contentDescription="@string/app_name" />
+
+            <TextView
+                android:id="@+id/text_unknow_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vui lòng chọn ảnh"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Bottom Navigation: RecyclerView để chứa nút Chọn ảnh / Filter / Lưu -->
+    <View
+        android:id="@+id/top_border"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#CCCCCC"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bottom_navigation"
@@ -57,6 +81,5 @@
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -30,8 +31,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
-
 dependencies {
+
+    implementation("com.github.yalantis:ucrop:2.2.10")
+    implementation("com.github.yalantis:ucrop:2.2.9-native")
+
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation (libs.gpuimage.v210)
 
     implementation(libs.glide)
     implementation(libs.appcompat)

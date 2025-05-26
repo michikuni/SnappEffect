@@ -17,9 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -35,24 +33,118 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.snapeffect.Adapter.BottomNavAdapter;
 import com.example.snapeffect.Model.BottomNavItem;
+import com.example.snapeffect.Model.EffectItem;
+import com.example.snapeffect.View.EffectBottomSheet;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+
+import jp.co.cyberagent.android.gpuimage.GPUImage;
+import jp.co.cyberagent.android.gpuimage.GPUImageView;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImage3x3ConvolutionFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImage3x3TextureSamplingFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageBoxBlurFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageGaussianBlurFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageHueFilter;
+
+import com.yalantis.ucrop.UCrop;
+
 
 public class MainActivity extends AppCompatActivity {
-    private static final int DEFAULT_SIZE = 150;
-//    private static final int REQUEST_CODE_GALLERY = 100;
-    private static final int REQUEST_CODE_CAMERA = 101;
     private static final int REQUEST_PERMISSION = 200;
     private static final int PERMISSION_REQUEST_CAMERA = 123;
     Toolbar layoutToolbar;
-    private ImageView imageView;
-    private TextView textView;
     private Uri photoUri;
+    private GPUImageView gpuImageView;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //Tạo Toolbar để hiển thị menu top
+        layoutToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(layoutToolbar);
+
+        gpuImageView = findViewById(R.id.content_edit);
+        gpuImageView.setScaleType(GPUImage.ScaleType.CENTER_INSIDE);
+        //Hiển thị menu bot bằng RecyclerView
+        RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
+        bottomNavView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        //Các thành phần của menu bot
+        List<BottomNavItem> items = new ArrayList<>();
+        items.add(new BottomNavItem(R.drawable.crop_24px, "Cắt"));
+        items.add(new BottomNavItem(R.drawable.shuffle, "Pha trộn ảnh"));
+        items.add(new BottomNavItem(R.drawable.blur_icon, "Làm mờ"));
+        items.add(new BottomNavItem(R.drawable.paint_icon, "Hiệu chỉnh màu sắc"));
+        items.add(new BottomNavItem(R.drawable.cyclone_24px, "Phát hiện biên & vẽ tay"));
+        items.add(new BottomNavItem(R.drawable.hive_24px, "Pixel & Hiệu ứng nghệ thuật"));
+        items.add(new BottomNavItem(R.drawable.settings_24px, "Hiệu ứng bổ sung"));
+
+        //Xử lý click
+        BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
+            String label = items.get(position).label;
+            if (position == 0){
+                Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis() + ".jpg"));
+                UCrop.of(photoUri, outputUri)
+                        .withAspectRatio(16, 9)
+                        .start(MainActivity.this);
+            }
+            else if (position == 1){
+                gpuImageView.setFilter(new GPUImageHueFilter());
+            }else if (position == 2){
+                List<EffectItem> blurEffects = Arrays.asList(
+                        new EffectItem("Gaussian Blur", new GPUImageGaussianBlurFilter()),
+                        new EffectItem("Box Blur", new GPUImageBoxBlurFilter())
+                );
+                EffectBottomSheet sheet = new EffectBottomSheet();
+                sheet.setEffectItems(blurEffects);
+                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.show(getSupportFragmentManager(), "blur_effects");
+            }else if (position == 3){
+                gpuImageView.setFilter(new GPUImageGaussianBlurFilter());
+            }else if (position == 4){
+                gpuImageView.setFilter(new GPUImageBoxBlurFilter());
+            }else if (position == 5){
+                gpuImageView.setFilter(new GPUImage3x3ConvolutionFilter());
+            }else if (position == 6){
+                gpuImageView.setFilter(new GPUImage3x3TextureSamplingFilter());
+            }
+            Log.d("Main Activity", "BottomNav clicked: " + label);
+            showToast("Clicked: " + label);
+        });
+
+        bottomNavView.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            assert data != null;
+            final Uri resultUri = UCrop.getOutput(data);
+            if (resultUri != null) {
+                photoUri = resultUri;
+                gpuImageView.setImage(photoUri);
+                gpuImageView.requestRender();
+            }
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            assert data != null;
+            final Throwable cropError = UCrop.getError(data);
+            if (cropError != null)
+                Toast.makeText(this, "Lỗi cắt ảnh: " + cropError.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void openCameraWithPermissionCheck() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -75,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     private void showToast(String message) {
         mainHandler.post(() -> {
             long startTime = System.nanoTime();
@@ -90,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         popup.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.option1){
               pickImageLauncher.launch("image/*");
-//                openGallery();
             }
             if (item.getItemId() == R.id.option2){
                 openCameraWithPermissionCheck();
@@ -103,24 +193,6 @@ public class MainActivity extends AppCompatActivity {
         anchorView.getLocationOnScreen(location);
         popup.show();
     }
-
-    //hết date
-//    private void openGallery() {
-//        Intent intent = new Intent(Intent.ACTION_PICK);
-//        intent.setType("image/*");
-//        startActivityForResult(intent, REQUEST_CODE_GALLERY);
-//    }
-//    private void openCamera() {
-//        ContentValues values = new ContentValues();
-//        values.put(MediaStore.Images.Media.TITLE, "New Picture");
-//        values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera");
-//
-//        photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-//
-//        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-//        startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
-//    }
     private void openCamera(){
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New picture");
@@ -138,20 +210,11 @@ public class MainActivity extends AppCompatActivity {
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK){
                     Toast.makeText(this, "Ảnh đã chụp xong", Toast.LENGTH_SHORT).show();
-                    Glide.with(this)
-                            .load(photoUri)
-                            .fitCenter()
-                            .into(imageView);
-                    imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            0
-                    );
-                    params.weight = 1;
-                    params.gravity = Gravity.CENTER;
-                    imageView.setLayoutParams(params);
-                    imageView.requestLayout();
-                    textView.setVisibility(ViewGroup.GONE);
+                    gpuImageView.setImage(photoUri);
+                    LinearLayout layout = findViewById(R.id.nav_host_fragment);
+                    layout.setVisibility(ViewGroup.GONE);
+                    gpuImageView.requestRender();
+                    gpuImageView.setFilter(new GPUImageFilter());
                 } else {
                     Toast.makeText(this, "Bạn đã hủy chụp ảnh", Toast.LENGTH_SHORT).show();
                 }
@@ -160,90 +223,19 @@ public class MainActivity extends AppCompatActivity {
     private final ActivityResultLauncher<String> pickImageLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
-                    Log.d("Main Activity", "Image selected: " + uri.toString());
-                    // Dùng Glide để tải ảnh
-                    Glide.with(this)
-                            .load(uri)
-                            .fitCenter()
-                            .into(imageView);
-                    imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                    // Thay đổi kích thước ImageView
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            0
-                    );
-                    params.weight = 1;
-                    params.gravity = Gravity.CENTER;
-                    imageView.setLayoutParams(params);
-                    imageView.requestLayout();
-                    textView.setVisibility(ViewGroup.GONE);
+                    Log.d("Main Activity", "Image selected: " + uri);
+                    photoUri = uri;
+                    gpuImageView.setImage(uri);
+                    LinearLayout layout = findViewById(R.id.nav_host_fragment);
+                    layout.setVisibility(ViewGroup.GONE);
+                    gpuImageView.requestRender();
+                    gpuImageView.setFilter(new GPUImageFilter());
                 }
                 else {
                     Log.w("Main Actitvity", "Không có ảnh nào được chọn");
                     Toast.makeText(this, "Không có ảnh nào đưược chọn", Toast.LENGTH_SHORT).show();
                 }
             });
-    @SuppressLint("MissingInflatedId")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setOnItemSelectedListener(item ->{
-//            if (item.getItemId() == R.id.nav_filters){
-//                Toast.makeText(this, "Filters clicked", Toast.LENGTH_SHORT).show();
-//                return true;
-//            } else if(item.getItemId() == R.id.nav_tools){
-//                Toast.makeText(this, "Tools clicked", Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
-//            return false;
-//        });
-
-
-        textView = findViewById(R.id.text_unknow_photo);
-        imageView = findViewById(R.id.photo_edit_content);
-        imageView.setImageResource(R.drawable.image_24px);
-        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        LinearLayout.LayoutParams defaultParams = new LinearLayout.LayoutParams(
-                dpToPx(DEFAULT_SIZE),
-                dpToPx(DEFAULT_SIZE)
-        );
-        defaultParams.gravity = Gravity.CENTER;
-        imageView.setLayoutParams(defaultParams);
-
-        //Tạo Toolbar để hiển thị menu top
-        layoutToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(layoutToolbar);
-
-        //Hiển thị menu bot bằng RecyclerView
-        RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
-        bottomNavView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        //Các thành phần của menu bot
-        List<BottomNavItem> items = new ArrayList<>();
-        items.add(new BottomNavItem(R.drawable.crop_24px, "Crop"));
-        items.add(new BottomNavItem(R.drawable.download_24px, "Download"));
-        items.add(new BottomNavItem(R.drawable.filter_alt_24px, "Filter"));
-        items.add(new BottomNavItem(R.drawable.folder_open_24px, "Open"));
-        items.add(new BottomNavItem(R.drawable.history_24px, "History"));
-        items.add(new BottomNavItem(R.drawable.photo_camera_24px, "Camera"));
-        items.add(new BottomNavItem(R.drawable.smartphone_24px, "Phone"));
-        items.add(new BottomNavItem(R.drawable.tune_24px, "Tune"));
-        items.add(new BottomNavItem(R.drawable.widgets_24px, "Widget"));
-        items.add(new BottomNavItem(R.drawable.more_vert_24px, "More Vert"));
-
-        //Xử lý click
-        BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
-            String label = items.get(position).label;
-            Log.d("Main Activity", "BottomNav clicked: " + label);
-            showToast("Clicked: " + label);
-        });
-
-        bottomNavView.setAdapter(adapter);
-    }
-
     private void checkPermission(){
         String[] permission = {
                 Manifest.permission.CAMERA,
@@ -263,28 +255,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_CODE_CAMERA) {
-                imageView.setImageURI(photoUri);
-            }
-        }
-    }
-    //Đổi từ dp sang pixel
-    private int dpToPx(int dp) {
-        float density = getResources().getDisplayMetrics().density;
-        return Math.round(dp * density);
-    }
-
     //Hiển thị menu top
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         return true;
     }
+
     //Xử lý các component của menu top
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -297,7 +274,6 @@ public class MainActivity extends AppCompatActivity {
                     androidx.appcompat.widget.ActionMenuView actionMenuView = (androidx.appcompat.widget.ActionMenuView) child;
                     for (int j = 0; j < actionMenuView.getChildCount(); j++) {
                         View menuItemView = actionMenuView.getChildAt(j);
-                        // Kiểm tra MenuItem tương ứng
                         if (actionMenuView.getMenu().getItem(j).getItemId() == R.id.menu_open) {
                             anchorView = menuItemView;
                             break;
@@ -309,9 +285,12 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Open file", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.menu_history) {
+            gpuImageView.setFilter(new GPUImageFilter());
             Toast.makeText(this, "History clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.menu_save) {
+            Random random = new Random();
+            gpuImageView.saveToPictures("Snap Effect", random + ".jpg", null);
             Toast.makeText(this, "Save clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.menu_more_vert) {
