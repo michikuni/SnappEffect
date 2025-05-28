@@ -46,12 +46,81 @@ import java.util.Random;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImage3x3ConvolutionFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImage3x3TextureSamplingFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageAddBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageAlphaBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageBilateralBlurFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageBoxBlurFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageBrightnessFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageBulgeDistortionFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageChromaKeyBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorBurnBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorDodgeBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorInvertFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorMatrixFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageContrastFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageCrosshatchFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageDarkenBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageDifferenceBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageDilationFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageDissolveBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageDivideBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageEmbossFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageExclusionBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageExposureFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFalseColorFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilterGroup;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageGammaFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageGaussianBlurFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageGlassSphereFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageGrayscaleFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageHalftoneFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageHardLightBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageHighlightShadowFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageHueBlendFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageHueFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLevelsFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLightenBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLinearBurnBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLookupFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLuminanceFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLuminanceThresholdFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageLuminosityBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageMixBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageMonochromeFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageMultiplyBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageNormalBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageOpacityFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageOverlayBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImagePixelationFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImagePosterizeFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageRGBDilationFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageRGBFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSaturationBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSaturationFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageScreenBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSepiaToneFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSketchFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSmoothToonFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSobelEdgeDetectionFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSobelThresholdFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSoftLightBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSolarizeFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSourceOverBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSphereRefractionFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSubtractBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSwirlFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageThresholdEdgeDetectionFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageToneCurveFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageToonFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageTransformFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageTwoInputFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageTwoPassFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageTwoPassTextureSamplingFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageWeakPixelInclusionFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageWhiteBalanceFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageZoomBlurFilter;
 
 import com.yalantis.ucrop.UCrop;
 
@@ -82,12 +151,13 @@ public class MainActivity extends AppCompatActivity {
         //Các thành phần của menu bot
         List<BottomNavItem> items = new ArrayList<>();
         items.add(new BottomNavItem(R.drawable.crop_24px, "Cắt"));
-        items.add(new BottomNavItem(R.drawable.shuffle, "Pha trộn ảnh"));
-        items.add(new BottomNavItem(R.drawable.blur_icon, "Làm mờ"));
-        items.add(new BottomNavItem(R.drawable.paint_icon, "Hiệu chỉnh màu sắc"));
-        items.add(new BottomNavItem(R.drawable.cyclone_24px, "Phát hiện biên & vẽ tay"));
-        items.add(new BottomNavItem(R.drawable.hive_24px, "Pixel & Hiệu ứng nghệ thuật"));
-        items.add(new BottomNavItem(R.drawable.settings_24px, "Hiệu ứng bổ sung"));
+        items.add(new BottomNavItem(R.drawable.shuffle, "Trộn ảnh"));
+        items.add(new BottomNavItem(R.drawable.blur_icon, "Chỉnh ảnh"));
+        items.add(new BottomNavItem(R.drawable.paint_icon, "Nghệ thuật"));
+        items.add(new BottomNavItem(R.drawable.cyclone_24px, "Biến dạng"));
+        items.add(new BottomNavItem(R.drawable.hive_24px, "Làm mờ"));
+        items.add(new BottomNavItem(R.drawable.settings_24px, "Ngưỡng hóa"));
+        items.add(new BottomNavItem(R.drawable.more_vert_24px, "Biến đổi"));
 
         //Xử lý click
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
@@ -99,27 +169,131 @@ public class MainActivity extends AppCompatActivity {
                         .start(MainActivity.this);
             }
             else if (position == 1){
-                gpuImageView.setFilter(new GPUImageHueFilter());
-            }else if (position == 2){
-                List<EffectItem> blurEffects = Arrays.asList(
-                        new EffectItem("Gaussian Blur", new GPUImageGaussianBlurFilter()),
-                        new EffectItem("Box Blur", new GPUImageBoxBlurFilter())
+                List<EffectItem> blendEffect = Arrays.asList(
+                        new EffectItem("Trộn pixel ảnh", new GPUImageAddBlendFilter()), // Cộng pixel ảnh
+                        new EffectItem("Trộn alpha ảnh", new GPUImageAlphaBlendFilter()), // Trộn alpha
+                        new EffectItem("Xóa màu nền", new GPUImageChromaKeyBlendFilter()), // Xóa màu nền
+                        new EffectItem("Trộn màu", new GPUImageColorBlendFilter()), // Trộn màu
+                        new EffectItem("Làm tối mạnh", new GPUImageColorBurnBlendFilter()), // Làm tối mạnh
+                        new EffectItem("Làm sáng mạnh", new GPUImageColorDodgeBlendFilter()), // Làm sáng mạnh
+                        new EffectItem("Giữ màu tối hơn", new GPUImageDarkenBlendFilter()), // Giữ màu tối hơn
+                        new EffectItem("Hiệu số pixel", new GPUImageDifferenceBlendFilter()), // Hiệu số pixel
+                        new EffectItem("Tan mờ ảnh", new GPUImageDissolveBlendFilter()), // Tan mờ ảnh
+                        new EffectItem("Chia pixel", new GPUImageDivideBlendFilter()), // Chia pixel
+                        new EffectItem("Khác biệt mềm", new GPUImageExclusionBlendFilter()), // Khác biệt mềm
+                        new EffectItem("Nhấn mạnh màu", new GPUImageHardLightBlendFilter()), // Nhấn mạnh màu
+                        new EffectItem("Trộn màu theo Hue", new GPUImageHueBlendFilter()), // Trộn màu theo Hue
+                        new EffectItem("Giữ màu sáng hơn", new GPUImageLightenBlendFilter()), // Giữ màu sáng hơn
+                        new EffectItem("Làm tối tuyến tính", new GPUImageLinearBurnBlendFilter()), // Làm tối tuyến tính
+                        new EffectItem("Trộn theo độ sáng", new GPUImageLuminosityBlendFilter()), // Trộn theo độ sáng
+                        new EffectItem("Trộn 2 ảnh theo tỉ lệ", new GPUImageMixBlendFilter("4")), // Trộn hai ảnh theo tỷ lệ
+                        new EffectItem("Nhân pixel ảnh", new GPUImageMultiplyBlendFilter()), // Nhân pixel ảnh
+                        new EffectItem("Trộn bình thường", new GPUImageNormalBlendFilter()), // Trộn bình thường
+                        new EffectItem("Hiệu ứng overlay", new GPUImageOverlayBlendFilter()), // Hiệu ứng overlay
+                        new EffectItem("Trộng độ bão hòa", new GPUImageSaturationBlendFilter()), // Trộn độ bão hòa
+                        new EffectItem("Làm sáng ảnh", new GPUImageScreenBlendFilter()), // Làm sáng ảnh
+                        new EffectItem("Trộn nhẹ nhàng", new GPUImageSoftLightBlendFilter()), // Trộn nhẹ nhàng
+                        new EffectItem("Ghi đè ảnh gốc", new GPUImageSourceOverBlendFilter()), // Ghi đè ảnh gốc
+                        new EffectItem("Trừ pixel", new GPUImageSubtractBlendFilter()) // Trừ pixel
                 );
                 EffectBottomSheet sheet = new EffectBottomSheet();
-                sheet.setEffectItems(blurEffects);
+                sheet.setEffectItems(blendEffect);
+                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.show(getSupportFragmentManager(), "blend effect");
+            }else if (position == 2){
+                List<EffectItem> adjustEffects = Arrays.asList(
+                        new EffectItem("Điều chỉnh độ sáng", new GPUImageBrightnessFilter(0.5f)), // Điều chỉnh độ sáng
+                        new EffectItem("Điều chỉnh tương phản", new GPUImageContrastFilter()), // Điều chỉnh tương phản
+                        new EffectItem("Điều chỉnh độ bão hòa", new GPUImageSaturationFilter()), // Điều chỉnh độ bão hòa
+                        new EffectItem("Điều chỉnh màu Hue", new GPUImageHueFilter()), // Điều chỉnh màu Hue
+                        new EffectItem("Điều chỉnh gamma", new GPUImageGammaFilter()), // Điều chỉnh gamma
+                        new EffectItem("Điều chỉnh phơi sáng", new GPUImageExposureFilter()), // Điều chỉnh phơi sáng
+                        new EffectItem("Cân bằng trắng", new GPUImageWhiteBalanceFilter()), // Cân bằng trắng
+                        new EffectItem("Điều chỉnh RGB riêng lẻ", new GPUImageRGBFilter()), // Điều chỉnh RGB riêng lẻ
+                        new EffectItem("Curve chỉnh màu", new GPUImageToneCurveFilter()), // Curve chỉnh màu
+                        new EffectItem("Đổ bóng", new GPUImageHighlightShadowFilter()), // Highlight/Shadow
+                        new EffectItem("Điều chỉnh cấp", new GPUImageLevelsFilter()), // Điều chỉnh levels
+                        new EffectItem("Áp dụng ma trận màu", new GPUImageColorMatrixFilter()), // Áp dụng ma trận màu
+                        new EffectItem("Lọc đơn sắc", new GPUImageMonochromeFilter()), // Lọc đơn sắc
+                        new EffectItem("Đảo màu", new GPUImageColorInvertFilter()), // Đảo màu
+                        new EffectItem("Đổi sáng tối thành màu", new GPUImageFalseColorFilter()), // Đổi sáng tối thành màu
+                        new EffectItem("Giảm màu sắc", new GPUImagePosterizeFilter()), // Giảm màu sắc
+                        new EffectItem("Màu nâu cổ điển", new GPUImageSepiaToneFilter()), // Màu nâu cổ điển
+                        new EffectItem("Chuyển sang trắng đen", new GPUImageGrayscaleFilter()) // Chuyển sang trắng đen
+                );
+                EffectBottomSheet sheet = new EffectBottomSheet();
+                sheet.setEffectItems(adjustEffects);
                 sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
                 sheet.show(getSupportFragmentManager(), "blur_effects");
             }else if (position == 3){
-                gpuImageView.setFilter(new GPUImageGaussianBlurFilter());
+                List<EffectItem> artEffect = Arrays.asList(
+                        new EffectItem("Vẽ phác thảo", new GPUImageSketchFilter()), // Vẽ phác thảo
+                        new EffectItem("Hiệu ứng hoạt hình", new GPUImageToonFilter()), // Hiệu ứng hoạt hình
+                        new EffectItem("Hoạt hình mượt", new GPUImageSmoothToonFilter()), // Hoạt hình mượt
+                        new EffectItem("Chấm tròn nửa tông", new GPUImageHalftoneFilter()), // Chấm tròn nửa tông
+                        new EffectItem("Gạch chéo", new GPUImageCrosshatchFilter()), // Gạch chéo
+                        new EffectItem("Nổi 3D", new GPUImageEmbossFilter()), // Nổi 3D
+                        new EffectItem("Đảo ngược vùng sáng", new GPUImageSolarizeFilter()), // Đảo ngược vùng sáng
+                        new EffectItem("LUT màu", new GPUImageLookupFilter()) // LUT màu
+                );
+                EffectBottomSheet sheet = new EffectBottomSheet();
+                sheet.setEffectItems(artEffect);
+                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.show(getSupportFragmentManager(), "art_effects");
             }else if (position == 4){
-                gpuImageView.setFilter(new GPUImageBoxBlurFilter());
+                List<EffectItem> distorEffect = Arrays.asList(
+                        new EffectItem("Phồng trung tâm", new GPUImageBulgeDistortionFilter()), // Phồng trung tâm
+                        new EffectItem("Hiệu ứng cầu kính", new GPUImageGlassSphereFilter()), // Hiệu ứng cầu kính
+                        new EffectItem("Xoáy hình ảnh", new GPUImageSwirlFilter()), // Xoáy hình ảnh
+                        new EffectItem("Khúc xạ cầu", new GPUImageSphereRefractionFilter()), // Khúc xạ cầu
+                        new EffectItem("Mờ zoom trung tâm", new GPUImageZoomBlurFilter()) // Mờ zoom trung tâm
+                );
+                EffectBottomSheet sheet = new EffectBottomSheet();
+                sheet.setEffectItems(distorEffect);
+                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.show(getSupportFragmentManager(), "distor_effects");
             }else if (position == 5){
-                gpuImageView.setFilter(new GPUImage3x3ConvolutionFilter());
+                List<EffectItem> blurEffect = Arrays.asList(
+                        new EffectItem("Làm mờ Gaussian", new GPUImageGaussianBlurFilter()), // Làm mờ Gaussian
+                        new EffectItem("Làm mờ hộp", new GPUImageBoxBlurFilter()), // Làm mờ hộp
+                        new EffectItem("Làm mờ giữ cạnh", new GPUImageBilateralBlurFilter()), // Làm mờ giữ cạnh
+                        new EffectItem("Khối pixel", new GPUImagePixelationFilter()), // Khối pixel
+                        new EffectItem("Dilation toàn ảnh", new GPUImageDilationFilter()), // Dilation toàn ảnh
+                        new EffectItem("Dilation kênh RGB", new GPUImageRGBDilationFilter()) // Dilation kênh RGB
+                );
+                EffectBottomSheet sheet = new EffectBottomSheet();
+                sheet.setEffectItems(blurEffect);
+                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.show(getSupportFragmentManager(), "blur_effects");
             }else if (position == 6){
-                gpuImageView.setFilter(new GPUImage3x3TextureSamplingFilter());
+                List<EffectItem> edgeEffect = Arrays.asList(
+                        new EffectItem("Phát hiện biên Sobel", new GPUImageSobelEdgeDetectionFilter()), // Phát hiện biên Sobel
+                        new EffectItem("Biên Sobel có ngưỡng", new GPUImageSobelThresholdFilter()), // Biên Sobel có ngưỡng
+                        new EffectItem("Biên theo ngưỡng", new GPUImageThresholdEdgeDetectionFilter()), // Biên theo ngưỡng
+                        new EffectItem("Lọc theo độ sáng", new GPUImageLuminanceFilter()), // Lọc theo độ sáng
+                        new EffectItem("Ngưỡng hóa sáng", new GPUImageLuminanceThresholdFilter()), // Ngưỡng hóa sáng
+                        new EffectItem("Lọc điểm yếu", new GPUImageWeakPixelInclusionFilter()) // Lọc điểm yếu
+                );
+                EffectBottomSheet sheet = new EffectBottomSheet();
+                sheet.setEffectItems(edgeEffect);
+                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.show(getSupportFragmentManager(), "edge_effects");
+            }else if (position == 7){
+                List<EffectItem> transEffect = Arrays.asList(
+                        new EffectItem("Bộ lọc cơ bản", new GPUImageFilter()), // Bộ lọc cơ bản
+                        new EffectItem("Nhóm filter", new GPUImageFilterGroup()), // Nhóm filter
+                        new EffectItem("Base blend 2 ảnh", new GPUImageTwoInputFilter("4")), // Base blend 2 ảnh
+                        new EffectItem("Filter 2 pass", new GPUImageTwoPassFilter("1", "1", "2", "2")), // Filter 2 pass
+                        new EffectItem("2 pass sampling", new GPUImageTwoPassTextureSamplingFilter("1", "1", "2", "2")), // 2 pass sampling
+                        new EffectItem("Biến đổi affine", new GPUImageTransformFilter()), // Biến đổi affine
+                        new EffectItem("Thay đổi độ mờ", new GPUImageOpacityFilter()) // Thay đổi độ mờ
+                );
+                EffectBottomSheet sheet = new EffectBottomSheet();
+                sheet.setEffectItems(transEffect);
+                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.show(getSupportFragmentManager(), "edge_effects");
             }
             Log.d("Main Activity", "BottomNav clicked: " + label);
-            showToast("Clicked: " + label);
         });
 
         bottomNavView.setAdapter(adapter);
@@ -282,19 +456,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             showPopupMenu(anchorView);
-            Toast.makeText(this, "Open file", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.menu_history) {
             gpuImageView.setFilter(new GPUImageFilter());
-            Toast.makeText(this, "History clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.menu_save) {
             Random random = new Random();
-            gpuImageView.saveToPictures("Snap Effect", random + ".jpg", null);
-            Toast.makeText(this, "Save clicked", Toast.LENGTH_SHORT).show();
+            int fileName = random.nextInt(100000);
+            gpuImageView.saveToPictures("Snap Effect", fileName + ".jpg", null);
+            Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+fileName+".jpg", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.menu_more_vert) {
-            Toast.makeText(this, "More Vert clicked", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
