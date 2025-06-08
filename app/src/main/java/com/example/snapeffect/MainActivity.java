@@ -12,13 +12,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -43,84 +38,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageAddBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageAlphaBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageBilateralBlurFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageBoxBlurFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageBrightnessFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageBulgeDistortionFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageChromaKeyBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorBurnBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorDodgeBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorInvertFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorMatrixFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageContrastFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageCrosshatchFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageDarkenBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageDifferenceBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageDilationFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageDissolveBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageDivideBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageEmbossFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageExclusionBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageExposureFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFalseColorFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilterGroup;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageGammaFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageGaussianBlurFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageGlassSphereFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageGrayscaleFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageHalftoneFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageHardLightBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageHighlightShadowFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageHueBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageHueFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLevelsFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLightenBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLinearBurnBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLookupFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLuminanceFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLuminanceThresholdFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLuminosityBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageMixBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageMonochromeFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageMultiplyBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageNormalBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageOpacityFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageOverlayBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImagePixelationFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImagePosterizeFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageRGBDilationFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageRGBFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSaturationBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSaturationFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageScreenBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSepiaToneFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSketchFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSmoothToonFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSobelEdgeDetectionFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSobelThresholdFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSoftLightBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSolarizeFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSourceOverBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSphereRefractionFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSubtractBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSwirlFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageThresholdEdgeDetectionFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageToneCurveFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageToonFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageTransformFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageTwoInputFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageTwoPassFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageTwoPassTextureSamplingFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageWeakPixelInclusionFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageWhiteBalanceFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageZoomBlurFilter;
+import jp.co.cyberagent.android.gpuimage.filter.*;
 
 import com.yalantis.ucrop.UCrop;
 
@@ -128,9 +50,12 @@ import com.yalantis.ucrop.UCrop;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION = 200;
     private static final int PERMISSION_REQUEST_CAMERA = 123;
+    SeekBar parameterSeekBar;
+    TextView seekBarLabel;
     Toolbar layoutToolbar;
     private Uri photoUri;
     private GPUImageView gpuImageView;
+    List<GPUImageFilter> activeFilters = new ArrayList<>();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
@@ -144,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         gpuImageView = findViewById(R.id.content_edit);
         gpuImageView.setScaleType(GPUImage.ScaleType.CENTER_INSIDE);
+
         //Hiển thị menu bot bằng RecyclerView
         RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
         bottomNavView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -198,11 +124,24 @@ public class MainActivity extends AppCompatActivity {
                 );
                 EffectBottomSheet sheet = new EffectBottomSheet();
                 sheet.setEffectItems(blendEffect);
-                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.setOnEffectClickListener(filter -> {
+                    applyFilter(filter);
+                    // Nếu filter có setMix, thì hiển thị thanh điều chỉnh
+                    if (filter instanceof GPUImageMixBlendFilter) {
+                        showSlider("Mix", 0f, 1f, 0f, value -> {
+                            ((GPUImageMixBlendFilter) filter).setMix(value);
+                            gpuImageView.requestRender(); // refresh ảnh
+                        });
+                    } else {
+                        hideSlider(); // Không hỗ trợ chỉnh
+                    }
+                    Log.e("filter", filter.toString());
+                });
+
                 sheet.show(getSupportFragmentManager(), "blend effect");
             }else if (position == 2){
                 List<EffectItem> adjustEffects = Arrays.asList(
-                        new EffectItem("Điều chỉnh độ sáng", new GPUImageBrightnessFilter(0.5f)), // Điều chỉnh độ sáng
+                        new EffectItem("Điều chỉnh độ sáng", new GPUImageBrightnessFilter()), // Điều chỉnh độ sáng
                         new EffectItem("Điều chỉnh tương phản", new GPUImageContrastFilter()), // Điều chỉnh tương phản
                         new EffectItem("Điều chỉnh độ bão hòa", new GPUImageSaturationFilter()), // Điều chỉnh độ bão hòa
                         new EffectItem("Điều chỉnh màu Hue", new GPUImageHueFilter()), // Điều chỉnh màu Hue
@@ -223,7 +162,17 @@ public class MainActivity extends AppCompatActivity {
                 );
                 EffectBottomSheet sheet = new EffectBottomSheet();
                 sheet.setEffectItems(adjustEffects);
-                sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
+                sheet.setOnEffectClickListener(filter -> {
+                    applyFilter(filter);
+                    if(filter instanceof GPUImageBrightnessFilter){
+                        showSlider("Độ sáng", 0f, 1f, 0f, value->{
+                            ((GPUImageBrightnessFilter) filter).setBrightness(value);
+                            gpuImageView.requestRender();
+                        });
+                    } else {
+                        hideSlider();
+                    }
+                });
                 sheet.show(getSupportFragmentManager(), "blur_effects");
             }else if (position == 3){
                 List<EffectItem> artEffect = Arrays.asList(
@@ -295,9 +244,47 @@ public class MainActivity extends AppCompatActivity {
             }
             Log.d("Main Activity", "BottomNav clicked: " + label);
         });
-
         bottomNavView.setAdapter(adapter);
+    }
+    private void applyFilter(GPUImageFilter filter) {
+        if (!activeFilters.contains(filter)) {
+            activeFilters.add(filter);
+            GPUImageFilterGroup group = new GPUImageFilterGroup(activeFilters);
+            gpuImageView.setFilter(group);
+            gpuImageView.requestRender();
+        }
+    }
 
+    @SuppressLint("SetTextI18n")
+    private void showSlider(String label, float min, float max, float defaultValue, Consumer<Float> onChange) {
+        parameterSeekBar = findViewById(R.id.parameterSeekBar);
+        seekBarLabel = findViewById(R.id.seekBarLabel);
+
+        seekBarLabel.setText(label + ": " + defaultValue);
+        parameterSeekBar.setVisibility(View.VISIBLE);
+        seekBarLabel.setVisibility(View.VISIBLE);
+        parameterSeekBar.setMax(100);
+        parameterSeekBar.setProgress((int) (defaultValue * 100));
+
+        parameterSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float value = min + (max - min) * (progress / 100f);
+                seekBarLabel.setText(label + ": " + String.format("%.2f", value));
+                onChange.accept(value);
+            }
+
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+    }
+
+    private void hideSlider() {
+        parameterSeekBar = findViewById(R.id.parameterSeekBar);
+        seekBarLabel = findViewById(R.id.seekBarLabel);
+        seekBarLabel.setVisibility(View.GONE);
+        parameterSeekBar.setVisibility(View.GONE);
     }
 
     @Override
