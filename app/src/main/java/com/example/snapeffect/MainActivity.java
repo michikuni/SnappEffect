@@ -1,15 +1,14 @@
 package com.example.snapeffect;
 
-import android.Manifest;
+import static com.example.snapeffect.Utils.FilterUtils.*;
+import static com.example.snapeffect.Utils.SliderUtils.*;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.*;
@@ -21,16 +20,16 @@ import androidx.annotation.NonNull;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.snapeffect.Adapter.BottomNavAdapter;
 import com.example.snapeffect.Model.BottomNavItem;
 import com.example.snapeffect.Model.EffectItem;
+import com.example.snapeffect.Utils.ImageUtils;
+import com.example.snapeffect.Utils.PermissionUtils;
+import com.example.snapeffect.Utils.UIUtils;
 import com.example.snapeffect.View.EffectBottomSheet;
 
 import java.io.File;
@@ -38,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Consumer;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
@@ -48,15 +46,12 @@ import com.yalantis.ucrop.UCrop;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_PERMISSION = 200;
+
     private static final int PERMISSION_REQUEST_CAMERA = 123;
-    SeekBar parameterSeekBar;
-    TextView seekBarLabel;
     Toolbar layoutToolbar;
     private Uri photoUri;
     private GPUImageView gpuImageView;
     List<GPUImageFilter> activeFilters = new ArrayList<>();
-    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,15 +120,15 @@ public class MainActivity extends AppCompatActivity {
                 EffectBottomSheet sheet = new EffectBottomSheet();
                 sheet.setEffectItems(blendEffect);
                 sheet.setOnEffectClickListener(filter -> {
-                    applyFilter(filter);
+                    applyFilter(gpuImageView, activeFilters, filter);
                     // Nếu filter có setMix, thì hiển thị thanh điều chỉnh
                     if (filter instanceof GPUImageMixBlendFilter) {
-                        showSlider("Mix", 0f, 1f, 0f, value -> {
+                        showSlider(this,"Mix", 0f, 1f, 0f, value -> {
                             ((GPUImageMixBlendFilter) filter).setMix(value);
                             gpuImageView.requestRender(); // refresh ảnh
                         });
                     } else {
-                        hideSlider(); // Không hỗ trợ chỉnh
+                        hideSlider(this); // Không hỗ trợ chỉnh
                     }
                     Log.e("filter", filter.toString());
                 });
@@ -163,14 +158,14 @@ public class MainActivity extends AppCompatActivity {
                 EffectBottomSheet sheet = new EffectBottomSheet();
                 sheet.setEffectItems(adjustEffects);
                 sheet.setOnEffectClickListener(filter -> {
-                    applyFilter(filter);
+                    applyFilter(gpuImageView, activeFilters, filter);
                     if(filter instanceof GPUImageBrightnessFilter){
-                        showSlider("Độ sáng", 0f, 1f, 0f, value->{
+                        showSlider(this,"Độ sáng", 0f, 1f, 0f, value->{
                             ((GPUImageBrightnessFilter) filter).setBrightness(value);
                             gpuImageView.requestRender();
                         });
                     } else {
-                        hideSlider();
+                        hideSlider(this);
                     }
                 });
                 sheet.show(getSupportFragmentManager(), "blur_effects");
@@ -246,128 +241,29 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNavView.setAdapter(adapter);
     }
-    private void applyFilter(GPUImageFilter filter) {
-        if (!activeFilters.contains(filter)) {
-            activeFilters.add(filter);
-            GPUImageFilterGroup group = new GPUImageFilterGroup(activeFilters);
-            gpuImageView.setFilter(group);
-            gpuImageView.requestRender();
-        }
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void showSlider(String label, float min, float max, float defaultValue, Consumer<Float> onChange) {
-        parameterSeekBar = findViewById(R.id.parameterSeekBar);
-        seekBarLabel = findViewById(R.id.seekBarLabel);
-
-        seekBarLabel.setText(label + ": " + defaultValue);
-        parameterSeekBar.setVisibility(View.VISIBLE);
-        seekBarLabel.setVisibility(View.VISIBLE);
-        parameterSeekBar.setMax(100);
-        parameterSeekBar.setProgress((int) (defaultValue * 100));
-
-        parameterSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float value = min + (max - min) * (progress / 100f);
-                seekBarLabel.setText(label + ": " + String.format("%.2f", value));
-                onChange.accept(value);
-            }
-
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-    }
-
-    private void hideSlider() {
-        parameterSeekBar = findViewById(R.id.parameterSeekBar);
-        seekBarLabel = findViewById(R.id.seekBarLabel);
-        seekBarLabel.setVisibility(View.GONE);
-        parameterSeekBar.setVisibility(View.GONE);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            assert data != null;
-            final Uri resultUri = UCrop.getOutput(data);
-            if (resultUri != null) {
-                photoUri = resultUri;
-                gpuImageView.setImage(photoUri);
-                gpuImageView.requestRender();
-            }
+            ImageUtils.handleCropResult(data,gpuImageView, uri -> photoUri = uri);
         } else if (resultCode == UCrop.RESULT_ERROR) {
-            assert data != null;
-            final Throwable cropError = UCrop.getError(data);
-            if (cropError != null)
-                Toast.makeText(this, "Lỗi cắt ảnh: " + cropError.getMessage(), Toast.LENGTH_SHORT).show();
+            ImageUtils.handleCropError(this, data);
         }
     }
+    public void openCamera(){
+    ContentValues values = new ContentValues();
+    values.put(MediaStore.Images.Media.TITLE, "New picture");
+    values.put(MediaStore.Images.Media.DESCRIPTION, "From camera");
 
-    private void openCameraWithPermissionCheck() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    PERMISSION_REQUEST_CAMERA);
-        } else {
-            openCamera(); // Gọi như bình thường
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_CAMERA) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openCamera();
-            } else {
-                Toast.makeText(this, "Bạn cần cấp quyền Camera", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    private void showToast(String message) {
-        mainHandler.post(() -> {
-            long startTime = System.nanoTime();
-            Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-            long endTime = System.nanoTime();
-            Log.d("Main Activity", "Toast display time: " + (endTime - startTime) / 1_000_000.0 + "ms");
-        });
-    }
-    private void showPopupMenu(View anchorView) {
-        PopupMenu popup = new PopupMenu(this, anchorView, Gravity.END);
-        popup.getMenuInflater().inflate(R.menu.open_option_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.option1){
-              pickImageLauncher.launch("image/*");
-            }
-            if (item.getItemId() == R.id.option2){
-                openCameraWithPermissionCheck();
-            }
-            checkPermission();
-            showToast("Selected: " + item.getTitle());
-            return true;
-        });
-        int[] location = new int[2];
-        anchorView.getLocationOnScreen(location);
-        popup.show();
-    }
-    private void openCamera(){
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, "New picture");
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From camera");
+    photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
-        photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
 
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-
-        cameraLauncher.launch(cameraIntent);
+    cameraLauncher.launch(cameraIntent);
     }
     private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
-      new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK){
                     Toast.makeText(this, "Ảnh đã chụp xong", Toast.LENGTH_SHORT).show();
@@ -381,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     );
-    private final ActivityResultLauncher<String> pickImageLauncher =
+    public final ActivityResultLauncher<String> pickImageLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
                     Log.d("Main Activity", "Image selected: " + uri);
@@ -397,25 +293,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Không có ảnh nào đưược chọn", Toast.LENGTH_SHORT).show();
                 }
             });
-    private void checkPermission(){
-        String[] permission = {
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-
-        boolean needRequest = false;
-        for (String permis : permission){
-            if (ContextCompat.checkSelfPermission(this, permis) != PackageManager.PERMISSION_GRANTED){
-                needRequest = true;
-                break;
-            }
-        }
-        if (needRequest){
-            ActivityCompat.requestPermissions(this, permission, REQUEST_PERMISSION);
-        }
-    }
-
     //Hiển thị menu top
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -442,7 +319,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            showPopupMenu(anchorView);
+            UIUtils.showPopupMenu(this,
+                    anchorView,
+                    () -> pickImageLauncher.launch("image/*"),
+                    () -> PermissionUtils.openCameraWithCheck(this, PERMISSION_REQUEST_CAMERA)
+            );
             return true;
         } else if (id == R.id.menu_history) {
             gpuImageView.setFilter(new GPUImageFilter());
