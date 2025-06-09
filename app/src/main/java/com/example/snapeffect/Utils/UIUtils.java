@@ -18,7 +18,7 @@ public class UIUtils {
             long startTime = System.nanoTime();
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
             long endTime = System.nanoTime();
-            Log.d("Main Activity", "Toast display time: " + (endTime - startTime) / 1_000_000.0 + "ms");
+            Log.d("Toast UIUtils", "Toast display time: " + (endTime - startTime) / 1_000_000.0 + "ms");
         });
     }
 
@@ -29,7 +29,7 @@ public class UIUtils {
             if (item.getItemId() == R.id.option1) onOption1.run();
             if (item.getItemId() == R.id.option2) onOption2.run();
             PermissionUtils.checkPermission(activity);
-            showToast(new Handler(Looper.getMainLooper()), activity, "Selected: " + item.getTitle());
+            showToast(new Handler(Looper.getMainLooper()), activity, "Chọn ảnh: " + item.getTitle());
             return true;
         });
         popup.show();

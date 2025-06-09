@@ -1,8 +1,9 @@
-package com.example.snapeffect.Utils;
+package com.example.snapeffect.Handler;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.yalantis.ucrop.UCrop;
@@ -11,7 +12,7 @@ import java.util.function.Consumer;
 
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
 
-public class ImageUtils {
+public class HandlerCrop {
     public static void handleCropResult(Intent data, GPUImageView gpuImageView, Consumer<Uri> onImageReady) {
         final Uri resultUri = UCrop.getOutput(data);
         if (resultUri != null) {
@@ -25,6 +26,7 @@ public class ImageUtils {
         final Throwable cropError = UCrop.getError(data);
         if (cropError != null) {
             Toast.makeText(activity, "Lỗi cắt ảnh: " + cropError.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("Lỗi HandlerCrop", "Lỗi cắt ảnh", cropError);
         }
     }
 }

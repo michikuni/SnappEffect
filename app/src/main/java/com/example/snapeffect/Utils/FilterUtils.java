@@ -7,6 +7,7 @@ import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilterGroup;
 
 public class FilterUtils {
+
     public static void applyFilter(GPUImageView gpuImageView, List<GPUImageFilter> activeFilters, GPUImageFilter filter){
         if (!activeFilters.contains(filter)){
             activeFilters.add(filter);
@@ -15,4 +16,5 @@ public class FilterUtils {
             gpuImageView.requestRender();
         }
     }
+
 }

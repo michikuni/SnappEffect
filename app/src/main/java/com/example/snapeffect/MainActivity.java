@@ -25,9 +25,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.snapeffect.Adapter.BottomNavAdapter;
+import com.example.snapeffect.Handler.HandlerCrop;
 import com.example.snapeffect.Model.BottomNavItem;
 import com.example.snapeffect.Model.EffectItem;
-import com.example.snapeffect.Utils.ImageUtils;
 import com.example.snapeffect.Utils.PermissionUtils;
 import com.example.snapeffect.Utils.UIUtils;
 import com.example.snapeffect.View.EffectBottomSheet;
@@ -73,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
         List<BottomNavItem> items = new ArrayList<>();
         items.add(new BottomNavItem(R.drawable.crop_24px, "Cắt"));
         items.add(new BottomNavItem(R.drawable.shuffle, "Trộn ảnh"));
-        items.add(new BottomNavItem(R.drawable.blur_icon, "Chỉnh ảnh"));
+        items.add(new BottomNavItem(R.drawable.tune_24px, "Chỉnh ảnh"));
         items.add(new BottomNavItem(R.drawable.paint_icon, "Nghệ thuật"));
         items.add(new BottomNavItem(R.drawable.cyclone_24px, "Biến dạng"));
-        items.add(new BottomNavItem(R.drawable.hive_24px, "Làm mờ"));
-        items.add(new BottomNavItem(R.drawable.settings_24px, "Ngưỡng hóa"));
-        items.add(new BottomNavItem(R.drawable.more_vert_24px, "Biến đổi"));
+        items.add(new BottomNavItem(R.drawable.blur_icon, "Làm mờ"));
+        items.add(new BottomNavItem(R.drawable.threshold_24px, "Ngưỡng hóa"));
+        items.add(new BottomNavItem(R.drawable.transform_24px, "Biến đổi"));
 
         //Xử lý click
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
@@ -130,9 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         hideSlider(this); // Không hỗ trợ chỉnh
                     }
-                    Log.e("filter", filter.toString());
                 });
-
                 sheet.show(getSupportFragmentManager(), "blend effect");
             }else if (position == 2){
                 List<EffectItem> adjustEffects = Arrays.asList(
@@ -237,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 sheet.setOnEffectClickListener(filter -> gpuImageView.setFilter(filter));
                 sheet.show(getSupportFragmentManager(), "edge_effects");
             }
-            Log.d("Main Activity", "BottomNav clicked: " + label);
+            Log.d("Main Activity", "Chọn chức năng" + label);
         });
         bottomNavView.setAdapter(adapter);
     }
@@ -245,9 +243,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            ImageUtils.handleCropResult(data,gpuImageView, uri -> photoUri = uri);
+            HandlerCrop.handleCropResult(data,gpuImageView, uri -> photoUri = uri);
         } else if (resultCode == UCrop.RESULT_ERROR) {
-            ImageUtils.handleCropError(this, data);
+            HandlerCrop.handleCropError(this, data);
         }
     }
     public void openCamera(){
@@ -267,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK){
                     Toast.makeText(this, "Ảnh đã chụp xong", Toast.LENGTH_SHORT).show();
+                    Log.d("Main Activity", "Chụp ảnh thành công");
                     gpuImageView.setImage(photoUri);
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
@@ -274,13 +273,14 @@ public class MainActivity extends AppCompatActivity {
                     gpuImageView.setFilter(new GPUImageFilter());
                 } else {
                     Toast.makeText(this, "Bạn đã hủy chụp ảnh", Toast.LENGTH_SHORT).show();
+                    Log.d("Main Activity", "Hủy chụp ảnh");
                 }
             }
     );
     public final ActivityResultLauncher<String> pickImageLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
-                    Log.d("Main Activity", "Image selected: " + uri);
+                    Log.d("Main Activity", "Chọn ảnh từ thư viện: " + uri);
                     photoUri = uri;
                     gpuImageView.setImage(uri);
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
@@ -331,8 +331,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.menu_save) {
             Random random = new Random();
             int fileName = random.nextInt(100000);
-            gpuImageView.saveToPictures("Snap Effect", fileName + ".jpg", null);
+            gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + fileName + ".jpg", null);
             Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+fileName+".jpg", Toast.LENGTH_SHORT).show();
+            Log.d("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/"+fileName+".jpg");
             return true;
         } else if (id == R.id.menu_more_vert) {
             return true;
