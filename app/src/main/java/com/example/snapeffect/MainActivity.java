@@ -28,6 +28,7 @@ import com.example.snapeffect.Model.BottomNavItem;
 import com.example.snapeffect.Model.EffectItem;
 import com.example.snapeffect.Utils.FilterUtils;
 import com.example.snapeffect.Utils.PermissionUtils;
+import com.example.snapeffect.Utils.SliderUtils;
 import com.example.snapeffect.Utils.UIUtils;
 import com.example.snapeffect.View.EffectBottomSheet;
 
@@ -250,7 +251,23 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Main Activity", "Chọn chức năng" + label);
         });
         bottomNavView.setAdapter(adapter);
+        SeekBar seekBar = findViewById(R.id.parameterSeekBar);
+        FrameLayout rootLayout = findViewById(R.id.frame_gpu);
+
+        // Khi click vào vùng trống thì ẩn SeekBar
+        rootLayout.setOnClickListener(v -> {
+            if (seekBar.getVisibility() == View.VISIBLE) {
+                SliderUtils.hideSlider(this);
+            }
+        });
+
+        // Ngăn SeekBar bắt nhầm sự kiện click truyền lên rootLayout
+        seekBar.setOnTouchListener((v, event) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            return false;
+        });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

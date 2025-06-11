@@ -1,9 +1,9 @@
 package com.example.snapeffect.Utils;
 
-import static com.example.snapeffect.Utils.SliderUtils.hideSlider;
 import static com.example.snapeffect.Utils.SliderUtils.showSlider;
 
 import android.app.Activity;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,9 +12,7 @@ import com.example.snapeffect.Model.AdjustableFilterConfig;
 import com.example.snapeffect.Model.EffectItem;
 import com.example.snapeffect.View.EffectBottomSheet;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
