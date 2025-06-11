@@ -10,4 +10,10 @@ public class EffectItem {
         this.name = name;
         this.filter = filter;
     }
+    public GPUImageFilter getFilter(){
+        return filter;
+    }
+    public String getName(){
+        return name;
+    }
 }
