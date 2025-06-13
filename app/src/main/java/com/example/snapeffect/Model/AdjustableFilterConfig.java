@@ -1,15 +1,14 @@
 package com.example.snapeffect.Model;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 public class AdjustableFilterConfig<T extends GPUImageFilter> {
-    public Class<T> filterClass;
-    public String label;
-    public float minValue, maxValue, defaultValue;
-    public BiConsumer<GPUImageFilter, Float> setter;
+    public final Class<T> filterClass;
+    public final String label;
+    public final float minValue, maxValue, defaultValue;
+    public final BiConsumer<GPUImageFilter, Float> setter;
 
     public AdjustableFilterConfig(Class<T> filterClass,
                                   String label,

@@ -3,7 +3,6 @@ package com.example.snapeffect.Utils;
 import static com.example.snapeffect.Utils.SliderUtils.showSlider;
 
 import android.app.Activity;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,13 +18,14 @@ import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilterGroup;
 
 public class FilterUtils {
+
     public static void applyFilter(GPUImageView gpuImageView, List<GPUImageFilter> activeFilters, GPUImageFilter filter){
         if (!activeFilters.contains(filter)){
             activeFilters.add(filter);
-            GPUImageFilterGroup filterGroup = new GPUImageFilterGroup(activeFilters);
-            gpuImageView.setFilter(filterGroup);
-            gpuImageView.requestRender();
         }
+        GPUImageFilterGroup filterGroup = new GPUImageFilterGroup(activeFilters);
+        gpuImageView.setFilter(filterGroup);
+        gpuImageView.requestRender();
     }
     @NonNull
     public static EffectBottomSheet getEffectBottomSheet(
@@ -58,8 +58,6 @@ public class FilterUtils {
                 applyFilter(gpuImageView, activeFilters, filter);
                 for (AdjustableFilterConfig<?> config : configs){
                     if (config.filterClass.isInstance(filter)) {
-                        config.setter.accept(filter, config.defaultValue);
-                        gpuImageView.requestRender();
                         showSlider(context, config.label, config.minValue, config.maxValue, config.defaultValue, value -> {
                             config.setter.accept(filter, value);
                             gpuImageView.requestRender();
