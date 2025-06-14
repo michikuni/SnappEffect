@@ -26,7 +26,7 @@ import com.example.snapeffect.Handler.HandlerCrop;
 import com.example.snapeffect.Model.AdjustableFilterConfig;
 import com.example.snapeffect.Model.BottomNavItem;
 import com.example.snapeffect.Model.EffectItem;
-import com.example.snapeffect.Utils.FilterUtils;
+import com.example.snapeffect.Filters.FilterHandler;
 import com.example.snapeffect.Utils.PermissionUtils;
 import com.example.snapeffect.Utils.SliderUtils;
 import com.example.snapeffect.Utils.UIUtils;
@@ -46,7 +46,6 @@ import com.yalantis.ucrop.UCrop;
 
 
 public class MainActivity extends AppCompatActivity {
-
     private static final int PERMISSION_REQUEST_CAMERA = 123;
     Toolbar layoutToolbar;
     private Uri photoUri;
@@ -124,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                         0f,1f,0f,
                         (filter, value) -> ((GPUImageAlphaBlendFilter) filter).setMix(value)
                 ));
-                EffectBottomSheet sheet = FilterUtils.getEffectBottomSheet(this, gpuImageView, blendEffect, activeFilters, filterConfigs);
+                EffectBottomSheet sheet = FilterHandler.getEffectBottomSheet(this, gpuImageView, blendEffect, activeFilters, filterConfigs);
                 sheet.show(getSupportFragmentManager(), "blend effect");
             }else if (position == 2){
                 List<EffectItem> adjustEffects = Arrays.asList(
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         0f,1f,0f,
                         (filter,value) -> ((GPUImageBrightnessFilter) filter).setBrightness(value)
                 ));
-                EffectBottomSheet sheet = FilterUtils.getEffectBottomSheet(this, gpuImageView, adjustEffects, activeFilters, filterConfigs);
+                EffectBottomSheet sheet = FilterHandler.getEffectBottomSheet(this, gpuImageView, adjustEffects, activeFilters, filterConfigs);
                 sheet.show(getSupportFragmentManager(), "blur_effects");
             }else if (position == 3){
                 List<EffectItem> artEffect = Arrays.asList(
@@ -174,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         0f,1f,0f,
                         (filter, value) -> ((GPUImageLookupFilter) filter).setIntensity(value)
                 ));
-                EffectBottomSheet sheet = FilterUtils.getEffectBottomSheet(this, gpuImageView, artEffect, activeFilters, filterConfigs);
+                EffectBottomSheet sheet = FilterHandler.getEffectBottomSheet(this, gpuImageView, artEffect, activeFilters, filterConfigs);
                 sheet.show(getSupportFragmentManager(), "art_effects");
             }else if (position == 4){
                 List<EffectItem> distorEffect = Arrays.asList(
@@ -191,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                         0f,5f,1f,
                         (filter, value) -> ((GPUImageSwirlFilter) filter).setAngle(value)
                 ));
-                EffectBottomSheet sheet =FilterUtils.getEffectBottomSheet(this, gpuImageView, distorEffect, activeFilters, filterConfigs);
+                EffectBottomSheet sheet = FilterHandler.getEffectBottomSheet(this, gpuImageView, distorEffect, activeFilters, filterConfigs);
                 sheet.show(getSupportFragmentManager(), "distor_effects");
             }else if (position == 5){
                 List<EffectItem> blurEffect = Arrays.asList(
@@ -209,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                         0f,10f,1f,
                         (filter, value) -> ((GPUImageGaussianBlurFilter) filter).setBlurSize(value)
                 ));
-                EffectBottomSheet sheet = FilterUtils.getEffectBottomSheet(this, gpuImageView, blurEffect, activeFilters, filterConfigs);
+                EffectBottomSheet sheet = FilterHandler.getEffectBottomSheet(this, gpuImageView, blurEffect, activeFilters, filterConfigs);
                 sheet.show(getSupportFragmentManager(), "blur_effects");
             }else if (position == 6){
                 List<EffectItem> edgeEffect = Arrays.asList(
@@ -227,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                         0f,1f,0.3f,
                         (filter, value) -> ((GPUImageSobelThresholdFilter) filter).setThreshold(value)
                 ));
-                EffectBottomSheet sheet = FilterUtils.getEffectBottomSheet(this, gpuImageView, edgeEffect, activeFilters, filterConfigs);
+                EffectBottomSheet sheet = FilterHandler.getEffectBottomSheet(this, gpuImageView, edgeEffect, activeFilters, filterConfigs);
                 sheet.show(getSupportFragmentManager(), "edge_effects");
             }else if (position == 7){
                 List<EffectItem> transEffect = Arrays.asList(
@@ -245,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                         0f,1f,0.3f,
                         (filter, value) -> ((GPUImageOpacityFilter) filter).setOpacity(value)
                 ));
-                EffectBottomSheet sheet = FilterUtils.getEffectBottomSheet(this, gpuImageView, transEffect, activeFilters, filterConfigs);
+                EffectBottomSheet sheet = FilterHandler.getEffectBottomSheet(this, gpuImageView, transEffect, activeFilters, filterConfigs);
                 sheet.show(getSupportFragmentManager(), "trans_effects");
             }
             Log.d("Main Activity", "Chọn chức năng" + label);

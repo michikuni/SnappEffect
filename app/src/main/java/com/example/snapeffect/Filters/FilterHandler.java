@@ -1,4 +1,4 @@
-package com.example.snapeffect.Utils;
+package com.example.snapeffect.Filters;
 
 import static com.example.snapeffect.Utils.SliderUtils.showSlider;
 
@@ -17,8 +17,7 @@ import jp.co.cyberagent.android.gpuimage.GPUImageView;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilterGroup;
 
-public class FilterUtils {
-
+public class FilterHandler {
     public static void applyFilter(GPUImageView gpuImageView, List<GPUImageFilter> activeFilters, GPUImageFilter filter){
         if (!activeFilters.contains(filter)){
             activeFilters.add(filter);
@@ -33,6 +32,7 @@ public class FilterUtils {
             List<EffectItem> effectItems, List<GPUImageFilter> activeFilters,
             List<AdjustableFilterConfig<?>> configs
     ) {
+
         EffectBottomSheet sheet = new EffectBottomSheet();
         sheet.setEffectItems(effectItems);
         sheet.setOnEffectClickListener(filter -> {
