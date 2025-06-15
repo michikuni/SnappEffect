@@ -24,7 +24,7 @@ public class SliderUtils {
 
         float actualValue = min + (max - min) * defaultValue;
         labelView.setText(label + ": " + String.format("%.2f", actualValue));
-        onChange.accept(actualValue); // gọi callback ngay để filter áp dụng luôn và label khớp
+        onChange.accept(actualValue);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -36,8 +36,6 @@ public class SliderUtils {
             @Override public void onStopTrackingTouch(SeekBar seekBar) {}
         });
     }
-
-
     public static void hideSlider(Activity activity) {
         SeekBar seekBar = activity.findViewById(R.id.parameterSeekBar);
         TextView labelView = activity.findViewById(R.id.seekBarLabel);

@@ -38,8 +38,8 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EffectItem item = effects.get(position);
-        ((TextView) holder.itemView).setText(item.name);
-        holder.itemView.setOnClickListener(v -> listener.onClick(item.filter));
+        ((TextView) holder.itemView).setText(item.getName());
+        holder.itemView.setOnClickListener(v -> listener.onClick(item.getFilter()));
     }
 
     @Override

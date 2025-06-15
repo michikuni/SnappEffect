@@ -14,6 +14,7 @@ import jp.co.cyberagent.android.gpuimage.GPUImageView;
 
 public class HandlerCrop {
     public static void handleCropResult(Intent data, GPUImageView gpuImageView, Consumer<Uri> onImageReady) {
+        gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
         final Uri resultUri = UCrop.getOutput(data);
         if (resultUri != null) {
             onImageReady.accept(resultUri);
