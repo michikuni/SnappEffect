@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.snapeffect"
+    namespace = "com.mpcorporation.snapeffect"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.snapeffect"
+        applicationId = "com.mpcorporation.snapeffect"
         minSdk = 28
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,6 +24,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            isDebuggable = false
+        }
+        debug {
+            isDebuggable = true
         }
     }
     compileOptions {
