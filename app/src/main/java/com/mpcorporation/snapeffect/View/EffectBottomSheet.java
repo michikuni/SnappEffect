@@ -65,6 +65,7 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
         sheet.setOnEffectClickListener(filter -> {
             boolean isRemoved = false;
             for (int i = 0; i < activeFilters.size(); i++) {
+                Log.e("List Filter", activeFilters.get(i).toString());
                 if (activeFilters.get(i).getClass().equals(filter.getClass())) {
                     activeFilters.remove(i);
                     if (activeFilters.isEmpty()){
@@ -93,7 +94,7 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
                         } else {
                             hideSlider(context);
                         }
-                        HandlerFilter.applyFilter(gpuImageView, activeFilters, config.getFilter());
+                        HandlerFilter.applyFilter(gpuImageView, activeFilters, filter, effectItems);
                         break;
                     }
                 }

@@ -47,7 +47,8 @@ public class EffectItem {
         this.currentValue = value;
         if (parameterApplier != null) {
             parameterApplier.accept(filter, value);
-            Log.e("Model filter", String.format("%.2f", value));
+            Log.e("Parameter", String.format("%.2f", value));
+            Log.e("Filter", filter.getClass().getSimpleName());
         }
     }
     public float getCurrentValue() {
