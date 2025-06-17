@@ -1,5 +1,7 @@
 package com.mpcorporation.snapeffect.Model;
 
+import android.util.Log;
+
 import java.util.function.BiConsumer;
 
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
@@ -33,17 +35,22 @@ public class EffectItem {
         this.parameterApplier = applier;
     }
 
+    public String getParameterApplier(){ return parameterApplier.toString(); }
     public String getName() { return name; }
     public GPUImageFilter getFilter() { return filter; }
     public boolean hasParameter() { return hasParameter; }
     public float getMin() { return min; }
     public float getMax() { return max; }
     public String getLabel() { return label; }
-
-
+    private float currentValue;
     public void applyParameter(float value) {
+        this.currentValue = value;
         if (parameterApplier != null) {
             parameterApplier.accept(filter, value);
+            Log.e("Model filter", String.format("%.2f", value));
         }
+    }
+    public float getCurrentValue() {
+        return currentValue;
     }
 }
