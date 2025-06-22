@@ -22,52 +22,52 @@ public class ArtEffectFactory {
         artEffect.add(new EffectItem(
                 "Vẽ phác thảo",
                 new GPUImageSketchFilter(),
-                R.drawable.widgets_24px
+                R.drawable.art_sketch
         ));
         artEffect.add(new EffectItem(
                 "Hiệu ứng hoạt hình",
                 new GPUImageToonFilter(),
-                R.drawable.widgets_24px
+                R.drawable.art_toon
         ));
         artEffect.add(new EffectItem(
                 "Hoạt hình mượt",
                 new GPUImageSmoothToonFilter(),
-                R.drawable.widgets_24px,
+                R.drawable.art_smooth_toon,
                 "Độ mượt", 0f, 1f,
                 (filter, value) -> ((GPUImageSmoothToonFilter) filter).setThreshold(value)
         ));
         artEffect.add(new EffectItem(
                 "Chấm tròn nửa tông",
                 new GPUImageHalftoneFilter(),
-                R.drawable.widgets_24px,
+                R.drawable.art_half_tone,
                 "Pixel", 0.001f, 0.05f,
                 (filter, value) -> ((GPUImageHalftoneFilter) filter).setFractionalWidthOfAPixel(value)
         ));
         artEffect.add(new EffectItem(
                 "Gạch chéo",
                 new GPUImageCrosshatchFilter(),
-                R.drawable.widgets_24px,
+                R.drawable.art_cross_hatch,
                 "Khoảng cách", 0.01f, 0.1f,
                 (filter, value) -> ((GPUImageCrosshatchFilter) filter).setCrossHatchSpacing(value)
         ));
         artEffect.add(new EffectItem(
                 "Nổi 3D",
                 new GPUImageEmbossFilter(),
-                R.drawable.widgets_24px,
+                R.drawable.art_emboss,
                 "Cường độ", 0f, 5f,
                 (filter, value) -> ((GPUImageEmbossFilter) filter).setIntensity(value)
         ));
         artEffect.add(new EffectItem(
                 "Đảo ngược vùng sáng",
                 new GPUImageSolarizeFilter(),
-                R.drawable.widgets_24px,
+                R.drawable.art_solarize,
                 "Cường độ", 0f, 1f,
                 (filter, value) -> ((GPUImageSolarizeFilter) filter).setThreshold(value)
         ));
         artEffect.add(new EffectItem(
                 "LUT màu",
                 new GPUImageLookupFilter(),
-                R.drawable.widgets_24px
+                R.drawable.art_lookup
         ));
         return artEffect;
     }
