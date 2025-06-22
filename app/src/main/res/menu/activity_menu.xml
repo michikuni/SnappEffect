@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_open"
-        android:icon="@drawable/folder_open_24px"
+        android:icon="@drawable/toolbar_open"
         android:iconTint="@color/white"
         android:orderInCategory="0"
         android:title="@string/menu_open_title"
@@ -13,13 +13,13 @@
         android:id="@+id/menu_history"
         android:iconTint="@color/white"
         android:orderInCategory="1"
-        android:icon="@drawable/history_24px"
+        android:icon="@drawable/toolbar_history"
         android:title="@string/menu_history_title"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_save"
-        android:icon="@drawable/download_24px"
+        android:icon="@drawable/toolbar_save"
         android:orderInCategory="2"
         android:iconTint="@color/white"
         android:title="@string/menu_save_title"
@@ -29,7 +29,7 @@
         android:id="@+id/menu_more_vert"
         android:iconTint="@color/white"
         android:orderInCategory="3"
-        android:icon="@drawable/more_vert_24px"
+        android:icon="@drawable/toolbar_more_vert"
         android:title="@string/menu_more_vert_title"
         app:showAsAction="always"/>
 </menu>

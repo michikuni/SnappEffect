@@ -20,38 +20,38 @@ public class EdgeEffectFactory {
         edgeEffect.add(new EffectItem(
                 "Biên Sobel có ngưỡng",
                 new GPUImageSobelThresholdFilter(),
-                R.drawable.adjust_24px,
+                R.drawable.widgets_24px,
                 "Biên", 0f, 1f,
                 (filter, value) -> ((GPUImageSobelThresholdFilter) filter).setThreshold(value)
         ));
         edgeEffect.add(new EffectItem(
                 "Biên theo ngưỡng",
                 new GPUImageThresholdEdgeDetectionFilter(),
-                R.drawable.adjust_24px,
+                R.drawable.widgets_24px,
                 "Biên", 0f, 1f,
                 (filter, value) -> ((GPUImageThresholdEdgeDetectionFilter) filter).setThreshold(value)
         ));
         edgeEffect.add(new EffectItem(
                 "Ngưỡng hóa sáng",
                 new GPUImageLuminanceThresholdFilter(),
-                R.drawable.adjust_24px,
+                R.drawable.widgets_24px,
                 "Ngưỡng", 0f, 1f,
                 (filter, value) -> ((GPUImageLuminanceThresholdFilter) filter).setThreshold(value)
         ));
         edgeEffect.add(new EffectItem(
                 "Phát hiện biên Sobel",
                 new GPUImageSobelEdgeDetectionFilter(),
-                R.drawable.adjust_24px
+                R.drawable.widgets_24px
         ));
         edgeEffect.add(new EffectItem(
                 "Lọc theo độ sáng",
                 new GPUImageLuminanceFilter(),
-                R.drawable.adjust_24px
+                R.drawable.widgets_24px
         ));
         edgeEffect.add(new EffectItem(
                 "Lọc điểm yếu",
                 new GPUImageWeakPixelInclusionFilter(),
-                R.drawable.adjust_24px
+                R.drawable.widgets_24px
         ));
         return edgeEffect;
     }

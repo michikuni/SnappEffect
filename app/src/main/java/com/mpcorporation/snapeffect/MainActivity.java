@@ -81,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Các thành phần của menu bot
         List<BottomNavItem> items = new ArrayList<>();
-        items.add(new BottomNavItem(R.drawable.crop_24px, "Cắt"));
-        items.add(new BottomNavItem(R.drawable.shuffle, "Trộn ảnh"));
-        items.add(new BottomNavItem(R.drawable.tune_24px, "Chỉnh ảnh"));
-        items.add(new BottomNavItem(R.drawable.paint_icon, "Nghệ thuật"));
-        items.add(new BottomNavItem(R.drawable.cyclone_24px, "Biến dạng"));
-        items.add(new BottomNavItem(R.drawable.blur_icon, "Làm mờ"));
-        items.add(new BottomNavItem(R.drawable.threshold_24px, "Ngưỡng hóa"));
-        items.add(new BottomNavItem(R.drawable.transform_24px, "Biến đổi"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_crop, "Cắt"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_blend, "Trộn ảnh"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_adjust, "Chỉnh ảnh"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_art, "Nghệ thuật"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_distor, "Biến dạng"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_blur, "Làm mờ"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_threshold, "Ngưỡng hóa"));
+        items.add(new BottomNavItem(R.drawable.bot_nav_transform, "Biến đổi"));
 
         //Xử lý click
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
