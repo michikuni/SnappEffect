@@ -19,26 +19,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mpcorporation.snapeffect.Adapter.BottomNavAdapter;
-import com.mpcorporation.snapeffect.Filters.AdjustEffectFactory;
-import com.mpcorporation.snapeffect.Filters.ArtEffectFactory;
-import com.mpcorporation.snapeffect.Filters.BlendEffectFactory;
-import com.mpcorporation.snapeffect.Filters.BlurEffectFactory;
-import com.mpcorporation.snapeffect.Filters.DistortEffectFactory;
-import com.mpcorporation.snapeffect.Filters.EdgeEffectFactory;
-import com.mpcorporation.snapeffect.Filters.TransformEffectFactory;
+import com.mpcorporation.snapeffect.Handler.BottomNavHandler;
 import com.mpcorporation.snapeffect.Handler.HandlerCrop;
-import com.mpcorporation.snapeffect.Model.BottomNavItem;
-import com.mpcorporation.snapeffect.Model.EffectItem;
+import com.mpcorporation.snapeffect.Handler.ToolbarHandler;
 import com.mpcorporation.snapeffect.Utils.PermissionUtils;
-import com.mpcorporation.snapeffect.Utils.SliderUtils;
 import com.mpcorporation.snapeffect.Utils.UIUtils;
-import com.mpcorporation.snapeffect.View.EffectBottomSheet;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -62,103 +50,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Tạo Toolbar để hiển thị menu top
         layoutToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(layoutToolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setLogo(R.drawable.photo_camera_24px);
-            getSupportActionBar().setDisplayUseLogoEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
-
         gpuImageView = findViewById(R.id.content_edit);
         gpuImageView.setScaleType(GPUImage.ScaleType.CENTER_INSIDE);
-        gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
 
-        //Hiển thị menu bot bằng RecyclerView
+        ToolbarHandler.setupToolbar(this, layoutToolbar);
+
         RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
-        bottomNavView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        //Các thành phần của menu bot
-        List<BottomNavItem> items = new ArrayList<>();
-        items.add(new BottomNavItem(R.drawable.bot_nav_crop, "Cắt"));
-        items.add(new BottomNavItem(R.drawable.bot_nav_blend, "Trộn ảnh"));
-        items.add(new BottomNavItem(R.drawable.bot_nav_adjust, "Chỉnh ảnh"));
-        items.add(new BottomNavItem(R.drawable.bot_nav_art, "Nghệ thuật"));
-        items.add(new BottomNavItem(R.drawable.bot_nav_distor, "Biến dạng"));
-        items.add(new BottomNavItem(R.drawable.bot_nav_blur, "Làm mờ"));
-        items.add(new BottomNavItem(R.drawable.bot_nav_threshold, "Ngưỡng hóa"));
-        items.add(new BottomNavItem(R.drawable.bot_nav_transform, "Biến đổi"));
+        BottomNavHandler.setupBottomNav(this, bottomNavView, gpuImageView, activeFilters, photoUri);
 
-        //Xử lý click
-        BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
-            String label = items.get(position).label;
-            EffectBottomSheet sheet;
-            switch (position){
-                case 0:
-                    Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis() + ".jpg"));
-                    UCrop.of(photoUri, outputUri)
-                            .withAspectRatio(16, 9)
-                            .start(MainActivity.this);
-                    break;
-                case 1:
-                    List<EffectItem> blendEffect = BlendEffectFactory.create();
-                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, blendEffect, activeFilters);
-                    sheet.show(getSupportFragmentManager(), "blend effect");
-                    break;
-                case 2:
-                    List<EffectItem> adjustEffects = AdjustEffectFactory.create();
-                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects, activeFilters);
-                    sheet.show(getSupportFragmentManager(), "blur_effects");
-                    break;
-                case 3:
-                    List<EffectItem> artEffect = ArtEffectFactory.create();
-                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect, activeFilters);
-                    sheet.show(getSupportFragmentManager(), "art_effects");
-                    break;
-                case 4:
-                    List<EffectItem> distorEffect = DistortEffectFactory.create();
-                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect, activeFilters);
-                    sheet.show(getSupportFragmentManager(), "distor_effects");
-                    break;
-                case 5:
-                    List<EffectItem> blurEffect = BlurEffectFactory.create();
-                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, blurEffect, activeFilters);
-                    sheet.show(getSupportFragmentManager(), "blur_effects");
-                    break;
-                case 6:
-                    List<EffectItem> edgeEffect = EdgeEffectFactory.create();
-                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, edgeEffect, activeFilters);
-                    sheet.show(getSupportFragmentManager(), "edge_effects");
-                    break;
-                case 7:
-                    List<EffectItem> transEffect = TransformEffectFactory.create();
-                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, transEffect, activeFilters);
-                    sheet.show(getSupportFragmentManager(), "trans_effects");
-
-            }
-            Log.d("Main Activity", "Chọn chức năng" + label);
-        });
-        bottomNavView.setAdapter(adapter);
-        SeekBar seekBar = findViewById(R.id.parameterSeekBar);
-        FrameLayout rootLayout = findViewById(R.id.frame_gpu);
-        if (seekBar == null) {
-            Log.e("Slider", "SeekBar or LabelView not found in layout.");
-            return;
-        }
-        // Khi click vào vùng trống thì ẩn SeekBar
-        rootLayout.setOnClickListener(v -> {
-            if (seekBar.getVisibility() == View.VISIBLE) {
-                SliderUtils.hideSlider(this);
-            }
-        });
-
-        // Ngăn SeekBar bắt nhầm sự kiện click truyền lên rootLayout
-        seekBar.setOnTouchListener((v, event) -> {
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            return false;
-        });
+        // Ẩn SeekBar
+        UIUtils.setupSeekBarDismissOnClick(findViewById(R.id.frame_gpu), findViewById(R.id.parameterSeekBar), this);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -170,13 +75,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void openCamera(){
-    ContentValues values = new ContentValues();
-    values.put(MediaStore.Images.Media.TITLE, "New picture");
-    values.put(MediaStore.Images.Media.DESCRIPTION, "From camera");
-    photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-    cameraLauncher.launch(cameraIntent);
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From camera");
+        photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+        cameraLauncher.launch(cameraIntent);
     }
     private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

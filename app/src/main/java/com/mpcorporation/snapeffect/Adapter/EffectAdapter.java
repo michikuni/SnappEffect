@@ -50,11 +50,11 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ViewHolder
         return effects.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageIcon;
         TextView textName;
 
-        ViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
             imageIcon = view.findViewById(R.id.filter_icon);
             textName = view.findViewById(R.id.filter_name);

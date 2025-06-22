@@ -10,6 +10,7 @@
         android:id="@+id/filter_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:contentDescription="TODO"
         android:scaleType="centerInside" />
 
     <TextView
@@ -20,6 +21,6 @@
         android:textSize="12sp"
         android:gravity="center"
         android:layout_marginTop="4dp"
-        android:maxLines="1"
+        android:maxLines="2"
         android:ellipsize="end" />
 </LinearLayout>
