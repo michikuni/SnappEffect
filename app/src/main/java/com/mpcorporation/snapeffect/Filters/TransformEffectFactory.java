@@ -17,19 +17,19 @@ public class TransformEffectFactory {
         transEffect.add(new EffectItem(
                 "Thay đổi độ mờ",
                 new GPUImageOpacityFilter(),
-                R.drawable.bot_nav_art,
+                R.drawable.trans_opacity,
                 "Độ mờ", 0f, 1f,
                 (filter, value) -> ((GPUImageOpacityFilter) filter).setOpacity(value)
         ));
         transEffect.add(new EffectItem(
                 "Bộ lọc cơ bản",
                 new GPUImageFilter(),
-                R.drawable.bot_nav_art
+                R.drawable.widgets_24px
         ));
         transEffect.add(new EffectItem(
                 "Biến đổi affine",
                 new GPUImageTransformFilter(),
-                R.drawable.bot_nav_art
+                R.drawable.trans_affine
         ));
         return transEffect;
     }
