@@ -20,40 +20,40 @@ public class BlurEffectFactory {
         blurEffect.add(new EffectItem(
                 "Làm mờ Gaussian",
                 new GPUImageGaussianBlurFilter(),
-                R.drawable.settings_24px,
+                R.drawable.blur_gaussian,
                 "Độ mờ", 0f, 10f,
                 (filter, value) -> ((GPUImageGaussianBlurFilter) filter).setBlurSize(value)
         ));
         blurEffect.add(new EffectItem(
                 "Làm mờ hộp",
                 new GPUImageBoxBlurFilter(),
-                R.drawable.settings_24px,
+                R.drawable.blur_box,
                 "Độ mờ", 0f, 10f,
                 (filter, value) -> ((GPUImageBoxBlurFilter) filter).setBlurSize(value)
         ));
         blurEffect.add(new EffectItem(
                 "Làm mờ giữ cạnh",
                 new GPUImageBilateralBlurFilter(),
-                R.drawable.settings_24px,
+                R.drawable.blur_bilateral,
                 "Độ mờ", 0f, 10f,
                 (filter, value) -> ((GPUImageBilateralBlurFilter) filter).setDistanceNormalizationFactor(value)
         ));
         blurEffect.add(new EffectItem(
                 "Khối pixel",
                 new GPUImagePixelationFilter(),
-                R.drawable.settings_24px,
+                R.drawable.blur_pixel,
                 "Pixel", 1f, 100f,
                 (filter, value) -> ((GPUImagePixelationFilter) filter).setPixel(value)
         ));
         blurEffect.add(new EffectItem(
                 "Dilation toàn ảnh",
                 new GPUImageDilationFilter(),
-                R.drawable.settings_24px
+                R.drawable.blur_dilation
         ));
         blurEffect.add(new EffectItem(
                 "Dilation kênh RGB",
                 new GPUImageRGBDilationFilter(),
-                R.drawable.settings_24px
+                R.drawable.blur_dilation_rbg
         ));
         return blurEffect;
     }
