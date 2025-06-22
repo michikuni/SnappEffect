@@ -19,33 +19,33 @@ public class DistortEffectFactory {
         distorEffect.add(new EffectItem(
                 "Phồng trung tâm",
                 new GPUImageBulgeDistortionFilter(),
-                R.drawable.filter_alt_24px,
+                R.drawable.distor_bulge,
                 "Độ phồng", 0f, 1f,
                 (filter, value) -> ((GPUImageBulgeDistortionFilter) filter).setScale(value)
         ));
         distorEffect.add(new EffectItem(
                 "Hiệu ứng cầu kính",
                 new GPUImageGlassSphereFilter(),
-                R.drawable.filter_alt_24px
+                R.drawable.distor_glass
         ));
         distorEffect.add(new EffectItem(
                 "Xoáy hình ảnh",
                 new GPUImageSwirlFilter(),
-                R.drawable.filter_alt_24px,
+                R.drawable.distor_swirl,
                 "Độ xoáy", 0f, 2f,
                 (filter, value) -> ((GPUImageSwirlFilter) filter).setAngle(value)
         ));
         distorEffect.add(new EffectItem(
                 "Khúc xạ cầu",
                 new GPUImageSphereRefractionFilter(),
-                R.drawable.filter_alt_24px,
+                R.drawable.distor_refraction,
                 "Độ khúc xạ", 0f, 1f,
                 (filter, value) -> ((GPUImageSphereRefractionFilter) filter).setRadius(value)
         ));
         distorEffect.add(new EffectItem(
                 "Mờ zoom trung tâm",
                 new GPUImageZoomBlurFilter(),
-                R.drawable.filter_alt_24px,
+                R.drawable.distor_zoom_blur,
                 "Kích thước mờ", 0f, 2f,
                 (filter, value) -> ((GPUImageZoomBlurFilter) filter).setBlurSize(value)
         ));
