@@ -3,12 +3,14 @@ package com.mpcorporation.snapeffect.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mpcorporation.snapeffect.Model.EffectItem;
+import com.mpcorporation.snapeffect.R;
 
 import java.util.List;
 
@@ -31,14 +33,15 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.filter_component, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EffectItem item = effects.get(position);
-        ((TextView) holder.itemView).setText(item.getName());
+        holder.textName.setText(item.getName());
+        holder.imageIcon.setImageResource(item.getFilterIconRes());
         holder.itemView.setOnClickListener(v -> listener.onClick(item.getFilter()));
     }
 
@@ -47,9 +50,14 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ViewHolder
         return effects.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(View view) {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageIcon;
+        TextView textName;
+
+        ViewHolder(View view) {
             super(view);
+            imageIcon = view.findViewById(R.id.filter_icon);
+            textName = view.findViewById(R.id.filter_name);
         }
     }
 }

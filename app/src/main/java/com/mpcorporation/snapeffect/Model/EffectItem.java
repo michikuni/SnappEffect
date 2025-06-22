@@ -8,25 +8,29 @@ import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 public class EffectItem {
     private final String name;
+    private final int filterIconRes;
     private final String label;
     private final GPUImageFilter filter;
     private final boolean hasParameter;
     private final float min;
     private final float max;
     private final BiConsumer<GPUImageFilter, Float> parameterApplier;
+    private float currentValue;
 
     // Filter không có tham số
-    public EffectItem(String name, GPUImageFilter filter) {
-        this(name, filter, "",false, 0f, 0f, null);
+    public EffectItem(String name, GPUImageFilter filter, int iconRes) {
+        this(name, iconRes, filter, "", false, 0f, 0f, null);
     }
 
     // Filter có tham số
-    public EffectItem(String name, GPUImageFilter filter, String label, float min, float max, BiConsumer<GPUImageFilter, Float> applier) {
-        this(name, filter, label, true, min, max, applier);
+    public EffectItem(String name, GPUImageFilter filter, int iconRes, String label, float min, float max, BiConsumer<GPUImageFilter, Float> applier) {
+        this(name, iconRes, filter, label, true, min, max, applier);
     }
 
-    private EffectItem(String name, GPUImageFilter filter, String label, boolean hasParameter, float min, float max, BiConsumer<GPUImageFilter, Float> applier) {
+    // Constructor chính
+    private EffectItem(String name, int filterIcon, GPUImageFilter filter, String label, boolean hasParameter, float min, float max, BiConsumer<GPUImageFilter, Float> applier) {
         this.name = name;
+        this.filterIconRes = filterIcon;
         this.label = label;
         this.filter = filter;
         this.hasParameter = hasParameter;
@@ -35,14 +39,38 @@ public class EffectItem {
         this.parameterApplier = applier;
     }
 
-    public String getParameterApplier(){ return parameterApplier.toString(); }
-    public String getName() { return name; }
-    public GPUImageFilter getFilter() { return filter; }
-    public boolean hasParameter() { return hasParameter; }
-    public float getMin() { return min; }
-    public float getMax() { return max; }
-    public String getLabel() { return label; }
-    private float currentValue;
+    public String getName() {
+        return name;
+    }
+
+    public int getFilterIconRes() {
+        return filterIconRes;
+    }
+
+    public GPUImageFilter getFilter() {
+        return filter;
+    }
+
+    public boolean hasParameter() {
+        return hasParameter;
+    }
+
+    public float getMin() {
+        return min;
+    }
+
+    public float getMax() {
+        return max;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public float getCurrentValue() {
+        return currentValue;
+    }
+
     public void applyParameter(float value) {
         this.currentValue = value;
         if (parameterApplier != null) {
@@ -50,8 +78,5 @@ public class EffectItem {
             Log.e("Parameter", String.format("%.2f", value));
             Log.e("Filter", filter.getClass().getSimpleName());
         }
-    }
-    public float getCurrentValue() {
-        return currentValue;
     }
 }

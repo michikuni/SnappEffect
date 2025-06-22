@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,7 +48,7 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sheet_effects, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_effects);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 5));
         recyclerView.setAdapter(new EffectAdapter(effectItems, filter -> {
             if (listener != null) listener.onClick(filter);
             dismiss();
