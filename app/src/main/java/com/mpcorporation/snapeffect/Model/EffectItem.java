@@ -14,6 +14,7 @@ public class EffectItem {
     private final boolean hasParameter;
     private final float min;
     private final float max;
+    private float value;
     private final BiConsumer<GPUImageFilter, Float> parameterApplier;
     private float currentValue;
 

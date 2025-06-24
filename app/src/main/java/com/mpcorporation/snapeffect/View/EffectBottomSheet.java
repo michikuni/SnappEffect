@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mpcorporation.snapeffect.Adapter.EffectAdapter;
-import com.mpcorporation.snapeffect.Handler.HandlerFilter;
+import com.mpcorporation.snapeffect.Handler.FilterHandler;
 import com.mpcorporation.snapeffect.Model.EffectItem;
 import com.mpcorporation.snapeffect.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -64,7 +64,6 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
         sheet.setOnEffectClickListener(filter -> {
             boolean isRemoved = false;
             for (int i = 0; i < activeFilters.size(); i++) {
-                Log.e("List Filter", activeFilters.get(i).toString());
                 if (activeFilters.get(i).getClass().equals(filter.getClass())) {
                     activeFilters.remove(i);
                     if (activeFilters.isEmpty()){
@@ -80,7 +79,7 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
                         Toast.makeText(context, "Gỡ bỏ: " + item.getName(), Toast.LENGTH_SHORT).show();
                     }
                 }
-                HandlerFilter.applyAllFilters(gpuImageView, activeFilters);
+                FilterHandler.applyAllFilters(gpuImageView, activeFilters);
             } else {
                 for (EffectItem config : effectItems){
                     if (config.getFilter().getClass().equals(filter.getClass())) {
@@ -88,12 +87,15 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
                             Log.e("Filter", String.format("%.2f", config.getCurrentValue()));
                             showSlider(context, config.getLabel(), config.getMin(), config.getMax(), (config.getMin()+config.getMax())/2, value -> {
                                 config.applyParameter(value);
+                                for(int i = 0; i < activeFilters.size(); i++){
+                                    Log.e("List Filter", activeFilters.get(i).toString());
+                                }
                                 gpuImageView.requestRender();
                             });
                         } else {
                             hideSlider(context);
                         }
-                        HandlerFilter.applyFilter(gpuImageView, activeFilters, filter, effectItems);
+                        FilterHandler.applyFilter(gpuImageView, activeFilters, filter, effectItems);
                         break;
                     }
                 }

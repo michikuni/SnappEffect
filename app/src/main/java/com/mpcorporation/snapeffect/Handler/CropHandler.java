@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
 
-public class HandlerCrop {
+public class CropHandler {
     public static void handleCropResult(Intent data, GPUImageView gpuImageView, Consumer<Uri> onImageReady) {
         gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
         final Uri resultUri = UCrop.getOutput(data);

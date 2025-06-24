@@ -7,7 +7,7 @@ import jp.co.cyberagent.android.gpuimage.GPUImageView;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilterGroup;
 
-public class HandlerFilter {
+public class FilterHandler {
     public static void applyFilter(GPUImageView gpuImageView, List<GPUImageFilter> activeFilters, GPUImageFilter filter, List<EffectItem> effectItems){
         gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
         for (EffectItem item : effectItems){
