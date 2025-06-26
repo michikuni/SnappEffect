@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.slider.Slider;
 import com.mpcorporation.snapeffect.Adapter.BottomNavAdapter;
 import com.mpcorporation.snapeffect.Filters.AdjustEffectFactory;
 import com.mpcorporation.snapeffect.Filters.ArtEffectFactory;
@@ -31,6 +32,7 @@ import com.mpcorporation.snapeffect.Handler.ToolbarHandler;
 import com.mpcorporation.snapeffect.Model.BottomNavItem;
 import com.mpcorporation.snapeffect.Model.EffectItem;
 import com.mpcorporation.snapeffect.Utils.PermissionUtils;
+import com.mpcorporation.snapeffect.Utils.SliderUtils;
 import com.mpcorporation.snapeffect.Utils.UIUtils;
 
 import java.io.File;
@@ -39,6 +41,7 @@ import java.util.Random;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 import com.mpcorporation.snapeffect.View.EffectBottomSheet;
 import com.yalantis.ucrop.UCrop;
@@ -175,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.menu_history) {
             if (photoUri != null){
+                gpuImageView.setFilter(new GPUImageFilter());
+                SliderUtils.hideSlider(this);
                 return true;
             } else {
                 Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
