@@ -41,7 +41,7 @@ public class ArtEffectFactory {
                 "Chấm tròn nửa tông",
                 new GPUImageHalftoneFilter(),
                 R.drawable.art_half_tone,
-                "Pixel", 0.001f, 0.05f, 0f,
+                "Pixel", 0.001f, 0.05f, 0.01f,
                 (filter, value) -> ((GPUImageHalftoneFilter) filter).setFractionalWidthOfAPixel(value)
         ));
         artEffect.add(new EffectItem(
