@@ -65,7 +65,7 @@ public class AdjustEffectFactory {
                 "Cân bằng trắng",
                 new GPUImageWhiteBalanceFilter(),
                 R.drawable.adjust_white_balance,
-                "Cân bằng trắng", 200f, 800f, 500f,
+                "Cân bằng trắng", 2000f, 8000f, 5000f,
                 (filter, value) -> ((GPUImageWhiteBalanceFilter) filter).setTemperature(value)
         ));
         adjustEffects.add(new EffectItem(
