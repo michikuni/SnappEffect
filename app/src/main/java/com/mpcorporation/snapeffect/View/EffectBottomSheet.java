@@ -5,11 +5,9 @@ import static com.mpcorporation.snapeffect.Utils.SliderUtils.showSlider;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +15,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mpcorporation.snapeffect.Adapter.EffectAdapter;
-import com.mpcorporation.snapeffect.Handler.FilterHandler;
 import com.mpcorporation.snapeffect.Model.EffectItem;
 import com.mpcorporation.snapeffect.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -25,7 +22,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.List;
 
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 public class EffectBottomSheet extends BottomSheetDialogFragment {
 
@@ -56,50 +52,26 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
     @NonNull
     public static EffectBottomSheet getEffectBottomSheet(
             Activity context, GPUImageView gpuImageView,
-            List<EffectItem> effectItems, List<GPUImageFilter> activeFilters
+            List<EffectItem> effectItems
     ) {
         gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
         EffectBottomSheet sheet = new EffectBottomSheet();
         sheet.setEffectItems(effectItems);
         sheet.setOnEffectClickListener(filter -> {
-            boolean isRemoved = false;
-            for (int i = 0; i < activeFilters.size(); i++) {
-                if (activeFilters.get(i).getClass().equals(filter.getClass())) {
-                    activeFilters.remove(i);
-                    if (activeFilters.isEmpty()){
-                        activeFilters.add(new GPUImageFilter());
+            for (EffectItem config : effectItems){
+                if (config.getFilter().getClass().equals(filter.getClass())) {
+                    if (config.hasParameter()){
+                        showSlider(context, config.getLabel(), config.getMin(), config.getMax(), config.getDefaultValue(), value -> {
+                            config.applyParameter(value);
+                            gpuImageView.setFilter(config.getFilter());
+                            gpuImageView.requestRender();
+                        });
+                    } else {
+                        hideSlider(context);
+                        gpuImageView.setFilter(filter);
                     }
-                    isRemoved = true;
                     break;
                 }
-            }
-            if (isRemoved) {
-                for (EffectItem item : effectItems) {
-                    if (item.getFilter().getClass().equals(filter.getClass())) {
-                        Toast.makeText(context, "Gỡ bỏ: " + item.getName(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                FilterHandler.applyAllFilters(gpuImageView, activeFilters);
-            } else {
-                for (EffectItem config : effectItems){
-                    if (config.getFilter().getClass().equals(filter.getClass())) {
-                        if (config.hasParameter()){
-                            Log.e("Filter", String.format("%.2f", config.getCurrentValue()));
-                            showSlider(context, config.getLabel(), config.getMin(), config.getMax(), config.getDefaultValue(), value -> {
-                                config.applyParameter(value);
-                                for(int i = 0; i < activeFilters.size(); i++){
-                                    Log.e("List Filter", activeFilters.get(i).toString());
-                                }
-                                gpuImageView.requestRender();
-                            });
-                        } else {
-                            hideSlider(context);
-                        }
-                        FilterHandler.applyFilter(gpuImageView, activeFilters, filter, effectItems);
-                        break;
-                    }
-                }
-
             }
         });
         return sheet;

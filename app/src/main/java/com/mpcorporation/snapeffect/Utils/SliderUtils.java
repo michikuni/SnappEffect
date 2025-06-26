@@ -39,19 +39,7 @@ public class SliderUtils {
     public static void hideSlider(Activity activity) {
         TextView labelView = activity.findViewById(R.id.seekBarLabel);
         SeekBar seekBar = activity.findViewById(R.id.parameterSeekBar);
-//        TextView labelLine1 = activity.findViewById(R.id.labelLine1);
-//        SeekBar seekBarLine1 = activity.findViewById(R.id.seekBarLine1);
-//        TextView labelLine2 = activity.findViewById(R.id.labelLine2);
-//        SeekBar seekBarLine2 = activity.findViewById(R.id.seekBarLine2);
-//        TextView labelLine3 = activity.findViewById(R.id.labelLine3);
-//        SeekBar seekBarLine3 = activity.findViewById(R.id.seekBarLine3);
         seekBar.setVisibility(View.GONE);
         labelView.setVisibility(View.GONE);
-//        seekBarLine1.setVisibility(View.GONE);
-//        labelLine1.setVisibility(View.GONE);
-//        seekBarLine2.setVisibility(View.GONE);
-//        labelLine2.setVisibility(View.GONE);
-//        seekBarLine3.setVisibility(View.GONE);
-//        labelLine3.setVisibility(View.GONE);
     }
 }

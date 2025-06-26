@@ -34,13 +34,11 @@ import com.mpcorporation.snapeffect.Utils.PermissionUtils;
 import com.mpcorporation.snapeffect.Utils.UIUtils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
-import jp.co.cyberagent.android.gpuimage.filter.*;
 
 import com.mpcorporation.snapeffect.View.EffectBottomSheet;
 import com.yalantis.ucrop.UCrop;
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private Uri photoUri;
 
     private GPUImageView gpuImageView;
-    List<GPUImageFilter> activeFilters = new ArrayList<>();
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,40 +75,22 @@ public class MainActivity extends AppCompatActivity {
                                 .withAspectRatio(16, 9)
                                 .start(this);
                         break;
-//                case 1:
-//                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, BlendEffectFactory.create(), activeFilters);
-//                    sheet.show(this.getSupportFragmentManager(), "blend_effect");
-//                    break;
 
                     case 1:
                         List<EffectItem> adjustEffects = AdjustEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects, activeFilters);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects);
                         sheet.show(this.getSupportFragmentManager(), "blur_effects");
                         break;
                     case 2:
                         List<EffectItem> artEffect = ArtEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect, activeFilters);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect);
                         sheet.show(this.getSupportFragmentManager(), "art_effects");
                         break;
                     case 3:
                         List<EffectItem> distorEffect = DistortEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect, activeFilters);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect);
                         sheet.show(this.getSupportFragmentManager(), "distor_effects");
                         break;
-//                case 4:
-//                    List<EffectItem> blurEffect = BlurEffectFactory.create();
-//                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, blurEffect, activeFilters);
-//                    sheet.show(this.getSupportFragmentManager(), "blur_effects");
-//                    break;
-//                case 5:
-//                    List<EffectItem> edgeEffect = EdgeEffectFactory.create();
-//                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, edgeEffect, activeFilters);
-//                    sheet.show(this.getSupportFragmentManager(), "edge_effects");
-//                    break;
-//                case 7:
-//                    List<EffectItem> transEffect = TransformEffectFactory.create();
-//                    sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, transEffect, activeFilters);
-//                    sheet.show(this.getSupportFragmentManager(), "trans_effects");
                 }
             } else {
                 Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
@@ -193,25 +172,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.menu_open) {
             pickImageLauncher.launch("image/*");
-//            View anchorView = layoutToolbar;
-//            for (int i = 0; i < layoutToolbar.getChildCount(); i++) {
-//                View child = layoutToolbar.getChildAt(i);
-//                if (child instanceof ActionMenuView) {
-//                    ActionMenuView actionMenuView = (ActionMenuView) child;
-//                    for (int j = 0; j < actionMenuView.getChildCount(); j++) {
-//                        View menuItemView = actionMenuView.getChildAt(j);
-//                        if (actionMenuView.getMenu().getItem(j).getItemId() == R.id.menu_open) {
-//                            anchorView = menuItemView;
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//            UIUtils.showPopupMenu(this,
-//                    anchorView,
-//                    () -> pickImageLauncher.launch("image/*"),
-//                    () -> PermissionUtils.openCameraWithCheck(this, PERMISSION_REQUEST_CAMERA)
-//            );
             return true;
         } else if (id == R.id.menu_history) {
             if (photoUri != null){

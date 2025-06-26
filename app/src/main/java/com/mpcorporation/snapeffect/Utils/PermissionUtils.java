@@ -20,22 +20,4 @@ public class PermissionUtils {
             ((MainActivity) activity).openCamera();
         }
     }
-    public static void checkPermission(Activity activity){
-        String[] permission = {
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
-
-        boolean needRequest = false;
-        for (String permis : permission){
-            if (ContextCompat.checkSelfPermission(activity, permis) != PackageManager.PERMISSION_GRANTED){
-                needRequest = true;
-                break;
-            }
-        }
-        if (needRequest){
-            ActivityCompat.requestPermissions(activity, permission, 200);
-        }
-    }
 }

@@ -6,11 +6,8 @@ import com.mpcorporation.snapeffect.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageBulgeDistortionFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageGaussianBlurFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageGlassSphereFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImagePixelationFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSphereRefractionFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageSwirlFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageZoomBlurFilter;
 
@@ -31,18 +28,6 @@ public class DistortEffectFactory {
                 "Độ mờ", 0f, 10f, 0f,
                 (filter, value) -> ((GPUImageGaussianBlurFilter) filter).setBlurSize(value)
         ));
-//        distorEffect.add(new EffectItem(
-//                "Phồng trung tâm",
-//                new GPUImageBulgeDistortionFilter(),
-//                R.drawable.distor_bulge,
-//                "Độ phồng", 0f, 1f,
-//                (filter, value) -> ((GPUImageBulgeDistortionFilter) filter).setScale(value)
-//        ));
-//        distorEffect.add(new EffectItem(
-//                "Hiệu ứng cầu kính",
-//                new GPUImageGlassSphereFilter(),
-//                R.drawable.distor_glass
-//        ));
         distorEffect.add(new EffectItem(
                 "Xoáy hình ảnh",
                 new GPUImageSwirlFilter(),
@@ -50,13 +35,6 @@ public class DistortEffectFactory {
                 "Độ xoáy", 0f, 2f, 0.1f,
                 (filter, value) -> ((GPUImageSwirlFilter) filter).setAngle(value)
         ));
-//        distorEffect.add(new EffectItem(
-//                "Khúc xạ cầu",
-//                new GPUImageSphereRefractionFilter(),
-//                R.drawable.distor_refraction,
-//                "Độ khúc xạ", 0f, 1f,
-//                (filter, value) -> ((GPUImageSphereRefractionFilter) filter).setRadius(value)
-//        ));
         distorEffect.add(new EffectItem(
                 "Mờ zoom trung tâm",
                 new GPUImageZoomBlurFilter(),

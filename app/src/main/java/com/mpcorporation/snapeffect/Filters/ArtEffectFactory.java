@@ -10,29 +10,14 @@ import jp.co.cyberagent.android.gpuimage.filter.GPUImageCrosshatchFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageEmbossFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageGrayscaleFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageHalftoneFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLookupFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageLuminanceThresholdFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageSepiaToneFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSketchFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageSmoothToonFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageSobelThresholdFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageSolarizeFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageToonFilter;
 
 public class ArtEffectFactory {
     public static List<EffectItem> create(){
         List<EffectItem> artEffect = new ArrayList<>();
-
-//        artEffect.add(new EffectItem(
-//                "Vẽ phác thảo",
-//                new GPUImageSketchFilter(),
-//                R.drawable.art_sketch
-//        ));
-//        artEffect.add(new EffectItem(
-//                "Hiệu ứng hoạt hình",
-//                new GPUImageToonFilter(),
-//                R.drawable.art_toon
-//        ));
         artEffect.add(new EffectItem(
                 "Âm bản",
                 new GPUImageGrayscaleFilter(),
@@ -87,18 +72,6 @@ public class ArtEffectFactory {
                 "Biên", 0f, 1f, 0.8f,
                 (filter, value) -> ((GPUImageSobelThresholdFilter) filter).setThreshold(value)
         ));
-//        artEffect.add(new EffectItem(
-//                "Ngưỡng hóa sáng",
-//                new GPUImageLuminanceThresholdFilter(),
-//                R.drawable.edge_luminance,
-//                "Ngưỡng", 0f, 1f,
-//                (filter, value) -> ((GPUImageLuminanceThresholdFilter) filter).setThreshold(value)
-//        ));
-//        artEffect.add(new EffectItem(
-//                "LUT màu",
-//                new GPUImageLookupFilter(),
-//                R.drawable.art_lookup
-//        ));
         return artEffect;
     }
 }

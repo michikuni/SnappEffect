@@ -16,7 +16,6 @@ public class EffectItem {
     private final float max;
     private final float defaultValue;
     private final BiConsumer<GPUImageFilter, Float> parameterApplier;
-    private float currentValue;
 
     // Filter không có tham số
     public EffectItem(String name, GPUImageFilter filter, int iconRes) {
@@ -72,13 +71,7 @@ public class EffectItem {
     public String getLabel() {
         return label;
     }
-
-    public float getCurrentValue() {
-        return currentValue;
-    }
-
     public void applyParameter(float value) {
-        this.currentValue = value;
         if (parameterApplier != null) {
             parameterApplier.accept(filter, value);
             Log.e("Parameter", String.format("%.2f", value));
