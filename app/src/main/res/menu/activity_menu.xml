@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_camera"
+        android:icon="@drawable/photo_camera_24px"
+        android:iconTint="@color/white"
+        android:orderInCategory="0"
+        android:title="@string/menu_open_title"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/menu_open"
         android:icon="@drawable/toolbar_open"
         android:iconTint="@color/white"
@@ -29,7 +36,7 @@
         android:id="@+id/menu_more_vert"
         android:iconTint="@color/white"
         android:orderInCategory="3"
-        android:icon="@drawable/toolbar_more_vert"
+        android:icon="@drawable/toolbar_info"
         android:title="@string/menu_more_vert_title"
         app:showAsAction="always"/>
 </menu>

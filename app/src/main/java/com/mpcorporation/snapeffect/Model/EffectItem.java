@@ -14,22 +14,22 @@ public class EffectItem {
     private final boolean hasParameter;
     private final float min;
     private final float max;
-    private float value;
+    private final float defaultValue;
     private final BiConsumer<GPUImageFilter, Float> parameterApplier;
     private float currentValue;
 
     // Filter không có tham số
     public EffectItem(String name, GPUImageFilter filter, int iconRes) {
-        this(name, iconRes, filter, "", false, 0f, 0f, null);
+        this(name, iconRes, filter, "", false, 0f, 0f, 0f, null);
     }
 
     // Filter có tham số
-    public EffectItem(String name, GPUImageFilter filter, int iconRes, String label, float min, float max, BiConsumer<GPUImageFilter, Float> applier) {
-        this(name, iconRes, filter, label, true, min, max, applier);
+    public EffectItem(String name, GPUImageFilter filter, int iconRes, String label, float min, float max, float defaultValue, BiConsumer<GPUImageFilter, Float> applier) {
+        this(name, iconRes, filter, label, true, min, max, defaultValue, applier);
     }
 
     // Constructor chính
-    private EffectItem(String name, int filterIcon, GPUImageFilter filter, String label, boolean hasParameter, float min, float max, BiConsumer<GPUImageFilter, Float> applier) {
+    private EffectItem(String name, int filterIcon, GPUImageFilter filter, String label, boolean hasParameter, float min, float max, float defaultValue, BiConsumer<GPUImageFilter, Float> applier) {
         this.name = name;
         this.filterIconRes = filterIcon;
         this.label = label;
@@ -37,8 +37,10 @@ public class EffectItem {
         this.hasParameter = hasParameter;
         this.min = min;
         this.max = max;
+        this.defaultValue = defaultValue;
         this.parameterApplier = applier;
     }
+
 
     public String getName() {
         return name;
@@ -58,6 +60,9 @@ public class EffectItem {
 
     public float getMin() {
         return min;
+    }
+    public float getDefaultValue() {
+        return defaultValue;
     }
 
     public float getMax() {

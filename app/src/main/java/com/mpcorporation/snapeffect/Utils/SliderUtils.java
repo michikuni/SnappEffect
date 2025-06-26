@@ -20,11 +20,11 @@ public class SliderUtils {
         labelView.setVisibility(View.VISIBLE);
 
         seekBar.setMax(100);
-        seekBar.setProgress((int) (defaultValue * 100));
+        int progress = (int) ((defaultValue - min) / (max - min) * 100f);
+        seekBar.setProgress(progress);
 
-        float actualValue = min + (max - min) * defaultValue;
-        labelView.setText(label + ": " + String.format("%.2f", actualValue));
-        onChange.accept(actualValue);
+        labelView.setText(label + ": " + String.format("%.2f", defaultValue));
+        onChange.accept(defaultValue);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

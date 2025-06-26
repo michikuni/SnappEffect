@@ -85,7 +85,7 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
                     if (config.getFilter().getClass().equals(filter.getClass())) {
                         if (config.hasParameter()){
                             Log.e("Filter", String.format("%.2f", config.getCurrentValue()));
-                            showSlider(context, config.getLabel(), config.getMin(), config.getMax(), (config.getMin()+config.getMax())/2, value -> {
+                            showSlider(context, config.getLabel(), config.getMin(), config.getMax(), config.getDefaultValue(), value -> {
                                 config.applyParameter(value);
                                 for(int i = 0; i < activeFilters.size(); i++){
                                     Log.e("List Filter", activeFilters.get(i).toString());

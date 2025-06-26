@@ -26,7 +26,7 @@ public class CropHandler {
     public static void handleCropError(Activity activity, Intent data) {
         final Throwable cropError = UCrop.getError(data);
         if (cropError != null) {
-            Toast.makeText(activity, "Lỗi cắt ảnh: " + cropError.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Cần thêm ảnh", Toast.LENGTH_SHORT).show();
             Log.d("Lỗi HandlerCrop", "Lỗi cắt ảnh", cropError);
         }
     }
