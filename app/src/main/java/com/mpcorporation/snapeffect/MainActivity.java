@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -36,14 +37,12 @@ import com.mpcorporation.snapeffect.Utils.SliderUtils;
 
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
-import com.mpcorporation.snapeffect.Utils.UIUtils;
 import com.mpcorporation.snapeffect.View.EffectBottomSheet;
 import com.yalantis.ucrop.UCrop;
 
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        deleteTemporaryImages();
 
         layoutToolbar = findViewById(R.id.toolbar);
         gpuImageView = findViewById(R.id.content_edit);
@@ -84,36 +84,16 @@ public class MainActivity extends AppCompatActivity {
                         List<EffectItem> adjustEffects = AdjustEffectFactory.create();
                         sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects);
                         sheet.show(this.getSupportFragmentManager(), "blur_effects");
-//                        try {
-//                            photoUri = ImageHandler.getFilteredImageTempUri(this, gpuImageView);
-//                            gpuImageView.requestRender();
-//                        } catch (IOException e) {
-//                            Log.e("FilterUri", "Lỗi khi tạo Uri tạm từ GPUImage", e);
-//                        }
                         break;
                     case 2:
                         List<EffectItem> artEffect = ArtEffectFactory.create();
                         sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect);
                         sheet.show(this.getSupportFragmentManager(), "art_effects");
-//                        try {
-//                            photoUri = ImageHandler.getFilteredImageTempUri(this, gpuImageView);
-//                            gpuImageView.requestRender();
-//
-//                        } catch (IOException e) {
-//                            Log.e("FilterUri", "Lỗi khi tạo Uri tạm từ GPUImage", e);
-//                        }
                         break;
                     case 3:
                         List<EffectItem> distorEffect = DistortEffectFactory.create();
                         sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect);
                         sheet.show(this.getSupportFragmentManager(), "distor_effects");
-//                        try {
-//                            photoUri = ImageHandler.getFilteredImageTempUri(this, gpuImageView);
-//                            gpuImageView.requestRender();
-//
-//                        } catch (IOException e) {
-//                            Log.e("FilterUri", "Lỗi khi tạo Uri tạm từ GPUImage", e);
-//                        }
                         break;
                 }
             } else {
@@ -122,11 +102,20 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNavView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         bottomNavView.setAdapter(adapter);
-        // Ẩn SeekBar
-//        UIUtils.setupSeekBarDismissOnClick(findViewById(R.id.frame_gpu), findViewById(R.id.parameterSeekBar), this);
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                deleteTemporaryImages();
+                finish();
+            }
+        });
+        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        deleteTemporaryImages();
+        Log.e("destroy", "Duc ngu");
     }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -192,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     //Xử lý các component của menu top
-    String file_name = null;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -213,44 +201,25 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.menu_keep) {
             if (photoUri != null){
-                Random random = new Random();
-                int fileName = random.nextInt(100000);
-                gpuImageView.saveToPictures("Snap Effect Temporary",fileName + ".jpg", new GPUImageView.OnPictureSavedListener() {
-                    @Override
-                    public void onPictureSaved(Uri uri) {
-                        Log.d("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
-                        gpuImageView.setImage(uri);
-                    }
+                gpuImageView.saveToPictures("Snap Effect Temporary",System.currentTimeMillis() + ".jpg", uri -> {
+                    Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
+                    gpuImageView.setImage(uri);
+                    SliderUtils.hideSlider(this);
+                    gpuImageView.setFilter(new GPUImageFilter());
                 });
-                Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect Temporary/"+fileName+".jpg", Toast.LENGTH_SHORT).show();
-                Log.d("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/"+fileName+".jpg");
+                Toast.makeText(this, "Áp dụng thành công hiệu ứng", Toast.LENGTH_SHORT).show();
+                Log.e("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
             } else {
                 Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
             }
             return true;
         }else if (id == R.id.menu_save) {
             if (photoUri != null){
-                Random random = new Random();
-                int fileName = random.nextInt(100000);
-                gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + fileName + ".jpg", null);
-                File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Snap Effect Temporary");
-                if (folder.exists() && folder.isDirectory()) {
-                    File[] files = folder.listFiles();
-                    if (files != null) {
-                        for (File file : files) {
-                            if (file.isFile()) {
-                                boolean deleted = file.delete();
-                                if (!deleted) {
-                                    Log.w("DeleteFiles", "Không thể xóa file: " + file.getAbsolutePath());
-                                }
-                            }
-                        }
-                    }
-                    SliderUtils.hideSlider(this);
-                }
-
-                Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+fileName+".jpg", Toast.LENGTH_SHORT).show();
-                Log.d("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/"+fileName+".jpg");
+                gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + System.currentTimeMillis() + ".jpg", null);
+                deleteTemporaryImages();
+                SliderUtils.hideSlider(this);
+                Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+ System.currentTimeMillis() +".jpg", Toast.LENGTH_SHORT).show();
+                Log.d("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
             } else {
                 Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
             }
@@ -265,4 +234,22 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    void deleteTemporaryImages (){
+        File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Snap Effect Temporary");
+        if (folder.exists() && folder.isDirectory()) {
+            File[] files = folder.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        boolean deleted = file.delete();
+                        if (!deleted) {
+                            Log.w("DeleteFiles", "Không thể xóa file: " + file.getAbsolutePath());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

@@ -45,7 +45,7 @@
         android:id="@+id/menu_clear"
         android:iconTint="@color/white"
         android:orderInCategory="5"
-        android:icon="@drawable/toolbar_clear_filter"
+        android:icon="@drawable/toolbar_clear"
         android:title="@string/menu_history_title"
         app:showAsAction="always"/>
 
