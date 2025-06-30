@@ -21,7 +21,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.slider.Slider;
 import com.mpcorporation.snapeffect.Adapter.BottomNavAdapter;
 import com.mpcorporation.snapeffect.Filters.AdjustEffectFactory;
 import com.mpcorporation.snapeffect.Filters.ArtEffectFactory;
@@ -33,7 +32,6 @@ import com.mpcorporation.snapeffect.Model.BottomNavItem;
 import com.mpcorporation.snapeffect.Model.EffectItem;
 import com.mpcorporation.snapeffect.Utils.PermissionUtils;
 import com.mpcorporation.snapeffect.Utils.SliderUtils;
-import com.mpcorporation.snapeffect.Utils.UIUtils;
 
 import java.io.File;
 import java.util.List;
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CAMERA = 123;
     Toolbar layoutToolbar;
     private Uri photoUri;
-
     private GPUImageView gpuImageView;
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
@@ -83,16 +80,36 @@ public class MainActivity extends AppCompatActivity {
                         List<EffectItem> adjustEffects = AdjustEffectFactory.create();
                         sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects);
                         sheet.show(this.getSupportFragmentManager(), "blur_effects");
+//                        try {
+//                            photoUri = ImageHandler.getFilteredImageTempUri(this, gpuImageView);
+//                            gpuImageView.requestRender();
+//                        } catch (IOException e) {
+//                            Log.e("FilterUri", "Lỗi khi tạo Uri tạm từ GPUImage", e);
+//                        }
                         break;
                     case 2:
                         List<EffectItem> artEffect = ArtEffectFactory.create();
                         sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect);
                         sheet.show(this.getSupportFragmentManager(), "art_effects");
+//                        try {
+//                            photoUri = ImageHandler.getFilteredImageTempUri(this, gpuImageView);
+//                            gpuImageView.requestRender();
+//
+//                        } catch (IOException e) {
+//                            Log.e("FilterUri", "Lỗi khi tạo Uri tạm từ GPUImage", e);
+//                        }
                         break;
                     case 3:
                         List<EffectItem> distorEffect = DistortEffectFactory.create();
                         sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect);
                         sheet.show(this.getSupportFragmentManager(), "distor_effects");
+//                        try {
+//                            photoUri = ImageHandler.getFilteredImageTempUri(this, gpuImageView);
+//                            gpuImageView.requestRender();
+//
+//                        } catch (IOException e) {
+//                            Log.e("FilterUri", "Lỗi khi tạo Uri tạm từ GPUImage", e);
+//                        }
                         break;
                 }
             } else {
@@ -102,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         bottomNavView.setAdapter(adapter);
         // Ẩn SeekBar
-        UIUtils.setupSeekBarDismissOnClick(findViewById(R.id.frame_gpu), findViewById(R.id.parameterSeekBar), this);
+//        UIUtils.setupSeekBarDismissOnClick(findViewById(R.id.frame_gpu), findViewById(R.id.parameterSeekBar), this);
     }
 
 
@@ -153,11 +170,12 @@ public class MainActivity extends AppCompatActivity {
                     gpuImageView.setImage(uri);
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
+                    gpuImageView.setFilter(new GPUImageFilter());
                     gpuImageView.requestRender();
                 }
                 else {
                     Log.e("Pick Image Launcher", "Không có ảnh nào được chọn");
-                    Toast.makeText(this, "Không có ảnh nào đưược chọn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Không có ảnh nào được chọn", Toast.LENGTH_SHORT).show();
                 }
             });
     //Hiển thị menu top
