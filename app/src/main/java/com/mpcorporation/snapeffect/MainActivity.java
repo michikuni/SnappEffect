@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.*;
@@ -35,12 +36,14 @@ import com.mpcorporation.snapeffect.Utils.SliderUtils;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
+import com.mpcorporation.snapeffect.Utils.UIUtils;
 import com.mpcorporation.snapeffect.View.EffectBottomSheet;
 import com.yalantis.ucrop.UCrop;
 
@@ -167,9 +170,11 @@ public class MainActivity extends AppCompatActivity {
                 if (uri != null) {
                     Log.d("Main Activity", "Chọn ảnh từ thư viện: " + uri);
                     photoUri = uri;
+                    Log.e("debug1", uri.toString());
                     gpuImageView.setImage(uri);
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
+                    SliderUtils.hideSlider(this);
                     gpuImageView.setFilter(new GPUImageFilter());
                     gpuImageView.requestRender();
                 }
@@ -185,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     //Xử lý các component của menu top
+    String file_name = null;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -203,11 +209,44 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
             }
             return true;
-        } else if (id == R.id.menu_save) {
+        } else if (id == R.id.menu_keep) {
+            if (photoUri != null){
+                Random random = new Random();
+                int fileName = random.nextInt(100000);
+                gpuImageView.saveToPictures("Snap Effect Temporary",fileName + ".jpg", new GPUImageView.OnPictureSavedListener() {
+                    @Override
+                    public void onPictureSaved(Uri uri) {
+                        Log.d("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
+                        gpuImageView.setImage(uri);
+                    }
+                });
+                Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect Temporary/"+fileName+".jpg", Toast.LENGTH_SHORT).show();
+                Log.d("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/"+fileName+".jpg");
+            } else {
+                Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        }else if (id == R.id.menu_save) {
             if (photoUri != null){
                 Random random = new Random();
                 int fileName = random.nextInt(100000);
                 gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + fileName + ".jpg", null);
+                File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Snap Effect Temporary");
+                if (folder.exists() && folder.isDirectory()) {
+                    File[] files = folder.listFiles();
+                    if (files != null) {
+                        for (File file : files) {
+                            if (file.isFile()) {
+                                boolean deleted = file.delete();
+                                if (!deleted) {
+                                    Log.w("DeleteFiles", "Không thể xóa file: " + file.getAbsolutePath());
+                                }
+                            }
+                        }
+                    }
+                    SliderUtils.hideSlider(this);
+                }
+
                 Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+fileName+".jpg", Toast.LENGTH_SHORT).show();
                 Log.d("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/"+fileName+".jpg");
             } else {
@@ -219,5 +258,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

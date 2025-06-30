@@ -10,11 +10,10 @@
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="wrap_content"
-        android:paddingStart="56dp"
-        android:paddingEnd="56dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFA1A1"
+
         app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
