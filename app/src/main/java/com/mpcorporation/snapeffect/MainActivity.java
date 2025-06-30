@@ -37,7 +37,6 @@ import com.mpcorporation.snapeffect.Utils.SliderUtils;
 
 import java.io.File;
 import java.util.List;
-import java.util.Random;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
@@ -225,6 +224,10 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         } else if (id == R.id.menu_more_vert) {
+            String url = "https://www.freeprivacypolicy.com/live/619f632c-4ca6-41ff-9c7c-524fd0e9eacd";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
             return true;
         }else if (id == R.id.menu_clear) {
             gpuImageView.setImage(resetUri);
