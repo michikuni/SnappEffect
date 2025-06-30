@@ -12,22 +12,15 @@
         android:id="@+id/menu_open"
         android:icon="@drawable/toolbar_open"
         android:iconTint="@color/white"
-        android:orderInCategory="0"
+        android:orderInCategory="1"
         android:title="@string/menu_open_title"
         app:showAsAction="always"/>
 
-    <item
-        android:id="@+id/menu_history"
-        android:iconTint="@color/white"
-        android:orderInCategory="1"
-        android:icon="@drawable/toolbar_history"
-        android:title="@string/menu_history_title"
-        app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_keep"
         android:iconTint="@color/white"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         android:icon="@drawable/toolbar_keep"
         android:title="@string/menu_tools"
         app:showAsAction="always"/>
@@ -35,15 +28,31 @@
     <item
         android:id="@+id/menu_save"
         android:icon="@drawable/toolbar_save"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:iconTint="@color/white"
         android:title="@string/menu_save_title"
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/menu_history"
+        android:iconTint="@color/white"
+        android:orderInCategory="4"
+        android:icon="@drawable/toolbar_history"
+        android:title="@string/menu_history_title"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_clear"
+        android:iconTint="@color/white"
+        android:orderInCategory="5"
+        android:icon="@drawable/toolbar_clear_filter"
+        android:title="@string/menu_history_title"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/menu_more_vert"
         android:iconTint="@color/white"
-        android:orderInCategory="3"
+        android:orderInCategory="6"
         android:icon="@drawable/toolbar_info"
         android:title="@string/menu_more_vert_title"
         app:showAsAction="always"/>

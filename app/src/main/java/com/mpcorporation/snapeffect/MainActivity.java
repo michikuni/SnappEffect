@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CAMERA = 123;
     Toolbar layoutToolbar;
     private Uri photoUri;
+    private Uri resetUri;
     private GPUImageView gpuImageView;
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 if (uri != null) {
                     Log.d("Main Activity", "Chọn ảnh từ thư viện: " + uri);
                     photoUri = uri;
+                    resetUri = uri;
                     Log.e("debug1", uri.toString());
                     gpuImageView.setImage(uri);
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
@@ -254,6 +256,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         } else if (id == R.id.menu_more_vert) {
+            return true;
+        }else if (id == R.id.menu_clear) {
+            gpuImageView.setImage(resetUri);
+            gpuImageView.setFilter(new GPUImageFilter());
+            SliderUtils.hideSlider(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
