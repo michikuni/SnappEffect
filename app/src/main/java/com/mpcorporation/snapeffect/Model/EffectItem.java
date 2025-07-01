@@ -74,8 +74,6 @@ public class EffectItem {
     public void applyParameter(float value) {
         if (parameterApplier != null) {
             parameterApplier.accept(filter, value);
-            Log.e("Parameter", String.format("%.2f", value));
-            Log.e("Filter", filter.getClass().getSimpleName());
         }
     }
 }

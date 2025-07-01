@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -64,73 +63,6 @@
                 android:progress="50"
                 android:visibility="gone"/>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/seekBar3Line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:id="@+id/labelLine1"
-                android:text=""
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:textAlignment="center"
-                android:paddingTop="4dp"
-                android:visibility="gone"/>
-
-            <SeekBar
-                android:id="@+id/seekBarLine1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingBottom="10dp"
-                android:max="100"
-                android:progress="50"
-                android:visibility="gone"/>
-            <TextView
-                android:id="@+id/labelLine2"
-                android:text=""
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:textAlignment="center"
-                android:paddingTop="4dp"
-                android:visibility="gone"/>
-
-            <SeekBar
-                android:id="@+id/seekBarLine2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingBottom="10dp"
-                android:max="100"
-                android:progress="50"
-                android:visibility="gone"/>
-
-            <TextView
-            android:id="@+id/labelLine3"
-            android:text=""
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textAlignment="center"
-            android:paddingTop="4dp"
-            android:visibility="gone"/>
-
-            <SeekBar
-                android:id="@+id/seekBarLine3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingBottom="10dp"
-                android:max="100"
-                android:progress="50"
-                android:visibility="gone"/>
-        </LinearLayout>
-
         <!-- Placeholder: Hiển thị khi chưa có ảnh -->
         <LinearLayout
             android:id="@+id/nav_host_fragment"
@@ -157,7 +89,6 @@
                 android:layout_marginTop="8dp" />
         </LinearLayout>
     </FrameLayout>
-
     <!-- Bottom Navigation: RecyclerView để chứa nút Chọn ảnh / Filter / Lưu -->
     <View
         android:id="@+id/top_border"

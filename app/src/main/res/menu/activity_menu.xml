@@ -34,18 +34,18 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/menu_history"
+        android:id="@+id/menu_undo"
         android:iconTint="@color/white"
         android:orderInCategory="4"
-        android:icon="@drawable/toolbar_history"
+        android:icon="@drawable/toolbar_undo"
         android:title="@string/menu_history_title"
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/menu_clear"
+        android:id="@+id/menu_redo"
         android:iconTint="@color/white"
         android:orderInCategory="5"
-        android:icon="@drawable/toolbar_clear"
+        android:icon="@drawable/toolbar_redo"
         android:title="@string/menu_history_title"
         app:showAsAction="always"/>
 

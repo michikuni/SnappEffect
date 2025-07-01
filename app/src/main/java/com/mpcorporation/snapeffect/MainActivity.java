@@ -32,6 +32,7 @@ import com.mpcorporation.snapeffect.Handler.CropHandler;
 import com.mpcorporation.snapeffect.Handler.ToolbarHandler;
 import com.mpcorporation.snapeffect.Model.BottomNavItem;
 import com.mpcorporation.snapeffect.Model.EffectItem;
+import com.mpcorporation.snapeffect.Utils.HistoryManager;
 import com.mpcorporation.snapeffect.Utils.PermissionUtils;
 import com.mpcorporation.snapeffect.Utils.SliderUtils;
 
@@ -50,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CAMERA = 123;
     Toolbar layoutToolbar;
     private Uri photoUri;
-    private Uri resetUri;
     private GPUImageView gpuImageView;
+    private HistoryManager<Uri> manager;
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
         layoutToolbar = findViewById(R.id.toolbar);
         gpuImageView = findViewById(R.id.content_edit);
         gpuImageView.setScaleType(GPUImage.ScaleType.CENTER_INSIDE);
+        manager = new HistoryManager<>();
 
         ToolbarHandler.setupToolbar(this, layoutToolbar);
 
         RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
 
-        List<BottomNavItem> items = BottomNavItemFactory.create(); // nếu có nhiều thì tách tiếp
+        List<BottomNavItem> items = BottomNavItemFactory.create();
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
             EffectBottomSheet sheet;
             if (photoUri != null){
@@ -108,12 +110,11 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        }
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         deleteTemporaryImages();
-        Log.e("destroy", "Duc ngu");
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -137,19 +138,16 @@ public class MainActivity extends AppCompatActivity {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK){
-                    Toast.makeText(this, "Ảnh đã chụp xong", Toast.LENGTH_SHORT).show();
-                    Log.d("Main Activity", "Chụp ảnh thành công");
                     if(photoUri != null){
                         gpuImageView.setImage(photoUri);
                     } else {
-                        Log.e("Camera Launcher", "Photo uri = null không thể set image");
+                        Log.e("Camera Launcher 144", "Photo uri = null không thể set image");
                     }
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
                     gpuImageView.requestRender();
                 } else {
-                    Toast.makeText(this, "Bạn đã hủy chụp ảnh", Toast.LENGTH_SHORT).show();
-                    Log.d("Main Activity", "Hủy chụp ảnh");
+                    Log.e("cameraLauncher 152", "Hủy chụp ảnh");
                 }
             }
     );
@@ -157,10 +155,8 @@ public class MainActivity extends AppCompatActivity {
             new ActivityResultContracts.GetContent(),
             uri -> {
                 if (uri != null) {
-                    Log.d("Main Activity", "Chọn ảnh từ thư viện: " + uri);
                     photoUri = uri;
-                    resetUri = uri;
-                    Log.e("debug1", uri.toString());
+                    manager.add(photoUri);
                     gpuImageView.setImage(uri);
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
@@ -169,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     gpuImageView.requestRender();
                 }
                 else {
-                    Log.e("Pick Image Launcher", "Không có ảnh nào được chọn");
-                    Toast.makeText(this, "Không có ảnh nào được chọn", Toast.LENGTH_SHORT).show();
+                    Log.e("pickImageLauncher 172", "Không có ảnh nào được chọn");
                 }
             });
     //Hiển thị menu top
@@ -180,34 +175,30 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     //Xử lý các component của menu top
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_camera) {
+            manager.clear();
             PermissionUtils.openCameraWithCheck(this, PERMISSION_REQUEST_CAMERA);
+            manager.add(photoUri);
             return true;
         } else if (id == R.id.menu_open) {
+            manager.clear();
             pickImageLauncher.launch("image/*");
-            return true;
-        } else if (id == R.id.menu_history) {
-            if (photoUri != null){
-                gpuImageView.setFilter(new GPUImageFilter());
-                SliderUtils.hideSlider(this);
-                return true;
-            } else {
-                Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
-            }
             return true;
         } else if (id == R.id.menu_keep) {
             if (photoUri != null){
                 gpuImageView.saveToPictures("Snap Effect Temporary",System.currentTimeMillis() + ".jpg", uri -> {
                     Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
+                    manager.add(uri);
                     gpuImageView.setImage(uri);
                     SliderUtils.hideSlider(this);
                     gpuImageView.setFilter(new GPUImageFilter());
                 });
                 Toast.makeText(this, "Áp dụng thành công hiệu ứng", Toast.LENGTH_SHORT).show();
-                Log.e("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
+                Log.e("menu keep 210", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
             } else {
                 Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
             }
@@ -218,21 +209,35 @@ public class MainActivity extends AppCompatActivity {
                 deleteTemporaryImages();
                 SliderUtils.hideSlider(this);
                 Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+ System.currentTimeMillis() +".jpg", Toast.LENGTH_SHORT).show();
-                Log.d("Main Activity", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
+                Log.e("menu keep 221", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
             } else {
                 Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
             }
+            return true;
+        } else if (id == R.id.menu_undo) {
+            if (photoUri != null){
+                manager.undo();
+                photoUri = manager.get();
+                Log.e("undo", photoUri.toString());
+                gpuImageView.setImage(photoUri);
+                gpuImageView.requestRender();
+                return true;
+            } else {
+                Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        } else if (id == R.id.menu_redo) {
+            manager.redo();
+            photoUri = manager.get();
+            Log.e("redo", photoUri.toString());
+            gpuImageView.setImage(photoUri);
+            gpuImageView.requestRender();
             return true;
         } else if (id == R.id.menu_more_vert) {
             String url = "https://www.freeprivacypolicy.com/live/619f632c-4ca6-41ff-9c7c-524fd0e9eacd";
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             startActivity(intent);
-            return true;
-        }else if (id == R.id.menu_clear) {
-            gpuImageView.setImage(resetUri);
-            gpuImageView.setFilter(new GPUImageFilter());
-            SliderUtils.hideSlider(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -247,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                     if (file.isFile()) {
                         boolean deleted = file.delete();
                         if (!deleted) {
-                            Log.w("DeleteFiles", "Không thể xóa file: " + file.getAbsolutePath());
+                            Log.e("delete temp 250", "Không thể xóa file: " + file.getAbsolutePath());
                         }
                     }
                 }
