@@ -217,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.menu_undo) {
             if (photoUri != null){
                 manager.undo();
-                manager.clear();
                 photoUri = manager.get();
                 Log.e("undo", photoUri.toString());
                 gpuImageView.setImage(photoUri);
