@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mpcorporation.snapeffect.Adapter.EffectAdapter;
 import com.mpcorporation.snapeffect.Model.EffectItem;
+import com.mpcorporation.snapeffect.Model.ScaleCrop;
 import com.mpcorporation.snapeffect.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mpcorporation.snapeffect.Utils.HistoryManager;
@@ -57,7 +58,6 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
             Activity context, GPUImageView gpuImageView,
             List<EffectItem> effectItems, HistoryManager<Uri> manager
     ) {
-        gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
         EffectBottomSheet sheet = new EffectBottomSheet();
         sheet.setEffectItems(effectItems);
         sheet.setOnEffectClickListener(filter -> {

@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis() + ".jpg"));
                         UCrop.of(photoUri, outputUri)
-                                .withAspectRatio(16, 9)
+                                .withAspectRatio(0, 0)
                                 .start(this);
                         break;
 
