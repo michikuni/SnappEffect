@@ -34,21 +34,14 @@ public class SliderUtils {
         labelView.setText(label + ": " + String.format("%.2f", defaultValue));
         onChange.accept(defaultValue);
 
-        final boolean[] isTracking = {false};
-        final int[] lastAppliedProgress = {-1};
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                isTracking[0] = true;
             }
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (!fromUser || !isTracking[0]) return;
-
-                if (progress == lastAppliedProgress[0]) return;
-                lastAppliedProgress[0] = progress;
 
                 float value = min + (max - min) * (progress / 100f);
                 labelView.setText(label + ": " + String.format("%.2f", value));
@@ -57,13 +50,9 @@ public class SliderUtils {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                isTracking[0] = false;
-
                 int progress = seekBar.getProgress();
-                if (progress == lastAppliedProgress[0]) return;
                 float value = min + (max - min) * (progress / 100f);
                 labelView.setText(label + ": " + String.format("%.2f", value));
-                lastAppliedProgress[0] = progress;
 
                 onFinalChange.accept(value);
             }
