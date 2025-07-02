@@ -79,19 +79,8 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
                                     gpuImageView.setFilter(config.getFilter());
                                     gpuImageView.requestRender(); // đảm bảo render lại ngay
                                 },
-
-                                // Khi thả tay: apply lại lần cuối rồi lưu ảnh
-                                finalValue -> {
-                                    config.applyParameter(finalValue);
-                                    gpuImageView.setFilter(config.getFilter());
-
-                                    gpuImageView.saveToPictures("Snap Effect Temporary", System.currentTimeMillis() + ".jpg", uri -> {
-                                        Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
-                                        manager.add(uri);
-                                        gpuImageView.setImage(uri); // update preview
-                                        gpuImageView.requestRender();
-                                    });
-                                }
+                                gpuImageView,
+                                manager
                         );
 
                     } else {

@@ -2,6 +2,8 @@ package com.mpcorporation.snapeffect.Utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -9,6 +11,9 @@ import android.widget.TextView;
 import com.mpcorporation.snapeffect.R;
 
 import java.util.function.Consumer;
+
+import jp.co.cyberagent.android.gpuimage.GPUImageView;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 public class SliderUtils {
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
@@ -19,7 +24,8 @@ public class SliderUtils {
             float max,
             float defaultValue,
             Consumer<Float> onChange,
-            Consumer<Float> onFinalChange
+            GPUImageView gpuImageView,
+            HistoryManager <Uri> manager
     ) {
         SeekBar seekBar = activity.findViewById(R.id.parameterSeekBar);
         TextView labelView = activity.findViewById(R.id.seekBarLabel);
@@ -42,7 +48,6 @@ public class SliderUtils {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
                 float value = min + (max - min) * (progress / 100f);
                 labelView.setText(label + ": " + String.format("%.2f", value));
                 onChange.accept(value);
@@ -50,11 +55,13 @@ public class SliderUtils {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int progress = seekBar.getProgress();
-                float value = min + (max - min) * (progress / 100f);
-                labelView.setText(label + ": " + String.format("%.2f", value));
-
-                onFinalChange.accept(value);
+                gpuImageView.saveToPictures("Snap Effect Temporary", System.currentTimeMillis() + ".jpg", uri -> {
+                    Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
+                    manager.add(uri);
+                    gpuImageView.setFilter(new GPUImageFilter());
+                    gpuImageView.setImage(uri);
+                    gpuImageView.requestRender();
+                });
             }
         });
     }

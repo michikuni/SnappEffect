@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         layoutToolbar = findViewById(R.id.toolbar);
         gpuImageView = findViewById(R.id.content_edit);
         gpuImageView.setScaleType(GPUImage.ScaleType.CENTER_INSIDE);
+        gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
         manager = new HistoryManager<>();
 
         ToolbarHandler.setupToolbar(this, layoutToolbar);
@@ -210,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 photoUri = manager.get();
                 Log.e("undo", photoUri.toString());
                 gpuImageView.setImage(photoUri);
+                gpuImageView.setFilter(new GPUImageFilter());
                 gpuImageView.requestRender();
                 return true;
             } else {
@@ -221,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
             photoUri = manager.get();
             Log.e("redo", photoUri.toString());
             gpuImageView.setImage(photoUri);
+            gpuImageView.setFilter(new GPUImageFilter());
             gpuImageView.requestRender();
             return true;
         } else if (id == R.id.menu_more_vert) {
