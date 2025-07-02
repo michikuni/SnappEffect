@@ -28,10 +28,12 @@ import com.mpcorporation.snapeffect.Filters.AdjustEffectFactory;
 import com.mpcorporation.snapeffect.Filters.ArtEffectFactory;
 import com.mpcorporation.snapeffect.Filters.BottomNavItemFactory;
 import com.mpcorporation.snapeffect.Filters.DistortEffectFactory;
+import com.mpcorporation.snapeffect.Filters.ScaleCropOptionFactory;
 import com.mpcorporation.snapeffect.Handler.CropHandler;
 import com.mpcorporation.snapeffect.Handler.ToolbarHandler;
 import com.mpcorporation.snapeffect.Model.BottomNavItem;
 import com.mpcorporation.snapeffect.Model.EffectItem;
+import com.mpcorporation.snapeffect.Model.ScaleCrop;
 import com.mpcorporation.snapeffect.Utils.HistoryManager;
 import com.mpcorporation.snapeffect.Utils.PermissionUtils;
 import com.mpcorporation.snapeffect.Utils.SliderUtils;
@@ -43,6 +45,7 @@ import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageView;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
+import com.mpcorporation.snapeffect.View.CropBottomSheet;
 import com.mpcorporation.snapeffect.View.EffectBottomSheet;
 import com.yalantis.ucrop.UCrop;
 
@@ -73,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
         List<BottomNavItem> items = BottomNavItemFactory.create();
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
             EffectBottomSheet sheet;
+            CropBottomSheet cropBottomSheet;
             if (photoUri != null){
                 switch (position) {
                     case 0:
                         Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis() + ".jpg"));
-                        UCrop.of(photoUri, outputUri)
-                                .withAspectRatio(0, 0)
-                                .start(this);
+                        List<ScaleCrop> scaleCrops = ScaleCropOptionFactory.create();
+                        cropBottomSheet = CropBottomSheet.getCropBottomSheet(this, scaleCrops,photoUri, outputUri);
+                        cropBottomSheet.show(this.getSupportFragmentManager(), "crop");
                         break;
-
                     case 1:
                         List<EffectItem> adjustEffects = AdjustEffectFactory.create();
                         sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects, manager);

@@ -1,7 +1,7 @@
 package com.mpcorporation.snapeffect.Model;
 
 public class ScaleCrop{
-    public final int iconResId;     // R.drawable.ic_crop_1_1, v.v.
+    public final int iconResId;
     public final String label;
     public final float ratioX;
     public final float ratioY;

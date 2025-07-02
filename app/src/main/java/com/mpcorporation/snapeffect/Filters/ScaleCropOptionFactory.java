@@ -9,7 +9,6 @@ import java.util.List;
 public class ScaleCropOptionFactory {
     public static List<ScaleCrop> create(){
         List<ScaleCrop> scaleCrops = new ArrayList<>();
-        scaleCrops.add(new ScaleCrop(R.drawable.crop_portrait_24px, "Dọc", 0, 0));
         scaleCrops.add(new ScaleCrop(R.drawable.crop_1_1, "1:1", 1, 1));
         scaleCrops.add(new ScaleCrop(R.drawable.crop_3_2_24px, "3:2", 3, 2));
         scaleCrops.add(new ScaleCrop(R.drawable.crop_5_4_24px, "5:4", 5, 4));
