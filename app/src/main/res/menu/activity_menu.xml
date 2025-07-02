@@ -16,15 +16,6 @@
         android:title="@string/menu_open_title"
         app:showAsAction="always"/>
 
-
-    <item
-        android:id="@+id/menu_keep"
-        android:iconTint="@color/white"
-        android:orderInCategory="2"
-        android:icon="@drawable/toolbar_keep"
-        android:title="@string/menu_tools"
-        app:showAsAction="always"/>
-
     <item
         android:id="@+id/menu_save"
         android:icon="@drawable/toolbar_save"

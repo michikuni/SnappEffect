@@ -45,4 +45,7 @@ public class HistoryManager <T>{
         idx = -1;
         len = 0;
     }
+    public int length(){
+        return history.size();
+    }
 }

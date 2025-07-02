@@ -4,7 +4,9 @@ import static com.mpcorporation.snapeffect.Utils.SliderUtils.hideSlider;
 import static com.mpcorporation.snapeffect.Utils.SliderUtils.showSlider;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.mpcorporation.snapeffect.Adapter.EffectAdapter;
 import com.mpcorporation.snapeffect.Model.EffectItem;
 import com.mpcorporation.snapeffect.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.mpcorporation.snapeffect.Utils.HistoryManager;
 
 import java.util.List;
 
@@ -52,23 +55,53 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
     @NonNull
     public static EffectBottomSheet getEffectBottomSheet(
             Activity context, GPUImageView gpuImageView,
-            List<EffectItem> effectItems
+            List<EffectItem> effectItems, HistoryManager<Uri> manager
     ) {
         gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
         EffectBottomSheet sheet = new EffectBottomSheet();
         sheet.setEffectItems(effectItems);
         sheet.setOnEffectClickListener(filter -> {
+            String pt = (String.valueOf(manager.length()));
+            Log.e("So phan tu", pt);
             for (EffectItem config : effectItems){
                 if (config.getFilter().getClass().equals(filter.getClass())) {
                     if (config.hasParameter()){
-                        showSlider(context, config.getLabel(), config.getMin(), config.getMax(), config.getDefaultValue(), value -> {
-                            config.applyParameter(value);
-                            gpuImageView.setFilter(config.getFilter());
-                            gpuImageView.requestRender();
-                        });
+                        showSlider(
+                                context,
+                                config.getLabel(),
+                                config.getMin(),
+                                config.getMax(),
+                                config.getDefaultValue(),
+
+                                // Khi đang kéo: apply tạm filter để preview
+                                value -> {
+                                    config.applyParameter(value);
+                                    gpuImageView.setFilter(config.getFilter());
+                                    gpuImageView.requestRender(); // đảm bảo render lại ngay
+                                },
+
+                                // Khi thả tay: apply lại lần cuối rồi lưu ảnh
+                                finalValue -> {
+                                    config.applyParameter(finalValue);
+                                    gpuImageView.setFilter(config.getFilter());
+
+                                    gpuImageView.saveToPictures("Snap Effect Temporary", System.currentTimeMillis() + ".jpg", uri -> {
+                                        Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
+                                        manager.add(uri);
+                                        gpuImageView.setImage(uri); // update preview
+                                        gpuImageView.requestRender();
+                                    });
+                                }
+                        );
+
                     } else {
                         hideSlider(context);
                         gpuImageView.setFilter(filter);
+                        gpuImageView.saveToPictures("Snap Effect Temporary",System.currentTimeMillis() + ".jpg", uri -> {
+                            Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
+                            manager.add(uri);
+                            gpuImageView.setImage(uri);
+                        });
                     }
                     break;
                 }

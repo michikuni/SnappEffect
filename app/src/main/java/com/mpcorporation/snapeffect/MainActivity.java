@@ -83,17 +83,17 @@ public class MainActivity extends AppCompatActivity {
 
                     case 1:
                         List<EffectItem> adjustEffects = AdjustEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects, manager);
                         sheet.show(this.getSupportFragmentManager(), "blur_effects");
                         break;
                     case 2:
                         List<EffectItem> artEffect = ArtEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect, manager);
                         sheet.show(this.getSupportFragmentManager(), "art_effects");
                         break;
                     case 3:
                         List<EffectItem> distorEffect = DistortEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect, manager);
                         sheet.show(this.getSupportFragmentManager(), "distor_effects");
                         break;
                 }
@@ -188,22 +188,7 @@ public class MainActivity extends AppCompatActivity {
             manager.clear();
             pickImageLauncher.launch("image/*");
             return true;
-        } else if (id == R.id.menu_keep) {
-            if (photoUri != null){
-                gpuImageView.saveToPictures("Snap Effect Temporary",System.currentTimeMillis() + ".jpg", uri -> {
-                    Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
-                    manager.add(uri);
-                    gpuImageView.setImage(uri);
-                    SliderUtils.hideSlider(this);
-                    gpuImageView.setFilter(new GPUImageFilter());
-                });
-                Toast.makeText(this, "Áp dụng thành công hiệu ứng", Toast.LENGTH_SHORT).show();
-                Log.e("menu keep 210", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
-            } else {
-                Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
-            }
-            return true;
-        }else if (id == R.id.menu_save) {
+        } else if (id == R.id.menu_save) {
             if (photoUri != null){
                 gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + System.currentTimeMillis() + ".jpg", null);
                 deleteTemporaryImages();
