@@ -139,7 +139,10 @@ public class MainActivity extends AppCompatActivity {
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK){
                     if(photoUri != null){
+                        manager.clear();
+                        manager.add(photoUri);
                         gpuImageView.setImage(photoUri);
+                        deleteTemporaryImages();
                     } else {
                         Log.e("Camera Launcher 144", "Photo uri = null không thể set image");
                     }
@@ -156,12 +159,13 @@ public class MainActivity extends AppCompatActivity {
             uri -> {
                 if (uri != null) {
                     photoUri = uri;
+                    manager.clear();
                     manager.add(photoUri);
-                    gpuImageView.setImage(uri);
+                    deleteTemporaryImages();
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
                     SliderUtils.hideSlider(this);
-                    gpuImageView.setFilter(new GPUImageFilter());
+                    gpuImageView.setImage(uri);
                     gpuImageView.requestRender();
                 }
                 else {
@@ -180,17 +184,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_camera) {
-            manager.clear();
             PermissionUtils.openCameraWithCheck(this, PERMISSION_REQUEST_CAMERA);
-            manager.add(photoUri);
             return true;
         } else if (id == R.id.menu_open) {
-            manager.clear();
             pickImageLauncher.launch("image/*");
             return true;
         } else if (id == R.id.menu_save) {
             if (photoUri != null){
-                gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + System.currentTimeMillis() + ".jpg", null);
+                gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + System.currentTimeMillis() + ".jpg", uri -> {
+                    manager.clear();
+                    manager.add(uri);
+                    gpuImageView.setImage(uri);
+                });
                 deleteTemporaryImages();
                 SliderUtils.hideSlider(this);
                 Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+ System.currentTimeMillis() +".jpg", Toast.LENGTH_SHORT).show();
