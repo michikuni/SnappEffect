@@ -21,12 +21,12 @@ public class ArtEffectFactory {
         artEffect.add(new EffectItem(
                 "Âm bản",
                 new GPUImageGrayscaleFilter(),
-                R.drawable.adjust_gray_scale
+                R.drawable.art_gray_scale
         ));
         artEffect.add(new EffectItem(
                 "Vintage",
                 new GPUImageSepiaToneFilter(),
-                R.drawable.adjust_vintage,
+                R.drawable.art_vintage,
                 "Cường độ", 0f, 1f, 0.5f,
                 (filter, value) -> ((GPUImageSepiaToneFilter) filter).setIntensity(value)
         ));
@@ -68,7 +68,7 @@ public class ArtEffectFactory {
         artEffect.add(new EffectItem(
                 "Sketch",
                 new GPUImageSobelThresholdFilter(),
-                R.drawable.edge_sobel,
+                R.drawable.art_sobel,
                 "Biên", 0f, 1f, 0.8f,
                 (filter, value) -> ((GPUImageSobelThresholdFilter) filter).setThreshold(value)
         ));

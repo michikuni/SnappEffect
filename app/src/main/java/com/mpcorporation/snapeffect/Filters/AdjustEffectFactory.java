@@ -71,7 +71,7 @@ public class AdjustEffectFactory {
         adjustEffects.add(new EffectItem(
                 "Ngưỡng hóa sáng",
                 new GPUImageLuminanceThresholdFilter(),
-                R.drawable.edge_luminance,
+                R.drawable.adjust_luminance,
                 "Ngưỡng", 0f, 1f, 0.5f,
                 (filter, value) -> ((GPUImageLuminanceThresholdFilter) filter).setThreshold(value)
         ));
