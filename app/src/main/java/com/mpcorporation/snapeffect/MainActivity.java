@@ -74,30 +74,13 @@ public class MainActivity extends AppCompatActivity {
         ToolbarHandler.setupToolbar(this, layoutToolbar);
 
         RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
-//        bottomNavView.post(() -> {
-//            RecyclerView.LayoutManager layoutManager = bottomNavView.getLayoutManager();
-//            if (layoutManager != null) {
-//                View itemView = layoutManager.findViewByPosition(3); // Đo item đầu tiên
-//                if (itemView != null) {
-//                    int width = itemView.getWidth();
-//                    int height = itemView.getHeight();
-//
-//                    Log.e("ItemSize", "Item 0 width: " + width + "px, height: " + height + "px");
-//                } else {
-//                    Log.e("ItemSize", "Item view chưa được hiển thị.");
-//                }
-//            }
-//        });
         int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-        int sidePadding = (screenWidth - 516)/2;
-        int sidePaddingTb = (screenWidth - 608)/2;
+        int swDp = Resources.getSystem().getConfiguration().smallestScreenWidthDp;
+        Log.e("Kích thước", "Smallest width dp: " + swDp);
+        int sidePadding = (int) (screenWidth * 0.17f);
 
         bottomNavView.setPadding(sidePadding, 0, sidePadding, 0);
         bottomNavView.setClipToPadding(false);
-        layoutToolbar.setPadding(sidePaddingTb, 0, sidePaddingTb, 0);
-        layoutToolbar.setClipToPadding(false);
-
-
 
         List<BottomNavItem> items = BottomNavItemFactory.create();
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
@@ -280,20 +263,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            int width = toolbar.getWidth();
-            int height = toolbar.getHeight();
-
-            Log.d("ToolbarSize", "Width: " + width + ", Height: " + height);
-        }
-    }
-
-
     void deleteTemporaryImages (){
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Snap Effect Temporary");
         if (folder.exists() && folder.isDirectory()) {
