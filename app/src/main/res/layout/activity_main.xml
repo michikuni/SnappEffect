@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -101,12 +102,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bottom_navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:paddingStart="56dp"
-        android:paddingEnd="56dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

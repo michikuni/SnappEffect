@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -72,6 +73,16 @@ public class MainActivity extends AppCompatActivity {
         ToolbarHandler.setupToolbar(this, layoutToolbar);
 
         RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
+        int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int sidePadding = (screenWidth - 156 * 4)/2;
+        int sidePaddingTb = (screenWidth - 100 * 6)/2;
+
+        bottomNavView.setPadding(sidePadding, 0, sidePadding, 0);
+        bottomNavView.setClipToPadding(false);
+        layoutToolbar.setPadding(sidePaddingTb, 0, sidePaddingTb, 0);
+        layoutToolbar.setClipToPadding(false);
+
+
 
         List<BottomNavItem> items = BottomNavItemFactory.create();
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {

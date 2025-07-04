@@ -36,13 +36,10 @@ android {
     }
 }
 dependencies {
-
-    implementation("com.github.yalantis:ucrop:2.2.10")
-    implementation("com.github.yalantis:ucrop:2.2.9-native")
-
+    implementation(libs.ucrop)
+    implementation(libs.ucrop)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation (libs.gpuimage.v210)
-
     implementation(libs.glide)
     implementation(libs.appcompat)
     implementation(libs.material)

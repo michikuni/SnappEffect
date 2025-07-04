@@ -4,6 +4,7 @@ androidGpuimage = "v1.4.1-eincs-1.0.1"
 glide = "4.16.0"
 gpuimage = "2.1.0"
 gpuimageVersion = "2.x.x"
+gravitysnaphelper = "2.2.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -24,6 +25,7 @@ android-gpuimage = { module = "jp.co.cyberagent.android:gpuimage", version.ref =
 eincs-android-gpuimage = { module = "com.github.eincs:android-gpuimage", version.ref = "androidGpuimage" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 gpuimage-v210 = { module = "jp.co.cyberagent.android:gpuimage", version.ref = "gpuimage" }
+gravitysnaphelper = { module = "com.github.rubensousa:gravitysnaphelper", version.ref = "gravitysnaphelper" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
