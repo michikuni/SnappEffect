@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         deleteTemporaryImages();
 
         layoutToolbar = findViewById(R.id.toolbar);
+
         gpuImageView = findViewById(R.id.content_edit);
         gpuImageView.setScaleType(GPUImage.ScaleType.CENTER_INSIDE);
         gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
@@ -73,9 +74,23 @@ public class MainActivity extends AppCompatActivity {
         ToolbarHandler.setupToolbar(this, layoutToolbar);
 
         RecyclerView bottomNavView = findViewById(R.id.bottom_navigation);
+//        bottomNavView.post(() -> {
+//            RecyclerView.LayoutManager layoutManager = bottomNavView.getLayoutManager();
+//            if (layoutManager != null) {
+//                View itemView = layoutManager.findViewByPosition(3); // Đo item đầu tiên
+//                if (itemView != null) {
+//                    int width = itemView.getWidth();
+//                    int height = itemView.getHeight();
+//
+//                    Log.e("ItemSize", "Item 0 width: " + width + "px, height: " + height + "px");
+//                } else {
+//                    Log.e("ItemSize", "Item view chưa được hiển thị.");
+//                }
+//            }
+//        });
         int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-        int sidePadding = (screenWidth - 156 * 4)/2;
-        int sidePaddingTb = (screenWidth - 100 * 6)/2;
+        int sidePadding = (screenWidth - 516)/2;
+        int sidePaddingTb = (screenWidth - 608)/2;
 
         bottomNavView.setPadding(sidePadding, 0, sidePadding, 0);
         bottomNavView.setClipToPadding(false);
@@ -191,6 +206,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_menu, menu);
+        MenuItem cameraItem = menu.findItem(R.id.menu_camera);
+        View actionView = cameraItem.getActionView();
+
+        if (actionView != null) {
+            // Click vào layout
+            actionView.setOnClickListener(v -> {
+                Toast.makeText(this, "Clicked Camera", Toast.LENGTH_SHORT).show();
+            });
+
+            // Đo kích thước
+            actionView.post(() -> {
+                int w = actionView.getWidth();
+                int h = actionView.getHeight();
+                Log.d("ToolbarCustomView", "Width: " + w + ", Height: " + h);
+            });
+        }
         return true;
     }
     //Xử lý các component của menu top
@@ -249,6 +280,19 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            int width = toolbar.getWidth();
+            int height = toolbar.getHeight();
+
+            Log.d("ToolbarSize", "Width: " + width + ", Height: " + height);
+        }
+    }
+
 
     void deleteTemporaryImages (){
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Snap Effect Temporary");
