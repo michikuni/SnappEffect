@@ -2,6 +2,6 @@
 <resources>
     <dimen name="bottom_nav_padding">10dp</dimen>
     <dimen name="bottom_nav_icon_size">22dp</dimen>
-    <dimen name="bottom_nav_padding_start_end">48dp</dimen>
+    <dimen name="bottom_nav_padding_start_end">50dp</dimen>
 
 </resources>

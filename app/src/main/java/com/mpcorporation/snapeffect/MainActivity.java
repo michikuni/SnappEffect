@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         manager.clear();
                         manager.add(photoUri);
                         gpuImageView.setImage(photoUri);
+                        gpuImageView.setFilter(new GPUImageFilter());
                         deleteTemporaryImages();
                     } else {
                         Log.e("Camera Launcher 144", "Photo uri = null không thể set image");
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     layout.setVisibility(ViewGroup.GONE);
                     SliderUtils.hideSlider(this);
                     gpuImageView.setImage(uri);
+                    gpuImageView.setFilter(new GPUImageFilter());
                     gpuImageView.requestRender();
                 }
                 else {
@@ -194,9 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (actionView != null) {
             // Click vào layout
-            actionView.setOnClickListener(v -> {
-                Toast.makeText(this, "Clicked Camera", Toast.LENGTH_SHORT).show();
-            });
+            actionView.setOnClickListener(v ->
+                    Toast.makeText(this, "Clicked Camera", Toast.LENGTH_SHORT).show());
 
             // Đo kích thước
             actionView.post(() -> {

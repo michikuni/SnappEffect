@@ -73,11 +73,10 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
                                 config.getMax(),
                                 config.getDefaultValue(),
 
-                                // Khi đang kéo: apply tạm filter để preview
                                 value -> {
                                     config.applyParameter(value);
                                     gpuImageView.setFilter(config.getFilter());
-                                    gpuImageView.requestRender(); // đảm bảo render lại ngay
+                                    gpuImageView.requestRender();
                                 },
                                 gpuImageView,
                                 manager

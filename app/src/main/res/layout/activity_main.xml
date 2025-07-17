@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#FFA1A1"
+        android:background="#FF0000"
 
         app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
@@ -106,7 +106,6 @@
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/bottom_nav_padding_start_end"
         android:paddingStart="@dimen/bottom_nav_padding_start_end"
-        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

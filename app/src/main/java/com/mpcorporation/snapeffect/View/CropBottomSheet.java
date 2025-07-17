@@ -1,12 +1,9 @@
 package com.mpcorporation.snapeffect.View;
 
-import static com.mpcorporation.snapeffect.Utils.SliderUtils.hideSlider;
-import static com.mpcorporation.snapeffect.Utils.SliderUtils.showSlider;
 
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +11,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.mpcorporation.snapeffect.Adapter.EffectAdapter;
 import com.mpcorporation.snapeffect.Adapter.ScaleCropAdapter;
-import com.mpcorporation.snapeffect.Model.EffectItem;
 import com.mpcorporation.snapeffect.Model.ScaleCrop;
 import com.mpcorporation.snapeffect.R;
-import com.mpcorporation.snapeffect.Utils.HistoryManager;
 import com.yalantis.ucrop.UCrop;
 
 import java.util.List;
 
-import jp.co.cyberagent.android.gpuimage.GPUImageView;
 
 public class CropBottomSheet extends BottomSheetDialogFragment {
     private List<ScaleCrop> cropOptions;
@@ -61,9 +53,7 @@ public class CropBottomSheet extends BottomSheetDialogFragment {
     ) {
         CropBottomSheet sheet = new CropBottomSheet();
         sheet.setScaleCrop(scaleCrops);
-        sheet.setOnCropClickListener(crop -> {
-            UCrop.of(input, output).withAspectRatio(crop.ratioX, crop.ratioY).start(activity);
-        });
+        sheet.setOnCropClickListener(crop -> UCrop.of(input, output).withAspectRatio(crop.ratioX, crop.ratioY).start(activity));
         return sheet;
     }
 }
