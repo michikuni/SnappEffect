@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.mpcorporation.snapeffect"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.mpcorporation.snapeffect"
@@ -38,6 +38,7 @@ android {
 dependencies {
     implementation(libs.ucrop)
     implementation(libs.ucrop)
+    implementation(libs.android.image.cropper)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation (libs.gpuimage.v210)
     implementation(libs.glide)
