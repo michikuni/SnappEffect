@@ -15,8 +15,8 @@ android {
         applicationId = "com.mpcorporation.snapeffect"
         minSdk = 28
         targetSdk = 35
-        versionCode = 13
-        versionName = "1.0.12"
+        versionCode = 15
+        versionName = "2.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -39,11 +39,8 @@ android {
     }
 }
 dependencies {
-    implementation(libs.ucrop)
-    implementation(libs.ucrop)
-    implementation(libs.android.image.cropper)
     implementation(libs.lifecycle.viewmodel.ktx)
-    implementation (libs.gpuimage.v210)
+    implementation(libs.exifinterface)
     implementation(libs.glide)
     implementation(libs.appcompat)
     implementation(libs.material)

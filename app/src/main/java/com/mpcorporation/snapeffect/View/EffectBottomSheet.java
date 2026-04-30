@@ -4,6 +4,7 @@ import static com.mpcorporation.snapeffect.Utils.SliderUtils.hideSlider;
 import static com.mpcorporation.snapeffect.Utils.SliderUtils.showSlider;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,24 +19,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mpcorporation.snapeffect.Adapter.EffectAdapter;
 import com.mpcorporation.snapeffect.Model.EffectItem;
-import com.mpcorporation.snapeffect.Model.ScaleCrop;
 import com.mpcorporation.snapeffect.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mpcorporation.snapeffect.Utils.HistoryManager;
+import com.mpcorporation.snapeffect.filter.BitmapIO;
+import com.mpcorporation.snapeffect.filter.ImageRenderer;
 
+import java.io.IOException;
 import java.util.List;
-
-import jp.co.cyberagent.android.gpuimage.GPUImageView;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class EffectBottomSheet extends BottomSheetDialogFragment {
 
     private List<EffectItem> effectItems;
     private EffectAdapter.OnEffectClickListener listener;
+    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    public void setEffectItems(List<EffectItem> effectItems) {
-        this.effectItems = effectItems;
-    }
-
+    public void setEffectItems(List<EffectItem> effectItems) { this.effectItems = effectItems; }
     public void setOnEffectClickListener(EffectAdapter.OnEffectClickListener listener) {
         this.listener = listener;
     }
@@ -53,46 +54,55 @@ public class EffectBottomSheet extends BottomSheetDialogFragment {
         }));
         return view;
     }
+
     @NonNull
     public static EffectBottomSheet getEffectBottomSheet(
-            Activity context, GPUImageView gpuImageView,
-            List<EffectItem> effectItems, HistoryManager<Uri> manager
+            Activity context,
+            ImageRenderer imageRenderer,
+            List<EffectItem> effectItems,
+            HistoryManager<Uri> manager
     ) {
         EffectBottomSheet sheet = new EffectBottomSheet();
         sheet.setEffectItems(effectItems);
-        sheet.setOnEffectClickListener(filter -> {
-            String pt = (String.valueOf(manager.length()));
-            Log.e("So phan tu", pt);
-            for (EffectItem config : effectItems){
-                if (config.getFilter().getClass().equals(filter.getClass())) {
-                    if (config.hasParameter()){
-                        showSlider(
-                                context,
-                                config.getLabel(),
-                                config.getMin(),
-                                config.getMax(),
-                                config.getDefaultValue(),
+        sheet.setOnEffectClickListener(clickedFilter -> {
+            for (EffectItem config : effectItems) {
+                if (!config.getFilter().getClass().equals(clickedFilter.getClass())) continue;
 
-                                value -> {
-                                    config.applyParameter(value);
-                                    gpuImageView.setFilter(config.getFilter());
-                                    gpuImageView.requestRender();
-                                },
-                                gpuImageView,
-                                manager
-                        );
+                if (config.hasParameter()) {
+                    // Filter có slider: preview trên bitmap nhỏ, apply gốc khi nhả
+                    showSlider(
+                            context,
+                            config.getLabel(),
+                            config.getMin(),
+                            config.getMax(),
+                            config.getDefaultValue(),
+                            value -> config.applyParameter(value),  // chỉ set tham số
+                            config.getFilter(),
+                            imageRenderer,
+                            manager
+                    );
+                } else {
+                    // Filter không có slider: apply trên background thread, không preview
+                    hideSlider(context);
+                    Bitmap source = imageRenderer.getSourceBitmap();
+                    if (source == null) break;
 
-                    } else {
-                        hideSlider(context);
-                        gpuImageView.setFilter(filter);
-                        gpuImageView.saveToPictures("Snap Effect Temporary",System.currentTimeMillis() + ".jpg", uri -> {
-                            Log.e("SavedImage", "Đã lưu ảnh tại: " + uri.toString());
-                            manager.add(uri);
-                            gpuImageView.setImage(uri);
-                        });
-                    }
-                    break;
+                    executor.execute(() -> {
+                        try {
+                            Bitmap filtered = config.getFilter().apply(source);
+                            Uri uri = BitmapIO.saveToCache(context, filtered,
+                                    "snap_tmp_" + System.currentTimeMillis() + ".jpg");
+                            Log.d("EffectSheet", "Saved: " + uri);
+                            context.runOnUiThread(() -> {
+                                manager.add(uri);
+                                imageRenderer.setImage(context, uri);
+                            });
+                        } catch (IOException e) {
+                            Log.e("EffectSheet", "Lỗi lưu ảnh", e);
+                        }
+                    });
                 }
+                break;
             }
         });
         return sheet;

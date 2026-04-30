@@ -11,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mpcorporation.snapeffect.Model.EffectItem;
 import com.mpcorporation.snapeffect.R;
+import com.mpcorporation.snapeffect.filter.ImageFilter;
 
 import java.util.List;
-
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ViewHolder> {
 
     public interface OnEffectClickListener {
-        void onClick(GPUImageFilter filter);
+        void onClick(ImageFilter filter);
     }
 
     private final List<EffectItem> effects;

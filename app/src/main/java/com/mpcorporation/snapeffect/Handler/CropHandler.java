@@ -1,32 +1,6 @@
 package com.mpcorporation.snapeffect.Handler;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.yalantis.ucrop.UCrop;
-
-import java.util.function.Consumer;
-
-import jp.co.cyberagent.android.gpuimage.GPUImageView;
-
+// CropHandler không còn được dùng — logic xử lý kết quả crop đã chuyển vào MainActivity.cropLauncher
+// File này giữ lại để tránh break build trong trường hợp còn reference, có thể xóa hoàn toàn sau.
 public class CropHandler {
-    public static void handleCropResult(Intent data, GPUImageView gpuImageView, Consumer<Uri> onImageReady) {
-        final Uri resultUri = UCrop.getOutput(data);
-        if (resultUri != null) {
-            onImageReady.accept(resultUri);
-            gpuImageView.setImage(resultUri);
-            gpuImageView.requestRender();
-        }
-    }
-
-    public static void handleCropError(Activity activity, Intent data) {
-        final Throwable cropError = UCrop.getError(data);
-        if (cropError != null) {
-            Toast.makeText(activity, "Cần thêm ảnh", Toast.LENGTH_SHORT).show();
-            Log.e("HandlerCrop 30", "Lỗi cắt ảnh", cropError);
-        }
-    }
 }

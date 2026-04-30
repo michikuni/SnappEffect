@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,8 +18,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,34 +28,33 @@ import com.mpcorporation.snapeffect.Filters.AdjustEffectFactory;
 import com.mpcorporation.snapeffect.Filters.ArtEffectFactory;
 import com.mpcorporation.snapeffect.Filters.BottomNavItemFactory;
 import com.mpcorporation.snapeffect.Filters.DistortEffectFactory;
-import com.mpcorporation.snapeffect.Filters.ScaleCropOptionFactory;
-import com.mpcorporation.snapeffect.Handler.CropHandler;
 import com.mpcorporation.snapeffect.Handler.ToolbarHandler;
 import com.mpcorporation.snapeffect.Model.BottomNavItem;
 import com.mpcorporation.snapeffect.Model.EffectItem;
-import com.mpcorporation.snapeffect.Model.ScaleCrop;
 import com.mpcorporation.snapeffect.Utils.HistoryManager;
 import com.mpcorporation.snapeffect.Utils.PermissionUtils;
 import com.mpcorporation.snapeffect.Utils.SliderUtils;
+import com.mpcorporation.snapeffect.crop.CropActivity;
+import com.mpcorporation.snapeffect.filter.BitmapIO;
+import com.mpcorporation.snapeffect.filter.ImageRenderer;
+
+import com.mpcorporation.snapeffect.View.EffectBottomSheet;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
-
-import jp.co.cyberagent.android.gpuimage.GPUImage;
-import jp.co.cyberagent.android.gpuimage.GPUImageView;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
-
-import com.mpcorporation.snapeffect.View.CropBottomSheet;
-import com.mpcorporation.snapeffect.View.EffectBottomSheet;
-import com.yalantis.ucrop.UCrop;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CAMERA = 123;
+
     Toolbar layoutToolbar;
     private Uri photoUri;
-    private GPUImageView gpuImageView;
+    private ImageRenderer imageRenderer;
     private HistoryManager<Uri> manager;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
         deleteTemporaryImages();
 
         layoutToolbar = findViewById(R.id.toolbar);
-
-        gpuImageView = findViewById(R.id.content_edit);
-        gpuImageView.setScaleType(GPUImage.ScaleType.CENTER_INSIDE);
-        gpuImageView.getGPUImage().setBackgroundColor(1.0f, 1.0f, 1.0f);
+        imageRenderer = findViewById(R.id.content_edit);
         manager = new HistoryManager<>();
 
         ToolbarHandler.setupToolbar(this, layoutToolbar);
@@ -85,37 +80,36 @@ public class MainActivity extends AppCompatActivity {
         List<BottomNavItem> items = BottomNavItemFactory.create();
         BottomNavAdapter adapter = new BottomNavAdapter(items, position -> {
             EffectBottomSheet sheet;
-            CropBottomSheet cropBottomSheet;
-            if (photoUri != null){
+            if (photoUri != null) {
                 switch (position) {
                     case 0:
-                        Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped_" + System.currentTimeMillis() + ".jpg"));
-                        List<ScaleCrop> scaleCrops = ScaleCropOptionFactory.create();
-                        cropBottomSheet = CropBottomSheet.getCropBottomSheet(this, scaleCrops,photoUri, outputUri);
-                        cropBottomSheet.show(this.getSupportFragmentManager(), "crop");
+                        Intent cropIntent = new Intent(this, CropActivity.class);
+                        cropIntent.putExtra(CropActivity.EXTRA_INPUT_URI, photoUri.toString());
+                        cropLauncher.launch(cropIntent);
                         break;
                     case 1:
                         List<EffectItem> adjustEffects = AdjustEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, adjustEffects, manager);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, imageRenderer, adjustEffects, manager);
                         sheet.show(this.getSupportFragmentManager(), "blur_effects");
                         break;
                     case 2:
                         List<EffectItem> artEffect = ArtEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, artEffect, manager);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, imageRenderer, artEffect, manager);
                         sheet.show(this.getSupportFragmentManager(), "art_effects");
                         break;
                     case 3:
                         List<EffectItem> distorEffect = DistortEffectFactory.create();
-                        sheet = EffectBottomSheet.getEffectBottomSheet(this, gpuImageView, distorEffect, manager);
+                        sheet = EffectBottomSheet.getEffectBottomSheet(this, imageRenderer, distorEffect, manager);
                         sheet.show(this.getSupportFragmentManager(), "distor_effects");
                         break;
                 }
             } else {
-                Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cần thêm ảnh", Toast.LENGTH_SHORT).show();
             }
         });
         bottomNavView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         bottomNavView.setAdapter(adapter);
+
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -124,21 +118,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        executor.shutdown();
         deleteTemporaryImages();
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            CropHandler.handleCropResult(data,gpuImageView, uri -> photoUri = uri);
-        } else if (resultCode == UCrop.RESULT_ERROR) {
-            CropHandler.handleCropError(this, data);
-        }
-    }
-    public void openCamera(){
+
+    // Launcher cho CropActivity
+    private final ActivityResultLauncher<Intent> cropLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    String uriStr = result.getData().getStringExtra(CropActivity.EXTRA_OUTPUT_URI);
+                    if (uriStr != null) {
+                        Uri croppedUri = Uri.parse(uriStr);
+                        photoUri = croppedUri;
+                        manager.add(croppedUri);
+                        imageRenderer.setImage(this, croppedUri);
+                        SliderUtils.hideSlider(this);
+                    }
+                } else if (result.getResultCode() == CropActivity.RESULT_CROP_ERROR) {
+                    Toast.makeText(this, "Lỗi cắt ảnh", Toast.LENGTH_SHORT).show();
+                }
+            }
+    );
+
+    public void openCamera() {
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From camera");
@@ -147,27 +154,28 @@ public class MainActivity extends AppCompatActivity {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
         cameraLauncher.launch(cameraIntent);
     }
+
     private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
-                if (result.getResultCode() == Activity.RESULT_OK){
-                    if(photoUri != null){
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    if (photoUri != null) {
                         manager.clear();
                         manager.add(photoUri);
-                        gpuImageView.setImage(photoUri);
-                        gpuImageView.setFilter(new GPUImageFilter());
+                        imageRenderer.setImage(this, photoUri);
+                        imageRenderer.clearFilter();
                         deleteTemporaryImages();
                     } else {
-                        Log.e("Camera Launcher 144", "Photo uri = null không thể set image");
+                        Log.e("cameraLauncher", "Photo uri = null");
                     }
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
-                    gpuImageView.requestRender();
                 } else {
-                    Log.e("cameraLauncher 152", "Hủy chụp ảnh");
+                    Log.e("cameraLauncher", "Hủy chụp ảnh");
                 }
             }
     );
+
     public final ActivityResultLauncher<String> pickImageLauncher = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
             uri -> {
@@ -179,36 +187,25 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout layout = findViewById(R.id.nav_host_fragment);
                     layout.setVisibility(ViewGroup.GONE);
                     SliderUtils.hideSlider(this);
-                    gpuImageView.setImage(uri);
-                    gpuImageView.setFilter(new GPUImageFilter());
-                    gpuImageView.requestRender();
-                }
-                else {
-                    Log.e("pickImageLauncher 172", "Không có ảnh nào được chọn");
+                    imageRenderer.setImage(this, uri);
+                    imageRenderer.clearFilter();
+                } else {
+                    Log.e("pickImageLauncher", "Không có ảnh nào được chọn");
                 }
             });
-    //Hiển thị menu top
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         MenuItem cameraItem = menu.findItem(R.id.menu_camera);
         View actionView = cameraItem.getActionView();
-
         if (actionView != null) {
-            // Click vào layout
             actionView.setOnClickListener(v ->
                     Toast.makeText(this, "Clicked Camera", Toast.LENGTH_SHORT).show());
-
-            // Đo kích thước
-            actionView.post(() -> {
-                int w = actionView.getWidth();
-                int h = actionView.getHeight();
-                Log.d("ToolbarCustomView", "Width: " + w + ", Height: " + h);
-            });
         }
         return true;
     }
-    //Xử lý các component của menu top
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -220,40 +217,51 @@ public class MainActivity extends AppCompatActivity {
             pickImageLauncher.launch("image/*");
             return true;
         } else if (id == R.id.menu_save) {
-            if (photoUri != null){
-                gpuImageView.saveToPictures("Snap Effect", "SnapEffect" + System.currentTimeMillis() + ".jpg", uri -> {
-                    manager.clear();
-                    manager.add(uri);
-                    gpuImageView.setImage(uri);
+            if (photoUri != null) {
+                Bitmap toSave = imageRenderer.getCurrentBitmap();
+                if (toSave == null) return true;
+                String filename = "SnapEffect" + System.currentTimeMillis() + ".jpg";
+                executor.execute(() -> {
+                    try {
+                        Uri saved = BitmapIO.saveToPictures(this, "Snap Effect", filename, toSave);
+                        runOnUiThread(() -> {
+                            manager.clear();
+                            manager.add(saved);
+                            imageRenderer.setImage(this, saved);
+                            deleteTemporaryImages();
+                            SliderUtils.hideSlider(this);
+                            Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/" + filename, Toast.LENGTH_SHORT).show();
+                        });
+                    } catch (IOException e) {
+                        Log.e("menu_save", "Lỗi lưu ảnh", e);
+                    }
                 });
-                deleteTemporaryImages();
-                SliderUtils.hideSlider(this);
-                Toast.makeText(this, "Ảnh được lưu tại: /Pictures/Snap Effect/"+ System.currentTimeMillis() +".jpg", Toast.LENGTH_SHORT).show();
-                Log.e("menu keep 221", "Lưu ảnh tại: /Pictures/Snap Effect/" + System.currentTimeMillis() + ".jpg");
             } else {
-                Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cần thêm ảnh", Toast.LENGTH_SHORT).show();
             }
             return true;
         } else if (id == R.id.menu_undo) {
-            if (photoUri != null){
+            if (photoUri != null) {
                 manager.undo();
                 photoUri = manager.get();
                 Log.e("undo", photoUri.toString());
-                gpuImageView.setImage(photoUri);
-                gpuImageView.setFilter(new GPUImageFilter());
-                gpuImageView.requestRender();
+                imageRenderer.setImage(this, photoUri);
+                imageRenderer.clearFilter();
+                SliderUtils.hideSlider(this);
                 return true;
             } else {
-                Toast.makeText(this, "Cần thêm ảnh",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cần thêm ảnh", Toast.LENGTH_SHORT).show();
             }
             return true;
         } else if (id == R.id.menu_redo) {
-            manager.redo();
-            photoUri = manager.get();
-            Log.e("redo", photoUri.toString());
-            gpuImageView.setImage(photoUri);
-            gpuImageView.setFilter(new GPUImageFilter());
-            gpuImageView.requestRender();
+            if (photoUri != null) {
+                manager.redo();
+                photoUri = manager.get();
+                Log.e("redo", photoUri.toString());
+                imageRenderer.setImage(this, photoUri);
+                imageRenderer.clearFilter();
+                SliderUtils.hideSlider(this);
+            }
             return true;
         } else if (id == R.id.menu_more_vert) {
             String url = "https://www.freeprivacypolicy.com/live/619f632c-4ca6-41ff-9c7c-524fd0e9eacd";
@@ -264,7 +272,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    void deleteTemporaryImages (){
+
+    void deleteTemporaryImages() {
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Snap Effect Temporary");
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles();
@@ -273,12 +282,17 @@ public class MainActivity extends AppCompatActivity {
                     if (file.isFile()) {
                         boolean deleted = file.delete();
                         if (!deleted) {
-                            Log.e("delete temp 250", "Không thể xóa file: " + file.getAbsolutePath());
+                            Log.e("deleteTemp", "Không thể xóa: " + file.getAbsolutePath());
                         }
                     }
                 }
             }
         }
+        // Xóa cache files cũ
+        File cache = getCacheDir();
+        File[] cacheFiles = cache.listFiles(f -> f.getName().startsWith("snap_tmp_") || f.getName().startsWith("cropped_"));
+        if (cacheFiles != null) {
+            for (File f : cacheFiles) f.delete();
+        }
     }
-
 }

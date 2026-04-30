@@ -31,11 +31,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <jp.co.cyberagent.android.gpuimage.GPUImageView
+        <com.mpcorporation.snapeffect.filter.ImageRenderer
             android:id="@+id/content_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerInside"
+            android:background="#FFFFFF"/>
 
         <LinearLayout
             android:id="@+id/seekBarLayout"
