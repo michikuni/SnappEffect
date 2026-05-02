@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".presentation.editor.EditorActivity">
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.mpcorporation.snapeffect.filter.ImageRenderer
+        <com.mpcorporation.snapeffect.presentation.editor.widget.ImageRendererView
             android:id="@+id/content_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
