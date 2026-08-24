@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Laster ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Språk</string>
+    <string name="language_subtitle">Velg språk</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Hvilke effekter liker du?</string>
+    <string name="onboarding_subtitle">Velg minst ett for å fortsette</string>
+    <string name="btn_continue">Fortsett</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Annonse</string>
+</resources>

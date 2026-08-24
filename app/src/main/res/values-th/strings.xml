@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">กำลังโหลด...</string>
+
+    <!-- Language -->
+    <string name="language_title">ภาษา</string>
+    <string name="language_subtitle">เลือกภาษาของคุณ</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">คุณชอบเอฟเฟกต์แบบไหน?</string>
+    <string name="onboarding_subtitle">เลือกอย่างน้อยหนึ่งรายการเพื่อไปต่อ</string>
+    <string name="btn_continue">ไปต่อ</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">โฆษณา</string>
+</resources>

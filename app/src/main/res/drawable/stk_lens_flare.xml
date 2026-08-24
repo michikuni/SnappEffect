@@ -1,0 +1,24 @@
+<!-- Loé sáng ống kính: vệt ngang dài + vệt dọc ngắn + quầng tâm -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#4DFFFFFF"
+      android:pathData="M60,60 m-26,0 a26,26 0 1,0 52,0 a26,26 0 1,0 -52,0 Z"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M2,60 C28,57 44,57 60,53 C76,57 92,57 118,60 C92,63 76,63 60,67 C44,63 28,63 2,60 Z"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M60,12 C63,34 63,46 66,60 C63,74 63,86 60,108 C57,86 57,74 54,60 C57,46 57,34 60,12 Z"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M60,60 m-12,0 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0 Z"/>
+  <path
+      android:strokeColor="#805AA9FF"
+      android:strokeWidth="3"
+      android:fillColor="#00000000"
+      android:pathData="M60,60 m-34,0 a34,34 0 1,0 68,0 a34,34 0 1,0 -68,0 Z"/>
+</vector>

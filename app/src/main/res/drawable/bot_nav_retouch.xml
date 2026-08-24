@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?attr/colorControlNormal">
+  <!-- Mặt cười - biểu tượng "Làm đẹp" -->
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="56"
+      android:fillColor="#00000000"
+      android:pathData="M160,480 A320,320 0 1 1 800,480 A320,320 0 1 1 160,480 Z"/>
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="56"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M360,585 Q480,690 600,585"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M356,430 A34,34 0 1 1 424,430 A34,34 0 1 1 356,430 Z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M536,430 A34,34 0 1 1 604,430 A34,34 0 1 1 536,430 Z"/>
+</vector>

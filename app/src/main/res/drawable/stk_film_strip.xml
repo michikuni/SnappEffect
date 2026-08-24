@@ -1,0 +1,24 @@
+<!-- Dải phim nghiêng: thân tối, hai hàng lỗ răng, ô hình ở giữa -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <group
+      android:pivotX="60"
+      android:pivotY="60"
+      android:rotation="8">
+    <path
+        android:fillColor="#1A1626"
+        android:pathData="M10,26 L110,26 Q116,26 116,32 L116,88 Q116,94 110,94 L10,94 Q4,94 4,88 L4,32 Q4,26 10,26 Z"/>
+    <path
+        android:fillColor="#F2F0F7"
+        android:pathData="M14,32 L26,32 L26,42 L14,42 Z M34,32 L46,32 L46,42 L34,42 Z M54,32 L66,32 L66,42 L54,42 Z M74,32 L86,32 L86,42 L74,42 Z M94,32 L106,32 L106,42 L94,42 Z M14,78 L26,78 L26,88 L14,88 Z M34,78 L46,78 L46,88 L34,88 Z M54,78 L66,78 L66,88 L54,88 Z M74,78 L86,78 L86,88 L74,88 Z M94,78 L106,78 L106,88 L94,88 Z"/>
+    <path
+        android:fillColor="#8B5CF6"
+        android:pathData="M14,48 L58,48 L58,72 L14,72 Z"/>
+    <path
+        android:fillColor="#FF7AB0"
+        android:pathData="M62,48 L106,48 L106,72 L62,72 Z"/>
+  </group>
+</vector>

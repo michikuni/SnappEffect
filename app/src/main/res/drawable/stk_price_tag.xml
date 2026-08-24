@@ -1,0 +1,16 @@
+<!-- Thẻ tag có lỗ xỏ dây -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#8B5CF6"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="6"
+      android:strokeLineJoin="round"
+      android:pathData="M20,12 L64,12 L110,58 Q116,64 110,70 L70,110 Q64,116 58,110 L12,64 L12,20 Q12,12 20,12 Z"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M36,36 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z"/>
+</vector>

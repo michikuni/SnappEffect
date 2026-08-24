@@ -5,8 +5,7 @@ import android.graphics.ColorMatrix
 import com.mpcorporation.snapeffect.domain.filter.ImageFilter
 
 class SaturationFilter(var saturation: Float) : ImageFilter {
-    override fun apply(src: Bitmap): Bitmap {
-        val cm = ColorMatrix().apply { setSaturation(saturation) }
-        return applyColorMatrix(src, cm)
-    }
+    override fun apply(src: Bitmap): Bitmap = applyColorMatrix(src, asColorMatrix())
+
+    override fun asColorMatrix(): ColorMatrix = ColorMatrix().apply { setSaturation(saturation) }
 }

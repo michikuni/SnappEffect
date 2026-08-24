@@ -5,10 +5,12 @@ import android.graphics.ColorMatrix
 import com.mpcorporation.snapeffect.domain.filter.ImageFilter
 
 class ContrastFilter(var contrast: Float) : ImageFilter {
-    override fun apply(src: Bitmap): Bitmap {
+    override fun apply(src: Bitmap): Bitmap = applyColorMatrix(src, asColorMatrix())
+
+    override fun asColorMatrix(): ColorMatrix {
         val c = contrast
         val t = (1f - c) / 2f * 255f
-        val cm = ColorMatrix(
+        return ColorMatrix(
             floatArrayOf(
                 c, 0f, 0f, 0f, t,
                 0f, c, 0f, 0f, t,
@@ -16,6 +18,5 @@ class ContrastFilter(var contrast: Float) : ImageFilter {
                 0f, 0f, 0f, 1f, 0f
             )
         )
-        return applyColorMatrix(src, cm)
     }
 }

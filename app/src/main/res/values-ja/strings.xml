@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">読み込み中…</string>
+
+    <!-- Language -->
+    <string name="language_title">言語</string>
+    <string name="language_subtitle">言語を選択</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">好きなエフェクトは何ですか？</string>
+    <string name="onboarding_subtitle">続けるには1つ以上選択してください</string>
+    <string name="btn_continue">続ける</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">広告</string>
+</resources>

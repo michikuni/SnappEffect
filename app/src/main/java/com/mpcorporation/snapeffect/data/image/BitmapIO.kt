@@ -4,10 +4,12 @@ import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.exifinterface.media.ExifInterface
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -28,9 +30,50 @@ internal object BitmapIO {
         }
 
         val decodeOpts = BitmapFactory.Options().apply { inSampleSize = sample }
-        return context.contentResolver.openInputStream(uri).use { input ->
+        val bitmap = context.contentResolver.openInputStream(uri).use { input ->
             BitmapFactory.decodeStream(input, null, decodeOpts)
         } ?: throw IOException("Failed to decode bitmap from $uri")
+
+        return applyExifRotation(context, uri, bitmap)
+    }
+
+    /**
+     * Ảnh chụp từ camera thường nằm ngang trong file và chỉ "đứng" nhờ thẻ EXIF Orientation.
+     * BitmapFactory bỏ qua thẻ này -> xoay lại ở đây để mọi màn (Editor/Crop/Text/Selective)
+     * đều nhận ảnh đã đúng chiều.
+     */
+    private fun applyExifRotation(context: Context, uri: Uri, bitmap: Bitmap): Bitmap {
+        val degrees = readExifRotation(context, uri)
+        if (degrees == 0) return bitmap
+
+        val matrix = Matrix().apply { postRotate(degrees.toFloat()) }
+        val rotated = Bitmap.createBitmap(
+            bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true
+        )
+        if (rotated != bitmap) bitmap.recycle()
+        return rotated
+    }
+
+    private fun readExifRotation(context: Context, uri: Uri): Int = try {
+        context.contentResolver.openInputStream(uri).use { stream ->
+            if (stream == null) {
+                0
+            } else {
+                when (
+                    ExifInterface(stream).getAttributeInt(
+                        ExifInterface.TAG_ORIENTATION,
+                        ExifInterface.ORIENTATION_NORMAL
+                    )
+                ) {
+                    ExifInterface.ORIENTATION_ROTATE_90 -> 90
+                    ExifInterface.ORIENTATION_ROTATE_180 -> 180
+                    ExifInterface.ORIENTATION_ROTATE_270 -> 270
+                    else -> 0
+                }
+            }
+        }
+    } catch (_: Exception) {
+        0
     }
 
     fun saveToCache(context: Context, bitmap: Bitmap, filename: String): Uri {

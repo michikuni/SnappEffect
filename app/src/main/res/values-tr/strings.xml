@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Yükleniyor ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Dil</string>
+    <string name="language_subtitle">Dilinizi seçin</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Hangi efektleri seviyorsun?</string>
+    <string name="onboarding_subtitle">Devam etmek için en az birini seç</string>
+    <string name="btn_continue">Devam</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Reklam</string>
+</resources>

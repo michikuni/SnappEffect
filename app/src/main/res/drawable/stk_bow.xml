@@ -1,0 +1,31 @@
+<!-- Nơ ruy băng: 2 cánh + nút giữa + 2 dải đuôi -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#FF7AB0"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="4"
+      android:strokeLineJoin="round"
+      android:pathData="M54,74 L42,108 L58,100 Z M66,74 L78,108 L62,100 Z"/>
+  <path
+      android:fillColor="#FF9EC7"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="4"
+      android:strokeLineJoin="round"
+      android:pathData="M56,60 C40,40 8,32 8,54 C8,76 38,78 56,64 Z"/>
+  <path
+      android:fillColor="#FF9EC7"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="4"
+      android:strokeLineJoin="round"
+      android:pathData="M64,60 C80,40 112,32 112,54 C112,76 82,78 64,64 Z"/>
+  <path
+      android:fillColor="#FF7AB0"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="4"
+      android:strokeLineJoin="round"
+      android:pathData="M52,48 L68,48 Q76,48 76,56 L76,66 Q76,74 68,74 L52,74 Q44,74 44,66 L44,56 Q44,48 52,48 Z"/>
+</vector>

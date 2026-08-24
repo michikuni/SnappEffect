@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">లోడ్ అవుతోంది ...</string>
+
+    <!-- Language -->
+    <string name="language_title">భాష</string>
+    <string name="language_subtitle">మీ భాషను ఎంచుకోండి</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">మీకు ఏ ఎఫెక్ట్‌లు నచ్చుతాయి?</string>
+    <string name="onboarding_subtitle">కొనసాగించడానికి కనీసం ఒకటి ఎంచుకోండి</string>
+    <string name="btn_continue">కొనసాగించు</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">ప్రకటన</string>
+</resources>

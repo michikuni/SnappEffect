@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Memuatkan ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Bahasa</string>
+    <string name="language_subtitle">Pilih bahasa anda</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Kesan apa yang anda suka?</string>
+    <string name="onboarding_subtitle">Pilih sekurang-kurangnya satu untuk teruskan</string>
+    <string name="btn_continue">Teruskan</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Iklan</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Ładowanie ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Język</string>
+    <string name="language_subtitle">Wybierz język</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Które efekty lubisz?</string>
+    <string name="onboarding_subtitle">Wybierz co najmniej jedną, aby kontynuować</string>
+    <string name="btn_continue">Kontynuuj</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Reklama</string>
+</resources>

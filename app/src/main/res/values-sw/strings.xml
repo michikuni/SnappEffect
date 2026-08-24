@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Inapakia ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Lugha</string>
+    <string name="language_subtitle">Chagua lugha yako</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Unapenda madoido gani?</string>
+    <string name="onboarding_subtitle">Chagua angalau moja ili kuendelea</string>
+    <string name="btn_continue">Endelea</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Tangazo</string>
+</resources>

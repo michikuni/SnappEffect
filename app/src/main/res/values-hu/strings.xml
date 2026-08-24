@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Betöltés ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Nyelv</string>
+    <string name="language_subtitle">Válaszd ki a nyelved</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Milyen effektek tetszenek?</string>
+    <string name="onboarding_subtitle">Válassz legalább egyet a folytatáshoz</string>
+    <string name="btn_continue">Folytatás</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Hirdetés</string>
+</resources>

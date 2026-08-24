@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
     <application
@@ -28,6 +29,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SnapEffect"
         tools:targetApi="tiramisu">
+
+        <!-- AdMob App ID: giá trị lấy từ manifestPlaceholders trong app/build.gradle.kts
+             (test ID cho debug, ID thật cho release) -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${admobAppId}" />
+
+        <!-- Tối ưu init + load ad trên background thread (khuyến nghị của Google) -->
+        <meta-data
+            android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"
+            android:value="true" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.mpcorporation.snapeffect.fileprovider"
@@ -37,26 +53,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <!-- Activity duy nhất: toàn bộ màn hình là Compose, điều hướng trong AppNavHost
+             (Splash -> Language -> Onboarding -> Editor -> Crop/Selective/Text). -->
         <activity
-            android:name=".presentation.editor.EditorActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.crop.CropActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".presentation.selective.SelectiveEditActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".presentation.text.TextOverlayActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">טוען ...</string>
+
+    <!-- Language -->
+    <string name="language_title">שפה</string>
+    <string name="language_subtitle">בחר את השפה שלך</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">אילו אפקטים אתה אוהב?</string>
+    <string name="onboarding_subtitle">בחר לפחות אחד כדי להמשיך</string>
+    <string name="btn_continue">המשך</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">מודעה</string>
+</resources>

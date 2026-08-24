@@ -1,0 +1,13 @@
+<!-- Nét gạch chân kiểu bút dạ, hai đầu vuốt nhọn -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#F5A623"
+      android:pathData="M6,70 C34,54 88,50 116,62 C90,80 32,86 6,70 Z"/>
+  <path
+      android:fillColor="#FFD98A"
+      android:pathData="M18,66 C42,57 80,55 102,61 C80,68 42,71 18,66 Z"/>
+</vector>

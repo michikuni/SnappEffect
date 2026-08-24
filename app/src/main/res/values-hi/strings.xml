@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">लोड हो रहा है ...</string>
+
+    <!-- Language -->
+    <string name="language_title">भाषा</string>
+    <string name="language_subtitle">अपनी भाषा चुनें</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">आपको कौन से इफ़ेक्ट पसंद हैं?</string>
+    <string name="onboarding_subtitle">जारी रखने के लिए कम से कम एक चुनें</string>
+    <string name="btn_continue">जारी रखें</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">विज्ञापन</string>
+</resources>

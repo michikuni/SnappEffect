@@ -1,0 +1,21 @@
+<!-- Vương miện 3 đỉnh, mỗi đỉnh gắn 1 viên đá -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#F5A623"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="6"
+      android:strokeLineJoin="round"
+      android:pathData="M12,88 L22,34 L44,56 L60,22 L76,56 L98,34 L108,88 Z"/>
+  <path
+      android:fillColor="#FFD98A"
+      android:pathData="M22,74 L98,74 L100,88 L20,88 Z"/>
+  <path
+      android:fillColor="#FF7AB0"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="3"
+      android:pathData="M22,32 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M98,32 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M60,20 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z"/>
+</vector>

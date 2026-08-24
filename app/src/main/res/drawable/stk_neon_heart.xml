@@ -1,0 +1,28 @@
+<!-- Trái tim neon: 3 lớp stroke chồng nhau tạo cảm giác ống đèn -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="16"
+      android:strokeLineJoin="round"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M60,104 C60,104 12,74 12,44 C12,27 26,14 42,14 C51,14 58,19 60,26 C62,19 69,14 78,14 C94,14 108,27 108,44 C108,74 60,104 60,104 Z"/>
+  <path
+      android:strokeColor="#FF7AB0"
+      android:strokeWidth="9"
+      android:strokeLineJoin="round"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M60,104 C60,104 12,74 12,44 C12,27 26,14 42,14 C51,14 58,19 60,26 C62,19 69,14 78,14 C94,14 108,27 108,44 C108,74 60,104 60,104 Z"/>
+  <path
+      android:strokeColor="#FFD3E6"
+      android:strokeWidth="3"
+      android:strokeLineJoin="round"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M60,104 C60,104 12,74 12,44 C12,27 26,14 42,14 C51,14 58,19 60,26 C62,19 69,14 78,14 C94,14 108,27 108,44 C108,74 60,104 60,104 Z"/>
+</vector>

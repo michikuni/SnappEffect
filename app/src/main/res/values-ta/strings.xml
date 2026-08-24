@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">ஏற்றுகிறது ...</string>
+
+    <!-- Language -->
+    <string name="language_title">மொழி</string>
+    <string name="language_subtitle">உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">உங்களுக்கு எந்த எஃபெக்ட்ஸ் பிடிக்கும்?</string>
+    <string name="onboarding_subtitle">தொடர குறைந்தது ஒன்றைத் தேர்வுசெய்யவும்</string>
+    <string name="btn_continue">தொடரவும்</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">விளம்பரம்</string>
+</resources>

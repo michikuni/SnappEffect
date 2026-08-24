@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?attr/colorControlNormal">
+  <!-- Quả địa cầu: vòng ngoài + kinh tuyến + 2 vĩ tuyến -->
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="56"
+      android:fillColor="#00000000"
+      android:pathData="M120,480 A360,360 0 1 1 840,480 A360,360 0 1 1 120,480 Z"/>
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="56"
+      android:fillColor="#00000000"
+      android:pathData="M480,120 A190,360 0 1 1 480,840 A190,360 0 1 1 480,120 Z"/>
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="48"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M170,360L790,360"/>
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="48"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M170,600L790,600"/>
+</vector>

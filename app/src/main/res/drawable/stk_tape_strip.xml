@@ -1,0 +1,18 @@
+<!-- Miếng băng dính washi: hai đầu xé răng cưa, màu trong mờ để thấy ảnh bên dưới -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <group
+      android:pivotX="60"
+      android:pivotY="60"
+      android:rotation="-12">
+    <path
+        android:fillColor="#B3A585FB"
+        android:pathData="M8,44 L112,44 L104,52 L112,60 L104,68 L112,76 L8,76 L16,68 L8,60 L16,52 Z"/>
+    <path
+        android:fillColor="#66FFFFFF"
+        android:pathData="M16,50 L104,50 L104,56 L16,56 Z"/>
+  </group>
+</vector>

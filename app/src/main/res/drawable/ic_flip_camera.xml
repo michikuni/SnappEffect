@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+  <!-- Vòng tròn mũi tên - đổi camera trước/sau -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M480,800Q347,800 253.5,706.5Q160,613 160,480Q160,347 253.5,253.5Q347,160 480,160Q548,160 610.5,188Q673,216 720,268L720,160L800,160L800,360L600,360L600,280L668,280Q629,241 578.5,220.5Q528,200 480,200Q380,200 310,270Q240,340 240,480Q240,620 310,690Q380,760 480,760Q580,760 650,690Q720,620 720,480L800,480Q800,613 706.5,706.5Q613,800 480,800Z"/>
+</vector>

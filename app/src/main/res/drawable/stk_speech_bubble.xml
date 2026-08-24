@@ -1,0 +1,16 @@
+<!-- Bong bóng thoại rỗng: nền trắng viền tím, đuôi chỉ xuống dưới trái -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#FFFFFF"
+      android:strokeColor="#8B5CF6"
+      android:strokeWidth="7"
+      android:strokeLineJoin="round"
+      android:pathData="M26,16 L94,16 Q108,16 108,30 L108,70 Q108,84 94,84 L56,84 L34,106 L38,84 L26,84 Q12,84 12,70 L12,30 Q12,16 26,16 Z"/>
+  <path
+      android:fillColor="#C3ADFF"
+      android:pathData="M38,42 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M60,42 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M82,42 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z"/>
+</vector>

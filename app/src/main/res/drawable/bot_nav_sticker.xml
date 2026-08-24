@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?attr/colorControlNormal">
+  <!-- Sticker: khung bo góc + góc gập, bên trong là trái tim -->
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="56"
+      android:strokeLineJoin="round"
+      android:fillColor="#00000000"
+      android:pathData="M240,120L600,120L840,360L840,720Q840,840 720,840L240,840Q120,840 120,720L120,240Q120,120 240,120Z"/>
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="56"
+      android:strokeLineJoin="round"
+      android:fillColor="#00000000"
+      android:pathData="M600,120L600,360L840,360"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M430,660C430,660 280,570 280,470C280,410 328,372 378,372C404,372 424,388 430,410C436,388 456,372 482,372C532,372 580,410 580,470C580,570 430,660 430,660Z"/>
+</vector>

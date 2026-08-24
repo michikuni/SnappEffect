@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Laadimine ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Keel</string>
+    <string name="language_subtitle">Vali oma keel</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Millised efektid sulle meeldivad?</string>
+    <string name="onboarding_subtitle">Jätkamiseks vali vähemalt üks</string>
+    <string name="btn_continue">Jätka</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Reklaam</string>
+</resources>

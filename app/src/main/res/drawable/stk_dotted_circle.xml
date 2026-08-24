@@ -1,0 +1,12 @@
+<!-- Vòng 12 chấm bi - khung tròn trang trí quanh chủ thể -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#FFFFFF"
+      android:strokeColor="#8B5CF6"
+      android:strokeWidth="3"
+      android:pathData="M104,60 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M98.1,82 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M82,98.1 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M60,104 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M38,98.1 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M21.9,82 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M16,60 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M21.9,38 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M38,21.9 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M60,16 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M82,21.9 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M98.1,38 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z"/>
+</vector>

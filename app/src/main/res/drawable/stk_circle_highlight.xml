@@ -1,0 +1,19 @@
+<!-- Vòng khoanh tròn vẽ tay (hai đầu chờm nhau), để khoanh chủ thể trong ảnh -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="17"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M96,30 C110,48 104,78 74,92 C44,106 14,96 8,72 C2,48 26,22 58,18 C82,15 98,22 106,36"/>
+  <path
+      android:strokeColor="#FF7AB0"
+      android:strokeWidth="9"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M96,30 C110,48 104,78 74,92 C44,106 14,96 8,72 C2,48 26,22 58,18 C82,15 98,22 106,36"/>
+</vector>

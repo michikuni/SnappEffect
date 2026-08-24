@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Ladataan ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Kieli</string>
+    <string name="language_subtitle">Valitse kielesi</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Mistä tehosteista pidät?</string>
+    <string name="onboarding_subtitle">Valitse vähintään yksi jatkaaksesi</string>
+    <string name="btn_continue">Jatka</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Mainos</string>
+</resources>

@@ -1,0 +1,16 @@
+<!-- Mặt trời retro: lõi tròn + 8 tia tam giác -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#F5A623"
+      android:pathData="M88,54 L116,60 L88,66 Z M32,54 L4,60 L32,66 Z M54,88 L60,116 L66,88 Z M54,32 L60,4 L66,32 Z M72.8,81.2 L98,98 L81.2,72.8 Z M38.8,72.8 L22,98 L47.2,81.2 Z M38.8,47.2 L22,22 L47.2,38.8 Z M72.8,38.8 L98,22 L81.2,47.2 Z"/>
+  <path
+      android:fillColor="#F5A623"
+      android:pathData="M60,60 m-24,0 a24,24 0 1,0 48,0 a24,24 0 1,0 -48,0 Z"/>
+  <path
+      android:fillColor="#FFD98A"
+      android:pathData="M60,60 m-14,0 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0 Z"/>
+</vector>

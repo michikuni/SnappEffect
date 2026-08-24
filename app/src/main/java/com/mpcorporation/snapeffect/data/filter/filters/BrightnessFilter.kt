@@ -5,9 +5,11 @@ import android.graphics.ColorMatrix
 import com.mpcorporation.snapeffect.domain.filter.ImageFilter
 
 class BrightnessFilter(var brightness: Float) : ImageFilter {
-    override fun apply(src: Bitmap): Bitmap {
+    override fun apply(src: Bitmap): Bitmap = applyColorMatrix(src, asColorMatrix())
+
+    override fun asColorMatrix(): ColorMatrix {
         val b = brightness * 255f
-        val cm = ColorMatrix(
+        return ColorMatrix(
             floatArrayOf(
                 1f, 0f, 0f, 0f, b,
                 0f, 1f, 0f, 0f, b,
@@ -15,6 +17,5 @@ class BrightnessFilter(var brightness: Float) : ImageFilter {
                 0f, 0f, 0f, 1f, 0f
             )
         )
-        return applyColorMatrix(src, cm)
     }
 }

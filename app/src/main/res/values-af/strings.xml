@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Laai tans ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Taal</string>
+    <string name="language_subtitle">Kies jou taal</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Van watter effekte hou jy?</string>
+    <string name="onboarding_subtitle">Kies ten minste een om voort te gaan</string>
+    <string name="btn_continue">Gaan voort</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Advertensie</string>
+</resources>

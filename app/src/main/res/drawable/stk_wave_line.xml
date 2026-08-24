@@ -1,0 +1,19 @@
+<!-- Nét sóng trang trí, viền trắng để nổi trên nền ảnh -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="18"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M10,60 C22,34 38,34 50,60 C62,86 78,86 90,60 C96,48 104,44 112,47"/>
+  <path
+      android:strokeColor="#8B5CF6"
+      android:strokeWidth="10"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"
+      android:pathData="M10,60 C22,34 38,34 50,60 C62,86 78,86 90,60 C96,48 104,44 112,47"/>
+</vector>

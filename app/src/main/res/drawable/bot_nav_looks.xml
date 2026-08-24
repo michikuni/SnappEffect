@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?attr/colorControlNormal">
+  <!-- Sparkles / "Looks" - ngôi sao 4 cánh lớn + sao nhỏ -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M420,520L360,660L300,520L160,460L300,400L360,260L420,400L560,460L420,520Z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M700,760L668,690L598,658L668,626L700,556L732,626L802,658L732,690L700,760Z"/>
+</vector>

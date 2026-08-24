@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Native ad template (layout_native_ad_*.xml) - đồng bộ palette "Beauty Camera" -->
+    <color name="ad_bg">#FFFFFF</color>
+    <color name="ad_stroke">#E4E0EC</color>
+    <color name="ad_badge">#FF7AB0</color>
+    <color name="ad_cta">#8B5CF6</color>
+    <color name="ad_text_primary">#1A1626</color>
+    <color name="ad_text_secondary">#6E6683</color>
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Φόρτωση ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Γλώσσα</string>
+    <string name="language_subtitle">Επιλέξτε τη γλώσσα σας</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Ποια εφέ σου αρέσουν;</string>
+    <string name="onboarding_subtitle">Επιλέξτε τουλάχιστον ένα για να συνεχίσετε</string>
+    <string name="btn_continue">Συνέχεια</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Διαφήμιση</string>
+</resources>

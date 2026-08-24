@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">加载中 ...</string>
+
+    <!-- Language -->
+    <string name="language_title">语言</string>
+    <string name="language_subtitle">选择你的语言</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">你喜欢哪些效果？</string>
+    <string name="onboarding_subtitle">至少选择一项以继续</string>
+    <string name="btn_continue">继续</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">广告</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">جارٍ التحميل ...</string>
+
+    <!-- Language -->
+    <string name="language_title">اللغة</string>
+    <string name="language_subtitle">اختر لغتك</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">ما التأثيرات التي تعجبك؟</string>
+    <string name="onboarding_subtitle">اختر واحدة على الأقل للمتابعة</string>
+    <string name="btn_continue">متابعة</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">إعلان</string>
+</resources>

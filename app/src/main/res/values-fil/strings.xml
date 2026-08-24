@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Naglo-load ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Wika</string>
+    <string name="language_subtitle">Piliin ang iyong wika</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Anong mga effect ang gusto mo?</string>
+    <string name="onboarding_subtitle">Pumili ng kahit isa para magpatuloy</string>
+    <string name="btn_continue">Magpatuloy</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Ad</string>
+</resources>

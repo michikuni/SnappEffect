@@ -1,0 +1,49 @@
+<!-- Chùm 3 ngôi sao lệch cỡ - dùng chung 1 path, khác group scale/translate -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <group
+      android:pivotX="60"
+      android:pivotY="60"
+      android:scaleX="0.62"
+      android:scaleY="0.62"
+      android:translateX="-14"
+      android:translateY="-14">
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#8B5CF6"
+        android:strokeWidth="6"
+        android:strokeLineJoin="round"
+        android:pathData="M60,10 C64,42 78,56 110,60 C78,64 64,78 60,110 C56,78 42,64 10,60 C42,56 56,42 60,10 Z"/>
+  </group>
+  <group
+      android:pivotX="60"
+      android:pivotY="60"
+      android:scaleX="0.34"
+      android:scaleY="0.34"
+      android:translateX="30"
+      android:translateY="12">
+    <path
+        android:fillColor="#FF7AB0"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineJoin="round"
+        android:pathData="M60,10 C64,42 78,56 110,60 C78,64 64,78 60,110 C56,78 42,64 10,60 C42,56 56,42 60,10 Z"/>
+  </group>
+  <group
+      android:pivotX="60"
+      android:pivotY="60"
+      android:scaleX="0.24"
+      android:scaleY="0.24"
+      android:translateX="-26"
+      android:translateY="36">
+    <path
+        android:fillColor="#F5A623"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="10"
+        android:strokeLineJoin="round"
+        android:pathData="M60,10 C64,42 78,56 110,60 C78,64 64,78 60,110 C56,78 42,64 10,60 C42,56 56,42 60,10 Z"/>
+  </group>
+</vector>

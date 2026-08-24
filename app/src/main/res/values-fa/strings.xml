@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">در حال بارگذاری ...</string>
+
+    <!-- Language -->
+    <string name="language_title">زبان</string>
+    <string name="language_subtitle">زبان خود را انتخاب کنید</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">چه افکت‌هایی را دوست دارید؟</string>
+    <string name="onboarding_subtitle">برای ادامه حداقل یکی را انتخاب کنید</string>
+    <string name="btn_continue">ادامه</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">تبلیغ</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Indlæser ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Sprog</string>
+    <string name="language_subtitle">Vælg dit sprog</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Hvilke effekter kan du lide?</string>
+    <string name="onboarding_subtitle">Vælg mindst ét for at fortsætte</string>
+    <string name="btn_continue">Fortsæt</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Annonce</string>
+</resources>

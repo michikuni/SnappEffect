@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Učitavanje ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Jezik</string>
+    <string name="language_subtitle">Odaberite jezik</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Koji vam se efekti sviđaju?</string>
+    <string name="onboarding_subtitle">Odaberite barem jednu za nastavak</string>
+    <string name="btn_continue">Nastavi</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Oglas</string>
+</resources>

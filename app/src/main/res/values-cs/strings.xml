@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Načítání ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Jazyk</string>
+    <string name="language_subtitle">Vyberte jazyk</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Které efekty se vám líbí?</string>
+    <string name="onboarding_subtitle">Vyberte alespoň jednu a pokračujte</string>
+    <string name="btn_continue">Pokračovat</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Reklama</string>
+</resources>

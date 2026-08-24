@@ -1,0 +1,26 @@
+<!-- Khung ảnh Polaroid nghiêng nhẹ, viền dày dưới đáy -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <group
+      android:pivotX="60"
+      android:pivotY="60"
+      android:rotation="-7">
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#BDB6CC"
+        android:strokeWidth="2"
+        android:pathData="M20,10 L100,10 Q106,10 106,16 L106,104 Q106,110 100,110 L20,110 Q14,110 14,104 L14,16 Q14,10 20,10 Z"/>
+    <path
+        android:fillColor="#2A2438"
+        android:pathData="M24,20 L96,20 L96,84 L24,84 Z"/>
+    <path
+        android:fillColor="#8B5CF6"
+        android:pathData="M24,62 L44,44 L60,58 L76,40 L96,64 L96,84 L24,84 Z"/>
+    <path
+        android:fillColor="#FFD98A"
+        android:pathData="M78,34 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z"/>
+  </group>
+</vector>

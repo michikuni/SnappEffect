@@ -1,0 +1,16 @@
+<!-- Ngôi sao lấp lánh 4 cánh, cánh cong lõm -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#F5A623"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="5"
+      android:strokeLineJoin="round"
+      android:pathData="M60,10 C64,42 78,56 110,60 C78,64 64,78 60,110 C56,78 42,64 10,60 C42,56 56,42 60,10 Z"/>
+  <path
+      android:fillColor="#FFD98A"
+      android:pathData="M60,36 C62,52 68,58 84,60 C68,62 62,68 60,84 C58,68 52,62 36,60 C52,58 58,52 60,36 Z"/>
+</vector>

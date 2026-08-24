@@ -1,0 +1,16 @@
+<!-- Dải băng banner, hai đầu khoét chữ V -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+  <path
+      android:fillColor="#FF7AB0"
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="6"
+      android:strokeLineJoin="round"
+      android:pathData="M6,34 L114,34 L98,60 L114,86 L6,86 L22,60 Z"/>
+  <path
+      android:fillColor="#FFC2DD"
+      android:pathData="M30,52 L90,52 L90,60 L30,60 Z M30,66 L74,66 L74,74 L30,74 Z"/>
+</vector>

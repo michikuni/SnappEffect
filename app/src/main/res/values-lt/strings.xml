@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_loading">Įkeliama ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Kalba</string>
+    <string name="language_subtitle">Pasirinkite kalbą</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Kokie efektai jums patinka?</string>
+    <string name="onboarding_subtitle">Pasirinkite bent vieną, kad tęstumėte</string>
+    <string name="btn_continue">Tęsti</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Skelbimas</string>
+</resources>

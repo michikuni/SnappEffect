@@ -10,4 +10,41 @@
     <string name="menu_tools">Công cụ</string>
     <string name="icon_width">32dp</string>
     <string name="icon_height">32dp</string>
+
+    <!-- Splash -->
+    <string name="splash_loading">Loading ...</string>
+
+    <!-- Language -->
+    <string name="language_title">Language</string>
+    <string name="language_subtitle">Select your language</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Which effects do you like?</string>
+    <string name="onboarding_subtitle">Select at least one to continue</string>
+    <string name="btn_continue">Continue</string>
+
+    <!-- Saved sheet (Editor, sau khi lưu ảnh) -->
+    <string name="saved_sheet_title">Đã lưu ảnh</string>
+    <string name="saved_sheet_path">Ảnh được lưu tại: %1$s</string>
+    <string name="saved_sheet_share">Chia sẻ</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_rate">Rate this app</string>
+    <string name="settings_rate_subtitle">Your rating helps us a lot</string>
+    <string name="settings_share">Share app</string>
+    <string name="settings_privacy">Privacy policy</string>
+    <string name="settings_terms">Terms of service</string>
+    <string name="settings_link_missing">This link is not configured yet</string>
+    <string name="share_app_message">Edit photos in seconds with SnapEffect: %1$s</string>
+
+    <!-- Rate dialog -->
+    <string name="rate_dialog_title">How do you like SnapEffect?</string>
+    <string name="rate_dialog_message">Pick your rating, then send it to the Play Store.</string>
+    <string name="rate_dialog_submit">Send rating</string>
+    <string name="rate_dialog_later">Later</string>
+
+    <!-- Ads -->
+    <string name="ad_attribution">Ad</string>
 </resources>
