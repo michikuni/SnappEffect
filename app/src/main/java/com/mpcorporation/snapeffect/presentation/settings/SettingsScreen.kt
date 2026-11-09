@@ -48,12 +48,10 @@ import com.mpcorporation.snapeffect.presentation.components.BaseTopBar
 import com.mpcorporation.snapeffect.presentation.components.SnapOutlinedCard
 import com.mpcorporation.snapeffect.presentation.theme.SnapTheme
 
-private const val PRIVACY_URL =
-    "https://www.freeprivacypolicy.com/live/619f632c-4ca6-41ff-9c7c-524fd0e9eacd"
+private const val PRIVACY_URL = "https://sites.google.com/view/beaty-camera/privacy-policy"
 
-// TODO: dán link Điều khoản dịch vụ thật vào đây (bắt buộc trước khi release bản có mục này).
 // Để rỗng -> app báo "chưa cấu hình" thay vì mở nhầm sang link khác.
-private const val TERMS_URL = ""
+private const val TERMS_URL = "https://sites.google.com/view/beaty-camera/term-of-service"
 
 /**
  * Màn Cài đặt: Ngôn ngữ / Đánh giá ứng dụng / Chia sẻ ứng dụng / Chính sách bảo mật /
