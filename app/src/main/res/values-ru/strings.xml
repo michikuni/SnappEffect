@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Реклама</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Загрузка языковых данных…</string>
+    <string name="language_applying">Применение языка…</string>
+    <string name="language_applied">Изменения применены!</string>
+    <string name="onboarding_1_title">Арт-эффекты в одно касание</string>
+    <string name="onboarding_1_desc">Превратите любое фото в искусство с десятками фильтров.</string>
+    <string name="onboarding_2_title">Редактируйте как профи</string>
+    <string name="onboarding_2_desc">Обрезка, настройка, ретушь, текст и стикеры.</string>
+    <string name="btn_next">Далее</string>
+    <string name="btn_done">Готово</string>
+    <string name="start_title">Всё готово!</string>
+    <string name="start_subtitle">Нажмите «Начать», чтобы отредактировать первое фото.</string>
+    <string name="btn_start">Начать</string>
+    <string name="cd_close">Закрыть</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Отзыв</string>
+    <string name="settings_privacy_options">Параметры конфиденциальности</string>
+    <string name="settings_version">Версия %1$s</string>
+    <string name="feedback_email_subject">Отзыв - %1$s</string>
+    <string name="exit_title">Выйти из приложения?</string>
+    <string name="exit_message">Вы уверены, что хотите выйти?</string>
+    <string name="btn_exit">Выйти</string>
+    <string name="btn_cancel">Отмена</string>
 </resources>

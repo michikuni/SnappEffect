@@ -36,15 +36,34 @@
     <string name="settings_share">Share app</string>
     <string name="settings_privacy">Privacy policy</string>
     <string name="settings_terms">Terms of service</string>
-    <string name="settings_link_missing">This link is not configured yet</string>
     <string name="share_app_message">Edit photos in seconds with SnapEffect: %1$s</string>
 
-    <!-- Rate dialog -->
-    <string name="rate_dialog_title">How do you like SnapEffect?</string>
-    <string name="rate_dialog_message">Pick your rating, then send it to the Play Store.</string>
-    <string name="rate_dialog_submit">Send rating</string>
-    <string name="rate_dialog_later">Later</string>
 
     <!-- Ads -->
     <string name="ad_attribution">Ad</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Loading language data…</string>
+    <string name="language_applying">Applying language…</string>
+    <string name="language_applied">Changes applied!</string>
+    <string name="onboarding_1_title">Art effects in one tap</string>
+    <string name="onboarding_1_desc">Turn any photo into art with dozens of filters.</string>
+    <string name="onboarding_2_title">Edit like a pro</string>
+    <string name="onboarding_2_desc">Crop, adjust, retouch and add text or stickers.</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_done">Done</string>
+    <string name="start_title">You\'re all set!</string>
+    <string name="start_subtitle">Tap Start to edit your first photo.</string>
+    <string name="btn_start">Start</string>
+    <string name="cd_close">Close</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_privacy_options">Privacy options</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="feedback_email_subject">Feedback - %1$s</string>
+    <string name="exit_title">Exit app?</string>
+    <string name="exit_message">Are you sure you want to exit?</string>
+    <string name="btn_exit">Exit</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>

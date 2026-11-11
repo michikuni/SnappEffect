@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash_loading">ലോഡ് ചെയ്യുന്നു ...</string>
+    <string name="language_title">ഭാഷ</string>
+    <string name="language_subtitle">നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക</string>
+    <string name="onboarding_title">നിങ്ങൾക്ക് ഇഷ്ടമുള്ള ഇഫക്റ്റുകൾ ഏതൊക്കെ?</string>
+    <string name="onboarding_subtitle">തുടരാൻ ഒരെണ്ണമെങ്കിലും തിരഞ്ഞെടുക്കുക</string>
+    <string name="btn_continue">തുടരുക</string>
+    <string name="ad_attribution">പരസ്യം</string>
+    <string name="language_loading">ഭാഷാ ഡാറ്റ ലോഡ് ചെയ്യുന്നു…</string>
+    <string name="language_applying">ഭാഷ പ്രയോഗിക്കുന്നു…</string>
+    <string name="language_applied">മാറ്റങ്ങൾ പ്രയോഗിച്ചു!</string>
+    <string name="onboarding_1_title">ഒറ്റ ടാപ്പിൽ ആർട്ട് ഇഫക്റ്റുകൾ</string>
+    <string name="onboarding_1_desc">ഡസൻ കണക്കിന് ഫിൽട്ടറുകൾ ഉപയോഗിച്ച് ഏത് ഫോട്ടോയും കലയാക്കൂ.</string>
+    <string name="onboarding_2_title">പ്രോയെപ്പോലെ എഡിറ്റ് ചെയ്യൂ</string>
+    <string name="onboarding_2_desc">ക്രോപ്പ്, അഡ്ജസ്റ്റ്, റീടച്ച് ചെയ്യുക, ടെക്സ്റ്റോ സ്റ്റിക്കറോ ചേർക്കുക.</string>
+    <string name="btn_next">അടുത്തത്</string>
+    <string name="btn_done">പൂർത്തിയായി</string>
+    <string name="start_title">എല്ലാം തയ്യാറാണ്!</string>
+    <string name="start_subtitle">ആദ്യ ഫോട്ടോ എഡിറ്റ് ചെയ്യാൻ ആരംഭിക്കുക ടാപ്പ് ചെയ്യൂ.</string>
+    <string name="btn_start">ആരംഭിക്കുക</string>
+    <string name="cd_close">അടയ്ക്കുക</string>
+    <string name="settings_feedback">ഫീഡ്ബാക്ക്</string>
+    <string name="settings_privacy_options">സ്വകാര്യതാ ഓപ്ഷനുകൾ</string>
+    <string name="settings_version">പതിപ്പ് %1$s</string>
+    <string name="feedback_email_subject">ഫീഡ്ബാക്ക് - %1$s</string>
+    <string name="exit_title">ആപ്പിൽ നിന്ന് പുറത്തുകടക്കണോ?</string>
+    <string name="exit_message">പുറത്തുകടക്കണമെന്ന് ഉറപ്പാണോ?</string>
+    <string name="btn_exit">പുറത്തുകടക്കുക</string>
+    <string name="btn_cancel">റദ്ദാക്കുക</string>
+</resources>

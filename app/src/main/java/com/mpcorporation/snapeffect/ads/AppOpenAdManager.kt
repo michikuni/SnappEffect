@@ -24,7 +24,7 @@ import com.mpcorporation.snapeffect.firebase.AnalyticsManager
  * - Ad cache quá 4 giờ coi như hết hạn (khuyến nghị Google), bỏ và load lại.
  * - Show xong / fail -> preload ngay con kế tiếp.
  *
- * KHÔNG show khi: [isEnabled] tắt, [isBlocked] bật (Splash đang hiển thị),
+ * KHÔNG show khi: [isEnabled] tắt, [isBlocked] bật (đang ở luồng mở app đầu tiên),
  * chưa có consent ([ConsentManager.canRequestAds]), đang có fullscreen ad khác
  * ([FullScreenAdGate.isShowing]), hoặc fullscreen ad khác vừa đóng chưa đủ
  * [minGapAfterFullScreenMs].
@@ -46,8 +46,8 @@ object AppOpenAdManager : DefaultLifecycleObserver, Application.ActivityLifecycl
     var minGapAfterFullScreenMs: Long = 10_000L
 
     /**
-     * Màn hình hiện tại không muốn app open show đè (Splash bật cờ này qua
-     * DisposableEffect, nhả khi rời màn).
+     * Màn hình hiện tại không muốn app open show đè. AppNavHost set cờ này theo route đang hiển
+     * thị (Splash và toàn bộ luồng mở app đầu tiên).
      */
     var isBlocked: Boolean = false
 
@@ -103,8 +103,9 @@ object AppOpenAdManager : DefaultLifecycleObserver, Application.ActivityLifecycl
         return ad
     }
 
-    fun preload(context: Context, adUnitId: String = AdConfig.APP_OPEN) {
-        if (!AdsMaster.isEnabled) return
+    fun preload(context: Context, adUnitId: String? = AdConfig.appOpen) {
+        // adUnitId = null khi công tắc tổng tắt (AdConfig) -> không có id để load
+        if (!AdsMaster.isEnabled || adUnitId == null) return
         if (availableAd() != null || isLoading) return
         if (!ConsentManager.canRequestAds(context)) return
         isLoading = true

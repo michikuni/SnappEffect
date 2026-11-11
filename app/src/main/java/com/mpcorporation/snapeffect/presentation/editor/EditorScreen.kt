@@ -46,7 +46,6 @@ import com.mpcorporation.snapeffect.ads.InterstitialAdManager
 import com.mpcorporation.snapeffect.core.util.findActivity
 import com.mpcorporation.snapeffect.domain.model.EditTool
 import com.mpcorporation.snapeffect.domain.model.EditorTool
-import com.mpcorporation.snapeffect.firebase.RemoteConfigManager
 import com.mpcorporation.snapeffect.presentation.components.BaseTopBar
 import com.mpcorporation.snapeffect.presentation.components.EditToolsSheet
 import com.mpcorporation.snapeffect.presentation.components.EditorBottomBar
@@ -87,10 +86,10 @@ fun EditorScreen(
 
     // Placement toggle - tắt được từ Remote Config
     val interstitialSaveEnabled = remember {
-        RemoteConfigManager.isPlacementEnabled(RemoteConfigManager.KEY_INTERSTITIAL_SAVE_ENABLED)
+        AdConfig.isPlacementEnabled(AdConfig.KEY_INTERSTITIAL_SAVE_ENABLED)
     }
     val bannerEnabled = remember {
-        RemoteConfigManager.isPlacementEnabled(RemoteConfigManager.KEY_BANNER_EDITOR_ENABLED)
+        AdConfig.isPlacementEnabled(AdConfig.KEY_BANNER_EDITOR_ENABLED)
     }
 
     fun toast(message: String) {
@@ -100,7 +99,7 @@ fun EditorScreen(
     LaunchedEffect(Unit) {
         // Preload sớm để lúc bấm Lưu ad đã sẵn (user thường chỉnh ảnh một lúc mới lưu)
         if (interstitialSaveEnabled) {
-            InterstitialAdManager.preload(context, AdConfig.INTERSTITIAL_SAVE)
+            InterstitialAdManager.preload(context, AdConfig.interstitialSave)
         }
         viewModel.events.collect { event ->
             when (event) {
@@ -110,7 +109,7 @@ fun EditorScreen(
                     // luôn được gọi kể cả khi ad chưa load / bị cap.
                     val activity = context.findActivity()
                     if (activity != null && interstitialSaveEnabled) {
-                        InterstitialAdManager.show(activity, AdConfig.INTERSTITIAL_SAVE) {
+                        InterstitialAdManager.show(activity, AdConfig.interstitialSave) {
                             savedResult = event
                         }
                     } else {
@@ -231,7 +230,7 @@ fun EditorScreen(
                 // canvas / không gây bấm nhầm. Tắt được từ Remote Config.
                 if (bannerEnabled) {
                     BannerAd(
-                        adUnitId = AdConfig.BANNER,
+                        adUnitId = AdConfig.banner,
                         modifier = Modifier.align(Alignment.BottomCenter)
                     )
                 }

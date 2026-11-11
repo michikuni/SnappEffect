@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Mainos</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Ladataan kielitietoja…</string>
+    <string name="language_applying">Otetaan kieli käyttöön…</string>
+    <string name="language_applied">Muutokset otettu käyttöön!</string>
+    <string name="onboarding_1_title">Taide-efektit yhdellä napautuksella</string>
+    <string name="onboarding_1_desc">Muuta mikä tahansa kuva taiteeksi kymmenillä suodattimilla.</string>
+    <string name="onboarding_2_title">Muokkaa kuin ammattilainen</string>
+    <string name="onboarding_2_desc">Rajaa, säädä, retusoi ja lisää tekstiä tai tarroja.</string>
+    <string name="btn_next">Seuraava</string>
+    <string name="btn_done">Valmis</string>
+    <string name="start_title">Kaikki valmista!</string>
+    <string name="start_subtitle">Napauta Aloita muokataksesi ensimmäistä kuvaasi.</string>
+    <string name="btn_start">Aloita</string>
+    <string name="cd_close">Sulje</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Palaute</string>
+    <string name="settings_privacy_options">Tietosuoja-asetukset</string>
+    <string name="settings_version">Versio %1$s</string>
+    <string name="feedback_email_subject">Palaute - %1$s</string>
+    <string name="exit_title">Suljetaanko sovellus?</string>
+    <string name="exit_message">Haluatko varmasti poistua?</string>
+    <string name="btn_exit">Poistu</string>
+    <string name="btn_cancel">Peruuta</string>
 </resources>

@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.mpcorporation.snapeffect.R
 import com.mpcorporation.snapeffect.ads.AdConfig
 import com.mpcorporation.snapeffect.ads.NativeAdMedium
-import com.mpcorporation.snapeffect.firebase.RemoteConfigManager
 import com.mpcorporation.snapeffect.presentation.components.PrimaryButton
 import com.mpcorporation.snapeffect.presentation.components.SnapDragHandle
 import com.mpcorporation.snapeffect.presentation.theme.MonoFontFamily
@@ -87,11 +86,11 @@ fun SavedSheet(
 
         // Native medium dưới cùng sheet - vị trí kết thúc task, không chen vào workflow
         val adEnabled = remember {
-            RemoteConfigManager.isPlacementEnabled(RemoteConfigManager.KEY_NATIVE_SAVED_ENABLED)
+            AdConfig.isPlacementEnabled(AdConfig.KEY_NATIVE_SAVED_ENABLED)
         }
         if (adEnabled) {
             NativeAdMedium(
-                adUnitId = AdConfig.NATIVE_MEDIUM,
+                adUnitId = AdConfig.nativeMedium,
                 modifier = Modifier.padding(horizontal = 12.dp)
             )
         }

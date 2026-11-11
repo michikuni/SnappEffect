@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Iklan</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Memuatkan data bahasa…</string>
+    <string name="language_applying">Menggunakan bahasa…</string>
+    <string name="language_applied">Perubahan digunakan!</string>
+    <string name="onboarding_1_title">Kesan seni dengan satu ketikan</string>
+    <string name="onboarding_1_desc">Jadikan mana-mana foto karya seni dengan puluhan penapis.</string>
+    <string name="onboarding_2_title">Sunting seperti pro</string>
+    <string name="onboarding_2_desc">Pangkas, laras, sentuh semula dan tambah teks atau pelekat.</string>
+    <string name="btn_next">Seterusnya</string>
+    <string name="btn_done">Selesai</string>
+    <string name="start_title">Semua sudah sedia!</string>
+    <string name="start_subtitle">Ketik Mula untuk menyunting foto pertama anda.</string>
+    <string name="btn_start">Mula</string>
+    <string name="cd_close">Tutup</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Maklum Balas</string>
+    <string name="settings_privacy_options">Pilihan Privasi</string>
+    <string name="settings_version">Versi %1$s</string>
+    <string name="feedback_email_subject">Maklum Balas - %1$s</string>
+    <string name="exit_title">Keluar dari apl?</string>
+    <string name="exit_message">Anda pasti mahu keluar?</string>
+    <string name="btn_exit">Keluar</string>
+    <string name="btn_cancel">Batal</string>
 </resources>

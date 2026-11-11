@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Advertentie</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Taalgegevens laden…</string>
+    <string name="language_applying">Taal toepassen…</string>
+    <string name="language_applied">Wijzigingen toegepast!</string>
+    <string name="onboarding_1_title">Kunsteffecten met één tik</string>
+    <string name="onboarding_1_desc">Maak van elke foto kunst met tientallen filters.</string>
+    <string name="onboarding_2_title">Bewerk als een pro</string>
+    <string name="onboarding_2_desc">Bijsnijden, aanpassen, retoucheren en tekst of stickers toevoegen.</string>
+    <string name="btn_next">Volgende</string>
+    <string name="btn_done">Klaar</string>
+    <string name="start_title">Alles is klaar!</string>
+    <string name="start_subtitle">Tik op Starten om je eerste foto te bewerken.</string>
+    <string name="btn_start">Starten</string>
+    <string name="cd_close">Sluiten</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_privacy_options">Privacyopties</string>
+    <string name="settings_version">Versie %1$s</string>
+    <string name="feedback_email_subject">Feedback - %1$s</string>
+    <string name="exit_title">App afsluiten?</string>
+    <string name="exit_message">Weet je zeker dat je wilt afsluiten?</string>
+    <string name="btn_exit">Afsluiten</string>
+    <string name="btn_cancel">Annuleren</string>
 </resources>

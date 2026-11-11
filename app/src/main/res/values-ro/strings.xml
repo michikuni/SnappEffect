@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Anunț</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Se încarcă datele de limbă…</string>
+    <string name="language_applying">Se aplică limba…</string>
+    <string name="language_applied">Modificări aplicate!</string>
+    <string name="onboarding_1_title">Efecte artistice dintr-o atingere</string>
+    <string name="onboarding_1_desc">Transformă orice fotografie în artă cu zeci de filtre.</string>
+    <string name="onboarding_2_title">Editează ca un profesionist</string>
+    <string name="onboarding_2_desc">Decupează, ajustează, retușează și adaugă text sau stickere.</string>
+    <string name="btn_next">Înainte</string>
+    <string name="btn_done">Gata</string>
+    <string name="start_title">Totul este gata!</string>
+    <string name="start_subtitle">Atinge Începe pentru a edita prima fotografie.</string>
+    <string name="btn_start">Începe</string>
+    <string name="cd_close">Închide</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_privacy_options">Opțiuni de confidențialitate</string>
+    <string name="settings_version">Versiunea %1$s</string>
+    <string name="feedback_email_subject">Feedback - %1$s</string>
+    <string name="exit_title">Închizi aplicația?</string>
+    <string name="exit_message">Sigur vrei să ieși?</string>
+    <string name="btn_exit">Ieși</string>
+    <string name="btn_cancel">Anulează</string>
 </resources>

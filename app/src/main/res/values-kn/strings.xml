@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash_loading">ಲೋಡ್ ಆಗುತ್ತಿದೆ ...</string>
+    <string name="language_title">ಭಾಷೆ</string>
+    <string name="language_subtitle">ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="onboarding_title">ನಿಮಗೆ ಯಾವ ಎಫೆಕ್ಟ್‌ಗಳು ಇಷ್ಟ?</string>
+    <string name="onboarding_subtitle">ಮುಂದುವರಿಯಲು ಕನಿಷ್ಠ ಒಂದನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="btn_continue">ಮುಂದುವರಿಸಿ</string>
+    <string name="ad_attribution">ಜಾಹೀರಾತು</string>
+    <string name="language_loading">ಭಾಷಾ ಡೇಟಾ ಲೋಡ್ ಆಗುತ್ತಿದೆ…</string>
+    <string name="language_applying">ಭಾಷೆಯನ್ನು ಅನ್ವಯಿಸಲಾಗುತ್ತಿದೆ…</string>
+    <string name="language_applied">ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲಾಗಿದೆ!</string>
+    <string name="onboarding_1_title">ಒಂದೇ ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಆರ್ಟ್ ಎಫೆಕ್ಟ್‌ಗಳು</string>
+    <string name="onboarding_1_desc">ಡಜನ್‌ಗಟ್ಟಲೆ ಫಿಲ್ಟರ್‌ಗಳಿಂದ ಯಾವುದೇ ಫೋಟೋವನ್ನು ಕಲೆಯಾಗಿ ಬದಲಿಸಿ.</string>
+    <string name="onboarding_2_title">ಪ್ರೊನಂತೆ ಎಡಿಟ್ ಮಾಡಿ</string>
+    <string name="onboarding_2_desc">ಕ್ರಾಪ್, ಅಡ್ಜಸ್ಟ್, ರೀಟಚ್ ಮಾಡಿ ಮತ್ತು ಪಠ್ಯ ಅಥವಾ ಸ್ಟಿಕ್ಕರ್ ಸೇರಿಸಿ.</string>
+    <string name="btn_next">ಮುಂದೆ</string>
+    <string name="btn_done">ಮುಗಿದಿದೆ</string>
+    <string name="start_title">ಎಲ್ಲವೂ ಸಿದ್ಧವಾಗಿದೆ!</string>
+    <string name="start_subtitle">ನಿಮ್ಮ ಮೊದಲ ಫೋಟೋ ಎಡಿಟ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ ಟ್ಯಾಪ್ ಮಾಡಿ.</string>
+    <string name="btn_start">ಪ್ರಾರಂಭಿಸಿ</string>
+    <string name="cd_close">ಮುಚ್ಚಿ</string>
+    <string name="settings_feedback">ಪ್ರತಿಕ್ರಿಯೆ</string>
+    <string name="settings_privacy_options">ಗೌಪ್ಯತಾ ಆಯ್ಕೆಗಳು</string>
+    <string name="settings_version">ಆವೃತ್ತಿ %1$s</string>
+    <string name="feedback_email_subject">ಪ್ರತಿಕ್ರಿಯೆ - %1$s</string>
+    <string name="exit_title">ಆ್ಯಪ್‌ನಿಂದ ನಿರ್ಗಮಿಸಬೇಕೇ?</string>
+    <string name="exit_message">ನೀವು ಖಚಿತವಾಗಿಯೂ ನಿರ್ಗಮಿಸಲು ಬಯಸುವಿರಾ?</string>
+    <string name="btn_exit">ನಿರ್ಗಮಿಸಿ</string>
+    <string name="btn_cancel">ರದ್ದುಮಾಡಿ</string>
+</resources>

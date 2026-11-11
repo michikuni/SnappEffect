@@ -9,90 +9,72 @@ import androidx.annotation.LayoutRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdLoader
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
+import com.mpcorporation.snapeffect.R
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.android.gms.ads.nativead.NativeAdView
-import com.mpcorporation.snapeffect.R
-import com.mpcorporation.snapeffect.firebase.AnalyticsManager
 
 /**
  * Core dùng chung cho mọi template Native Ad.
  *
- * Chịu trách nhiệm: load ad khi vào composition, destroy khi rời, hiển thị skeleton shimmer giữ chỗ
- * lúc đang load, collapse khi fail. Layout cụ thể do [layoutRes] quyết định - chỉ cần layout đó
- * chứa đủ các id: ad_headline, ad_body, ad_app_icon, ad_call_to_action, ad_media.
+ * Chịu trách nhiệm: lấy ad khi vào composition (từ [NativeAdPreloader], không có thì tự load),
+ * destroy khi rời, hiển thị skeleton shimmer giữ chỗ lúc đang load, collapse khi fail. Layout cụ
+ * thể do [layoutRes] quyết định - layout phải có ad_headline, ad_body, ad_call_to_action;
+ * ad_app_icon và ad_media có thể không có.
  *
  * @param skeleton khung placeholder shimmer vẽ lúc đang load (nhận modifier để giữ đúng bề rộng/chỗ).
+ * @param onAdImpression SDK ghi nhận impression của ad này - dùng cho các màn chờ ad rồi mới đi tiếp.
  */
 @Composable
 fun NativeAdTemplate(
-    adUnitId: String,
+    adUnitId: String?,
     @LayoutRes layoutRes: Int,
     skeleton: @Composable (Modifier) -> Unit,
     modifier: Modifier = Modifier,
     onAdLoaded: () -> Unit = {},
     onAdFailedToLoad: () -> Unit = {},
+    onAdImpression: () -> Unit = {},
 ) {
-    // Công tắc tổng: không emit gì (kể cả skeleton) -> layout co lại như chưa từng có ad.
+    // Công tắc tổng (adUnitId = null khi tắt - xem AdConfig): không emit gì (kể cả skeleton)
+    // -> layout co lại như chưa từng có ad.
     // Tắt giữa session thì recompose vào nhánh này, onDispose bên dưới destroy ad đang hiển thị.
-    if (!AdsMaster.isEnabled) return
+    if (!AdsMaster.isEnabled || adUnitId == null) return
 
     val context = LocalContext.current
-    var nativeAd by remember(adUnitId) { mutableStateOf<NativeAd?>(null) }
-    var isFailed by remember(adUnitId) { mutableStateOf(false) }
+    var request by remember(adUnitId) { mutableStateOf<NativeAdRequest?>(null) }
+    val currentOnAdLoaded by rememberUpdatedState(onAdLoaded)
+    val currentOnAdFailedToLoad by rememberUpdatedState(onAdFailedToLoad)
+    val currentOnAdImpression by rememberUpdatedState(onAdImpression)
 
     DisposableEffect(adUnitId) {
-        var isDisposed = false
-
-        val adLoader = AdLoader.Builder(context, adUnitId)
-            .forNativeAd { ad ->
-                if (isDisposed) {
-                    // Composable đã rời màn hình trước khi ad load xong
-                    ad.destroy()
-                } else {
-                    ad.setOnPaidEventListener { adValue ->
-                        AnalyticsManager.logAdRevenue(
-                            adValue, "native", adUnitId,
-                            ad.responseInfo?.loadedAdapterResponseInfo?.adSourceName
-                        )
-                    }
-                    nativeAd = ad
-                    onAdLoaded()
-                }
-            }
-            .withAdListener(object : AdListener() {
-                override fun onAdFailedToLoad(error: LoadAdError) {
-                    if (!isDisposed) {
-                        isFailed = true
-                        onAdFailedToLoad()
-                    }
-                }
-            })
-            .withNativeAdOptions(
-                NativeAdOptions.Builder()
-                    .setAdChoicesPlacement(NativeAdOptions.ADCHOICES_TOP_RIGHT)
-                    .build()
-            )
-            .build()
-
-        adLoader.loadAd(AdRequest.Builder().build())
+        val current = NativeAdPreloader.take(adUnitId)
+            ?: NativeAdRequest(adUnitId).also { it.load(context) }
+        current.onImpression = { currentOnAdImpression() }
+        request = current
 
         onDispose {
-            isDisposed = true
-            nativeAd?.destroy()
-            nativeAd = null
+            current.destroy()
+            request = null
+        }
+    }
+
+    val nativeAd = request?.ad
+    val isFailed = request?.isFailed == true
+
+    // Ad preload có thể đã có sẵn ngay từ lần đầu, nên báo theo state thay vì theo callback của SDK
+    LaunchedEffect(nativeAd != null, isFailed) {
+        when {
+            nativeAd != null -> currentOnAdLoaded()
+            isFailed -> currentOnAdFailedToLoad()
         }
     }
 
@@ -104,11 +86,10 @@ fun NativeAdTemplate(
                     LayoutInflater.from(ctx).inflate(layoutRes, null) as NativeAdView
                 },
                 update = { adView ->
-                    val ad = nativeAd ?: return@AndroidView
                     // Tránh bind lại cùng 1 ad mỗi lần recompose
-                    if (adView.tag != ad) {
-                        adView.tag = ad
-                        bindNativeAd(ad, adView)
+                    if (adView.tag != nativeAd) {
+                        adView.tag = nativeAd
+                        bindNativeAd(nativeAd, adView)
                     }
                 }
             )
@@ -126,9 +107,10 @@ fun NativeAdTemplate(
 private fun bindNativeAd(nativeAd: NativeAd, adView: NativeAdView) {
     val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
     val bodyView = adView.findViewById<TextView>(R.id.ad_body)
-    val iconView = adView.findViewById<ImageView>(R.id.ad_app_icon)
+    // Không phải layout nào cũng có đủ: small không có media, media-left không có icon.
+    val iconView: ImageView? = adView.findViewById(R.id.ad_app_icon)
     val ctaView = adView.findViewById<Button>(R.id.ad_call_to_action)
-    val mediaView = adView.findViewById<MediaView>(R.id.ad_media)
+    val mediaView: MediaView? = adView.findViewById(R.id.ad_media)
 
     adView.headlineView = headlineView
     adView.bodyView = bodyView
@@ -137,7 +119,7 @@ private fun bindNativeAd(nativeAd: NativeAd, adView: NativeAdView) {
     adView.mediaView = mediaView
 
     headlineView.text = nativeAd.headline
-    nativeAd.mediaContent?.let { mediaView.mediaContent = it }
+    nativeAd.mediaContent?.let { mediaView?.mediaContent = it }
 
     if (nativeAd.body.isNullOrEmpty()) {
         bodyView.visibility = View.INVISIBLE
@@ -148,10 +130,10 @@ private fun bindNativeAd(nativeAd: NativeAd, adView: NativeAdView) {
 
     val icon = nativeAd.icon
     if (icon == null) {
-        iconView.visibility = View.GONE
+        iconView?.visibility = View.GONE
     } else {
-        iconView.visibility = View.VISIBLE
-        iconView.setImageDrawable(icon.drawable)
+        iconView?.visibility = View.VISIBLE
+        iconView?.setImageDrawable(icon.drawable)
     }
 
     if (nativeAd.callToAction.isNullOrEmpty()) {

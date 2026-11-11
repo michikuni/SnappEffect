@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Annonce</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Chargement des données de langue…</string>
+    <string name="language_applying">Application de la langue…</string>
+    <string name="language_applied">Modifications appliquées !</string>
+    <string name="onboarding_1_title">Des effets artistiques en un geste</string>
+    <string name="onboarding_1_desc">Transformez n\'importe quelle photo en œuvre d\'art avec des dizaines de filtres.</string>
+    <string name="onboarding_2_title">Retouchez comme un pro</string>
+    <string name="onboarding_2_desc">Recadrez, ajustez, retouchez et ajoutez du texte ou des stickers.</string>
+    <string name="btn_next">Suivant</string>
+    <string name="btn_done">Terminé</string>
+    <string name="start_title">Tout est prêt !</string>
+    <string name="start_subtitle">Appuyez sur Commencer pour retoucher votre première photo.</string>
+    <string name="btn_start">Commencer</string>
+    <string name="cd_close">Fermer</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Commentaires</string>
+    <string name="settings_privacy_options">Options de confidentialité</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="feedback_email_subject">Commentaires - %1$s</string>
+    <string name="exit_title">Quitter l\'appli ?</string>
+    <string name="exit_message">Voulez-vous vraiment quitter ?</string>
+    <string name="btn_exit">Quitter</string>
+    <string name="btn_cancel">Annuler</string>
 </resources>

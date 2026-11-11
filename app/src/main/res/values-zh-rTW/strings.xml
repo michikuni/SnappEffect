@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash_loading">載入中 ...</string>
+    <string name="language_title">語言</string>
+    <string name="language_subtitle">選擇您的語言</string>
+    <string name="onboarding_title">你喜歡哪些效果？</string>
+    <string name="onboarding_subtitle">請至少選擇一項以繼續</string>
+    <string name="btn_continue">繼續</string>
+    <string name="ad_attribution">廣告</string>
+    <string name="language_loading">正在載入語言資料…</string>
+    <string name="language_applying">正在套用語言…</string>
+    <string name="language_applied">變更已套用！</string>
+    <string name="onboarding_1_title">一鍵藝術效果</string>
+    <string name="onboarding_1_desc">數十種濾鏡，讓任何照片變成藝術作品。</string>
+    <string name="onboarding_2_title">像專業人士一樣編輯</string>
+    <string name="onboarding_2_desc">裁剪、調整、修飾，加入文字或貼圖。</string>
+    <string name="btn_next">下一步</string>
+    <string name="btn_done">完成</string>
+    <string name="start_title">一切就緒！</string>
+    <string name="start_subtitle">點按「開始」編輯你的第一張照片。</string>
+    <string name="btn_start">開始</string>
+    <string name="cd_close">關閉</string>
+    <string name="settings_feedback">意見回饋</string>
+    <string name="settings_privacy_options">隱私權選項</string>
+    <string name="settings_version">版本 %1$s</string>
+    <string name="feedback_email_subject">意見回饋 - %1$s</string>
+    <string name="exit_title">要結束應用程式嗎？</string>
+    <string name="exit_message">確定要結束嗎？</string>
+    <string name="btn_exit">結束</string>
+    <string name="btn_cancel">取消</string>
+</resources>

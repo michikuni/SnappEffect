@@ -16,8 +16,11 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import java.util.Locale
 
-/** Locale tương ứng 1 language code trong danh sách hỗ trợ. */
-fun localeForCode(code: String): Locale = Locale(code)
+/** Locale tương ứng 1 language code trong danh sách hỗ trợ ("vi" hoặc có vùng như "pt_BR"). */
+fun localeForCode(code: String): Locale {
+    val parts = code.split("_", limit = 2)
+    return if (parts.size == 2) Locale(parts[0], parts[1]) else Locale(code)
+}
 
 /**
  * Context bọc Activity nhưng trả về [Resources] đã localize theo [locale].

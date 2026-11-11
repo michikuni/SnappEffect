@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Reklama</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Wczytywanie danych językowych…</string>
+    <string name="language_applying">Stosowanie języka…</string>
+    <string name="language_applied">Zmiany zastosowane!</string>
+    <string name="onboarding_1_title">Efekty artystyczne jednym dotknięciem</string>
+    <string name="onboarding_1_desc">Zamień każde zdjęcie w dzieło sztuki dzięki dziesiątkom filtrów.</string>
+    <string name="onboarding_2_title">Edytuj jak profesjonalista</string>
+    <string name="onboarding_2_desc">Kadruj, dostosowuj, retuszuj i dodawaj tekst lub naklejki.</string>
+    <string name="btn_next">Dalej</string>
+    <string name="btn_done">Gotowe</string>
+    <string name="start_title">Wszystko gotowe!</string>
+    <string name="start_subtitle">Dotknij Zacznij, aby edytować pierwsze zdjęcie.</string>
+    <string name="btn_start">Zacznij</string>
+    <string name="cd_close">Zamknij</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Opinia</string>
+    <string name="settings_privacy_options">Opcje prywatności</string>
+    <string name="settings_version">Wersja %1$s</string>
+    <string name="feedback_email_subject">Opinia - %1$s</string>
+    <string name="exit_title">Zamknąć aplikację?</string>
+    <string name="exit_message">Czy na pewno chcesz wyjść?</string>
+    <string name="btn_exit">Wyjdź</string>
+    <string name="btn_cancel">Anuluj</string>
 </resources>

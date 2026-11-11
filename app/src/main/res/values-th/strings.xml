@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">โฆษณา</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">กำลังโหลดข้อมูลภาษา…</string>
+    <string name="language_applying">กำลังใช้ภาษา…</string>
+    <string name="language_applied">ใช้การเปลี่ยนแปลงแล้ว!</string>
+    <string name="onboarding_1_title">เอฟเฟกต์ศิลปะในแตะเดียว</string>
+    <string name="onboarding_1_desc">เปลี่ยนรูปใดก็ได้ให้เป็นงานศิลป์ด้วยฟิลเตอร์มากมาย</string>
+    <string name="onboarding_2_title">แต่งรูปแบบมือโปร</string>
+    <string name="onboarding_2_desc">ครอป ปรับแต่ง รีทัช และเพิ่มข้อความหรือสติกเกอร์</string>
+    <string name="btn_next">ถัดไป</string>
+    <string name="btn_done">เสร็จสิ้น</string>
+    <string name="start_title">พร้อมแล้ว!</string>
+    <string name="start_subtitle">แตะ เริ่ม เพื่อแต่งรูปแรกของคุณ</string>
+    <string name="btn_start">เริ่ม</string>
+    <string name="cd_close">ปิด</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">ความคิดเห็น</string>
+    <string name="settings_privacy_options">ตัวเลือกความเป็นส่วนตัว</string>
+    <string name="settings_version">เวอร์ชัน %1$s</string>
+    <string name="feedback_email_subject">ความคิดเห็น - %1$s</string>
+    <string name="exit_title">ออกจากแอป</string>
+    <string name="exit_message">ต้องการออกจากแอปใช่ไหม</string>
+    <string name="btn_exit">ออก</string>
+    <string name="btn_cancel">ยกเลิก</string>
 </resources>

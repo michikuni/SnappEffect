@@ -35,6 +35,7 @@ val testAdUnitIds = mapOf(
     "AD_UNIT_NATIVE_LANGUAGE" to "ca-app-pub-3940256099942544/2247696110",
     "AD_UNIT_NATIVE_ONBOARDING" to "ca-app-pub-3940256099942544/2247696110",
     "AD_UNIT_NATIVE_MEDIUM" to "ca-app-pub-3940256099942544/2247696110",
+    "AD_UNIT_NATIVE_FULL_SCREEN" to "ca-app-pub-3940256099942544/2247696110",
     "AD_UNIT_INTERSTITIAL_ONBOARDING" to "ca-app-pub-3940256099942544/1033173712",
     "AD_UNIT_INTERSTITIAL_SAVE" to "ca-app-pub-3940256099942544/1033173712",
     "AD_UNIT_BANNER" to "ca-app-pub-3940256099942544/6300978111",
@@ -49,6 +50,10 @@ val releaseAdUnitIds = mapOf(
     "AD_UNIT_NATIVE_LANGUAGE" to "ca-app-pub-8164347892343683/3991924312",
     "AD_UNIT_NATIVE_ONBOARDING" to "ca-app-pub-8164347892343683/5414329964",
     "AD_UNIT_NATIVE_MEDIUM" to "ca-app-pub-8164347892343683/6995573166",
+    // Native Full sau Choose Language - TẠM dùng chung unit với AD_UNIT_NATIVE_MEDIUM (cùng format
+    // native, chỉ khác template). Số liệu AdMob sẽ gộp với Start / sheet thoát app. Tách riêng: tạo
+    // unit native mới rồi điền vào đây, hoặc đặt param `ad_id_native_full_screen` trên Remote Config.
+    "AD_UNIT_NATIVE_FULL_SCREEN" to "ca-app-pub-8164347892343683/6995573166",
     "AD_UNIT_INTERSTITIAL_ONBOARDING" to "ca-app-pub-8164347892343683/6968451767",
     // Interstitial show sau khi Lưu ảnh - tạo unit mới trong AdMob console rồi điền vào đây
     "AD_UNIT_INTERSTITIAL_SAVE" to "ca-app-pub-8164347892343683/7046975836",
@@ -70,7 +75,7 @@ android {
         applicationId = "com.mpcorporation.snapeffect"
         minSdk = 28
         targetSdk = 36
-        versionCode = 17
+        versionCode = 18
         versionName = "3.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -182,6 +187,14 @@ dependencies {
 
     // Play In-App Review - đánh giá app ngay trong app (màn Cài đặt)
     implementation(libs.play.review)
+
+    // Play Billing - IAP credits cho tính năng AI (xem CLAUDE.md mục 6)
+    implementation(libs.play.billing)
+
+    // Luồng mở app theo AdmobBase: Lottie cho màn Choose Language, sdp/ssp cho layout native ad
+    implementation(libs.lottie.compose)
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
 
     // Firebase - SDK luôn compile sẵn; chỉ hoạt động khi có google-services.json
     implementation(platform(libs.firebase.bom))

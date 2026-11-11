@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Token rieng cua layout_native_ad_medium_horizontal.xml: sua o day chi anh huong ad nay. -->
+<resources>
+    <!-- Tổng chiều cao, dùng cho chỗ giữ và skeleton khi đang load -->
+    <dimen name="ad_template_horizontal_height">@dimen/_186sdp</dimen>
+    <!-- card -->
+    <dimen name="ad_template_horizontal_card_padding">@dimen/_10sdp</dimen>
+    <color name="ad_template_horizontal_card_bg_color">#FFFFFF</color>
+    <dimen name="ad_template_horizontal_card_stroke_width">1dp</dimen>
+    <color name="ad_template_horizontal_card_stroke_color">#E5E7EB</color>
+    <dimen name="ad_template_horizontal_card_radius">@dimen/_10sdp</dimen>
+    <!-- group2 -->
+    <dimen name="ad_template_horizontal_group2_height">@dimen/_120sdp</dimen>
+    <!-- media -->
+    <dimen name="ad_template_horizontal_media_width">@dimen/_120sdp</dimen>
+    <!-- group3 -->
+    <dimen name="ad_template_horizontal_group3_margin_start">@dimen/_10sdp</dimen>
+    <!-- icon -->
+    <dimen name="ad_template_horizontal_icon_width">@dimen/_33sdp</dimen>
+    <dimen name="ad_template_horizontal_icon_height">@dimen/_33sdp</dimen>
+    <!-- group5 -->
+    <dimen name="ad_template_horizontal_group5_margin_start">@dimen/_7sdp</dimen>
+    <!-- label -->
+    <dimen name="ad_template_horizontal_label_padding_start">@dimen/_4sdp</dimen>
+    <dimen name="ad_template_horizontal_label_padding_top">@dimen/_1sdp</dimen>
+    <dimen name="ad_template_horizontal_label_padding_end">@dimen/_4sdp</dimen>
+    <dimen name="ad_template_horizontal_label_padding_bottom">@dimen/_1sdp</dimen>
+    <color name="ad_template_horizontal_label_text_color">#FFFFFF</color>
+    <dimen name="ad_template_horizontal_label_text_size">@dimen/_8ssp</dimen>
+    <color name="ad_template_horizontal_label_bg_color">#F4B400</color>
+    <dimen name="ad_template_horizontal_label_radius">@dimen/_3sdp</dimen>
+    <!-- title -->
+    <dimen name="ad_template_horizontal_title_margin_top">@dimen/_3sdp</dimen>
+    <color name="ad_template_horizontal_title_text_color">#1F2937</color>
+    <dimen name="ad_template_horizontal_title_text_size">@dimen/_13ssp</dimen>
+    <!-- desc -->
+    <dimen name="ad_template_horizontal_desc_margin_top">@dimen/_5sdp</dimen>
+    <color name="ad_template_horizontal_desc_text_color">#6B7280</color>
+    <dimen name="ad_template_horizontal_desc_text_size">@dimen/_10ssp</dimen>
+    <!-- cta -->
+    <dimen name="ad_template_horizontal_cta_height">@dimen/_38sdp</dimen>
+    <dimen name="ad_template_horizontal_cta_margin_top">@dimen/_8sdp</dimen>
+    <color name="ad_template_horizontal_cta_text_color">#FFFFFF</color>
+    <dimen name="ad_template_horizontal_cta_text_size">@dimen/_12ssp</dimen>
+    <color name="ad_template_horizontal_cta_bg_color">#7C3AED</color>
+    <dimen name="ad_template_horizontal_cta_radius">@dimen/_8sdp</dimen>
+</resources>

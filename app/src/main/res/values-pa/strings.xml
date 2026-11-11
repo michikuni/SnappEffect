@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash_loading">ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ ...</string>
+    <string name="language_title">ਭਾਸ਼ਾ</string>
+    <string name="language_subtitle">ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ</string>
+    <string name="onboarding_title">ਤੁਹਾਨੂੰ ਕਿਹੜੇ ਇਫੈਕਟ ਪਸੰਦ ਹਨ?</string>
+    <string name="onboarding_subtitle">ਜਾਰੀ ਰੱਖਣ ਲਈ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਚੁਣੋ</string>
+    <string name="btn_continue">ਜਾਰੀ ਰੱਖੋ</string>
+    <string name="ad_attribution">ਵਿਗਿਆਪਨ</string>
+    <string name="language_loading">ਭਾਸ਼ਾ ਡਾਟਾ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>
+    <string name="language_applying">ਭਾਸ਼ਾ ਲਾਗੂ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…</string>
+    <string name="language_applied">ਤਬਦੀਲੀਆਂ ਲਾਗੂ ਹੋ ਗਈਆਂ!</string>
+    <string name="onboarding_1_title">ਇੱਕ ਟੈਪ ਵਿੱਚ ਆਰਟ ਇਫੈਕਟ</string>
+    <string name="onboarding_1_desc">ਦਰਜਨਾਂ ਫਿਲਟਰਾਂ ਨਾਲ ਕਿਸੇ ਵੀ ਫੋਟੋ ਨੂੰ ਕਲਾ ਵਿੱਚ ਬਦਲੋ।</string>
+    <string name="onboarding_2_title">ਪ੍ਰੋ ਵਾਂਗ ਐਡਿਟ ਕਰੋ</string>
+    <string name="onboarding_2_desc">ਕ੍ਰੌਪ, ਐਡਜਸਟ, ਰੀਟੱਚ ਕਰੋ ਅਤੇ ਟੈਕਸਟ ਜਾਂ ਸਟਿੱਕਰ ਜੋੜੋ।</string>
+    <string name="btn_next">ਅੱਗੇ</string>
+    <string name="btn_done">ਹੋ ਗਿਆ</string>
+    <string name="start_title">ਸਭ ਕੁਝ ਤਿਆਰ ਹੈ!</string>
+    <string name="start_subtitle">ਆਪਣੀ ਪਹਿਲੀ ਫੋਟੋ ਐਡਿਟ ਕਰਨ ਲਈ ਸ਼ੁਰੂ ਕਰੋ \'ਤੇ ਟੈਪ ਕਰੋ।</string>
+    <string name="btn_start">ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="cd_close">ਬੰਦ ਕਰੋ</string>
+    <string name="settings_feedback">ਫੀਡਬੈਕ</string>
+    <string name="settings_privacy_options">ਪਰਦੇਦਾਰੀ ਵਿਕਲਪ</string>
+    <string name="settings_version">ਵਰਜਨ %1$s</string>
+    <string name="feedback_email_subject">ਫੀਡਬੈਕ - %1$s</string>
+    <string name="exit_title">ਕੀ ਐਪ ਤੋਂ ਬਾਹਰ ਜਾਣਾ ਹੈ?</string>
+    <string name="exit_message">ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ \'ਤੇ ਬਾਹਰ ਜਾਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="btn_exit">ਬਾਹਰ ਜਾਓ</string>
+    <string name="btn_cancel">ਰੱਦ ਕਰੋ</string>
+</resources>

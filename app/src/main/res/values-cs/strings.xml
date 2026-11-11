@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Reklama</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Načítání jazykových dat…</string>
+    <string name="language_applying">Použití jazyka…</string>
+    <string name="language_applied">Změny byly použity!</string>
+    <string name="onboarding_1_title">Umělecké efekty jedním klepnutím</string>
+    <string name="onboarding_1_desc">Proměňte jakoukoli fotku v umění s desítkami filtrů.</string>
+    <string name="onboarding_2_title">Upravujte jako profík</string>
+    <string name="onboarding_2_desc">Ořezávejte, dolaďujte, retušujte a přidávejte text nebo nálepky.</string>
+    <string name="btn_next">Další</string>
+    <string name="btn_done">Hotovo</string>
+    <string name="start_title">Všechno je připraveno!</string>
+    <string name="start_subtitle">Klepnutím na Začít upravíte svou první fotku.</string>
+    <string name="btn_start">Začít</string>
+    <string name="cd_close">Zavřít</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Zpětná vazba</string>
+    <string name="settings_privacy_options">Možnosti soukromí</string>
+    <string name="settings_version">Verze %1$s</string>
+    <string name="feedback_email_subject">Zpětná vazba - %1$s</string>
+    <string name="exit_title">Ukončit aplikaci?</string>
+    <string name="exit_message">Opravdu chcete ukončit?</string>
+    <string name="btn_exit">Ukončit</string>
+    <string name="btn_cancel">Zrušit</string>
 </resources>

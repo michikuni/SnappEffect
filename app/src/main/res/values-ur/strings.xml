@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">اشتہار</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">زبان کا ڈیٹا لوڈ ہو رہا ہے…</string>
+    <string name="language_applying">زبان لاگو کی جا رہی ہے…</string>
+    <string name="language_applied">تبدیلیاں لاگو ہو گئیں!</string>
+    <string name="onboarding_1_title">ایک ٹیپ میں آرٹ ایفیکٹس</string>
+    <string name="onboarding_1_desc">درجنوں فلٹرز سے کسی بھی تصویر کو فن پارہ بنائیں۔</string>
+    <string name="onboarding_2_title">پرو کی طرح ایڈٹ کریں</string>
+    <string name="onboarding_2_desc">کراپ، ایڈجسٹ، ری ٹچ کریں اور متن یا اسٹیکرز شامل کریں۔</string>
+    <string name="btn_next">اگلا</string>
+    <string name="btn_done">ہو گیا</string>
+    <string name="start_title">سب کچھ تیار ہے!</string>
+    <string name="start_subtitle">اپنی پہلی تصویر ایڈٹ کرنے کے لیے شروع کریں پر ٹیپ کریں۔</string>
+    <string name="btn_start">شروع کریں</string>
+    <string name="cd_close">بند کریں</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">رائے</string>
+    <string name="settings_privacy_options">پرائیویسی آپشنز</string>
+    <string name="settings_version">ورژن %1$s</string>
+    <string name="feedback_email_subject">رائے - %1$s</string>
+    <string name="exit_title">ایپ بند کریں؟</string>
+    <string name="exit_message">کیا آپ واقعی باہر نکلنا چاہتے ہیں؟</string>
+    <string name="btn_exit">باہر نکلیں</string>
+    <string name="btn_cancel">منسوخ کریں</string>
 </resources>

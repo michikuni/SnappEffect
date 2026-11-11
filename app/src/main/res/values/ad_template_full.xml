@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Token rieng cua layout_native_ad_full.xml: sua o day chi anh huong ad nay. -->
+<resources>
+    <!-- card -->
+    <color name="ad_template_full_card_bg_color">#FFFFFF</color>
+    <dimen name="ad_template_full_card_padding">@dimen/_10sdp</dimen>
+    <!-- group2 -->
+    <dimen name="ad_template_full_group2_margin_top">@dimen/_10sdp</dimen>
+    <!-- icon -->
+    <dimen name="ad_template_full_icon_width">@dimen/_37sdp</dimen>
+    <dimen name="ad_template_full_icon_height">@dimen/_37sdp</dimen>
+    <!-- group3 -->
+    <dimen name="ad_template_full_group3_margin_start">@dimen/_8sdp</dimen>
+    <!-- label -->
+    <dimen name="ad_template_full_label_padding_start">@dimen/_4sdp</dimen>
+    <dimen name="ad_template_full_label_padding_top">@dimen/_1sdp</dimen>
+    <dimen name="ad_template_full_label_padding_end">@dimen/_4sdp</dimen>
+    <dimen name="ad_template_full_label_padding_bottom">@dimen/_1sdp</dimen>
+    <color name="ad_template_full_label_text_color">#FFFFFF</color>
+    <dimen name="ad_template_full_label_text_size">@dimen/_8ssp</dimen>
+    <color name="ad_template_full_label_bg_color">#F4B400</color>
+    <dimen name="ad_template_full_label_radius">@dimen/_3sdp</dimen>
+    <!-- title -->
+    <dimen name="ad_template_full_title_margin_start">@dimen/_5sdp</dimen>
+    <color name="ad_template_full_title_text_color">#1F2937</color>
+    <dimen name="ad_template_full_title_text_size">@dimen/_13ssp</dimen>
+    <!-- desc -->
+    <dimen name="ad_template_full_desc_margin_top">@dimen/_2sdp</dimen>
+    <color name="ad_template_full_desc_text_color">#6B7280</color>
+    <dimen name="ad_template_full_desc_text_size">@dimen/_11ssp</dimen>
+    <!-- cta -->
+    <dimen name="ad_template_full_cta_height">@dimen/_40sdp</dimen>
+    <dimen name="ad_template_full_cta_margin_top">@dimen/_10sdp</dimen>
+    <color name="ad_template_full_cta_text_color">#FFFFFF</color>
+    <dimen name="ad_template_full_cta_text_size">@dimen/_13ssp</dimen>
+    <color name="ad_template_full_cta_bg_color">#7C3AED</color>
+    <dimen name="ad_template_full_cta_radius">@dimen/_8sdp</dimen>
+</resources>

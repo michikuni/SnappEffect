@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Реклама</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Зареждане на езиковите данни…</string>
+    <string name="language_applying">Прилагане на езика…</string>
+    <string name="language_applied">Промените са приложени!</string>
+    <string name="onboarding_1_title">Арт ефекти с едно докосване</string>
+    <string name="onboarding_1_desc">Превърнете всяка снимка в изкуство с десетки филтри.</string>
+    <string name="onboarding_2_title">Редактирайте като професионалист</string>
+    <string name="onboarding_2_desc">Изрязвайте, настройвайте, ретуширайте и добавяйте текст или стикери.</string>
+    <string name="btn_next">Напред</string>
+    <string name="btn_done">Готово</string>
+    <string name="start_title">Всичко е готово!</string>
+    <string name="start_subtitle">Докоснете Старт, за да редактирате първата си снимка.</string>
+    <string name="btn_start">Старт</string>
+    <string name="cd_close">Затвори</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Обратна връзка</string>
+    <string name="settings_privacy_options">Опции за поверителност</string>
+    <string name="settings_version">Версия %1$s</string>
+    <string name="feedback_email_subject">Обратна връзка - %1$s</string>
+    <string name="exit_title">Изход от приложението?</string>
+    <string name="exit_message">Сигурни ли сте, че искате да излезете?</string>
+    <string name="btn_exit">Изход</string>
+    <string name="btn_cancel">Отказ</string>
 </resources>

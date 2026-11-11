@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Reklam</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Dil verileri yükleniyor…</string>
+    <string name="language_applying">Dil uygulanıyor…</string>
+    <string name="language_applied">Değişiklikler uygulandı!</string>
+    <string name="onboarding_1_title">Tek dokunuşla sanat efektleri</string>
+    <string name="onboarding_1_desc">Onlarca filtreyle her fotoğrafı sanata dönüştürün.</string>
+    <string name="onboarding_2_title">Profesyonel gibi düzenleyin</string>
+    <string name="onboarding_2_desc">Kırpın, ayarlayın, rötuşlayın, metin veya çıkartma ekleyin.</string>
+    <string name="btn_next">İleri</string>
+    <string name="btn_done">Bitti</string>
+    <string name="start_title">Her şey hazır!</string>
+    <string name="start_subtitle">İlk fotoğrafınızı düzenlemek için Başla\'ya dokunun.</string>
+    <string name="btn_start">Başla</string>
+    <string name="cd_close">Kapat</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Geri Bildirim</string>
+    <string name="settings_privacy_options">Gizlilik Seçenekleri</string>
+    <string name="settings_version">Sürüm %1$s</string>
+    <string name="feedback_email_subject">Geri bildirim - %1$s</string>
+    <string name="exit_title">Uygulamadan çıkılsın mı?</string>
+    <string name="exit_message">Çıkmak istediğine emin misin?</string>
+    <string name="btn_exit">Çık</string>
+    <string name="btn_cancel">İptal</string>
 </resources>

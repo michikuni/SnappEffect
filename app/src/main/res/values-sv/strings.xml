@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Annons</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Läser in språkdata…</string>
+    <string name="language_applying">Tillämpar språk…</string>
+    <string name="language_applied">Ändringarna har tillämpats!</string>
+    <string name="onboarding_1_title">Konsteffekter med ett tryck</string>
+    <string name="onboarding_1_desc">Gör vilket foto som helst till konst med dussintals filter.</string>
+    <string name="onboarding_2_title">Redigera som ett proffs</string>
+    <string name="onboarding_2_desc">Beskär, justera, retuschera och lägg till text eller klistermärken.</string>
+    <string name="btn_next">Nästa</string>
+    <string name="btn_done">Klar</string>
+    <string name="start_title">Allt är klart!</string>
+    <string name="start_subtitle">Tryck på Starta för att redigera ditt första foto.</string>
+    <string name="btn_start">Starta</string>
+    <string name="cd_close">Stäng</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_privacy_options">Integritetsalternativ</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="feedback_email_subject">Feedback – %1$s</string>
+    <string name="exit_title">Avsluta appen?</string>
+    <string name="exit_message">Är du säker på att du vill avsluta?</string>
+    <string name="btn_exit">Avsluta</string>
+    <string name="btn_cancel">Avbryt</string>
 </resources>

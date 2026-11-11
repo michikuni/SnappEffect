@@ -32,11 +32,12 @@ private enum class BannerState { LOADING, LOADED, FAILED }
  */
 @Composable
 fun BannerAd(
-    adUnitId: String,
+    adUnitId: String?,
     modifier: Modifier = Modifier,
 ) {
-    // Công tắc tổng: không emit gì (kể cả skeleton) -> layout co lại như chưa từng có ad.
-    if (!AdsMaster.isEnabled) return
+    // Công tắc tổng (adUnitId = null khi tắt - xem AdConfig): không emit gì (kể cả skeleton)
+    // -> layout co lại như chưa từng có ad.
+    if (!AdsMaster.isEnabled || adUnitId == null) return
 
     val context = LocalContext.current
     val adWidthDp = LocalConfiguration.current.screenWidthDp

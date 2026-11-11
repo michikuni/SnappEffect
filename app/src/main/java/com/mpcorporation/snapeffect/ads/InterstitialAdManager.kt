@@ -21,7 +21,7 @@ import com.mpcorporation.snapeffect.firebase.AnalyticsManager
  * [onDismiss] LUÔN được gọi (kể cả khi ad chưa load kịp, show fail, hoặc bị
  * frequency cap chặn) để flow điều hướng không bao giờ bị kẹt.
  *
- * Bật/tắt từng placement: check `RemoteConfigManager.isPlacementEnabled(...)` tại
+ * Bật/tắt từng placement: check `AdConfig.isPlacementEnabled(...)` tại
  * call site trước khi gọi show (giống pattern các native ad) - manager này chỉ lo
  * capping chung.
  *
@@ -63,8 +63,9 @@ object InterstitialAdManager {
         return entry.ad
     }
 
-    fun preload(context: Context, adUnitId: String = AdConfig.INTERSTITIAL_ONBOARDING) {
-        if (!AdsMaster.isEnabled) return
+    fun preload(context: Context, adUnitId: String? = AdConfig.interstitialOnboarding) {
+        // adUnitId = null khi công tắc tổng tắt (AdConfig) -> không có id để load
+        if (!AdsMaster.isEnabled || adUnitId == null) return
         if (availableAd(adUnitId) != null || adUnitId in loading) return
         loading += adUnitId
 
@@ -104,10 +105,10 @@ object InterstitialAdManager {
 
     fun show(
         activity: Activity,
-        adUnitId: String = AdConfig.INTERSTITIAL_ONBOARDING,
+        adUnitId: String? = AdConfig.interstitialOnboarding,
         onDismiss: () -> Unit,
     ) {
-        if (!AdsMaster.isEnabled) {
+        if (!AdsMaster.isEnabled || adUnitId == null) {
             onDismiss()
             return
         }

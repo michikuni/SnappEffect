@@ -1,6 +1,7 @@
 package com.mpcorporation.snapeffect
 
 import android.app.Application
+import com.mpcorporation.snapeffect.ads.AdConfig
 import com.mpcorporation.snapeffect.ads.AppOpenAdManager
 import com.mpcorporation.snapeffect.firebase.AnalyticsManager
 import com.mpcorporation.snapeffect.firebase.RemoteConfigManager
@@ -19,8 +20,11 @@ class SnappEffectApp : Application() {
         // Chỉ đăng ký observer, không load ad ở đây (load cần consent trước).
         AppOpenAdManager.register(this)
 
-        // Firebase (tự no-op nếu chưa đặt app/google-services.json)
+        // Firebase (tự no-op nếu chưa đặt app/google-services.json).
+        // AdConfig đăng ký listener trước, RemoteConfigManager init sau để không lỡ
+        // đợt activate đầu tiên (giá trị persist từ phiên trước).
         AnalyticsManager.init(this)
+        AdConfig.init()
         RemoteConfigManager.init(this)
     }
 }

@@ -1,8 +1,6 @@
 package com.mpcorporation.snapeffect.presentation.settings
 
-import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
+import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,43 +17,45 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.mpcorporation.snapeffect.BuildConfig
 import com.mpcorporation.snapeffect.R
+import com.mpcorporation.snapeffect.ads.ConsentManager
+import com.mpcorporation.snapeffect.core.util.RateApp
 import com.mpcorporation.snapeffect.core.util.findActivity
+import com.mpcorporation.snapeffect.core.util.openUrl
+import com.mpcorporation.snapeffect.core.util.sendEmail
+import com.mpcorporation.snapeffect.core.util.shareText
+import com.mpcorporation.snapeffect.data.AppLinks
 import com.mpcorporation.snapeffect.domain.model.APP_LANGUAGES
 import com.mpcorporation.snapeffect.presentation.components.BaseTopBar
 import com.mpcorporation.snapeffect.presentation.components.SnapOutlinedCard
 import com.mpcorporation.snapeffect.presentation.theme.SnapTheme
 
-private const val PRIVACY_URL = "https://sites.google.com/view/beaty-camera/privacy-policy"
-
-// Để rỗng -> app báo "chưa cấu hình" thay vì mở nhầm sang link khác.
-private const val TERMS_URL = "https://sites.google.com/view/beaty-camera/term-of-service"
-
 /**
- * Màn Cài đặt: Ngôn ngữ / Đánh giá ứng dụng / Chia sẻ ứng dụng / Chính sách bảo mật /
- * Điều khoản dịch vụ.
+ * Màn Cài đặt (theo AdmobBase): Ngôn ngữ / Đánh giá / Chia sẻ / Góp ý / Chính sách bảo mật /
+ * Điều khoản dịch vụ (+ Privacy Options khi user thuộc khu vực GDPR yêu cầu) + version ở cuối.
  *
  * @param currentLanguageCode ngôn ngữ đang áp dụng - hiện làm dòng phụ của mục Ngôn ngữ.
  * @param onOpenLanguage      mở màn chọn ngôn ngữ (bản có nút back, xem AppNavHost).
@@ -68,45 +68,25 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    var rateDialogOpen by remember { mutableStateOf(false) }
+    val appName = stringResource(R.string.app_name)
 
     val currentLanguage = remember(currentLanguageCode) {
         APP_LANGUAGES.firstOrNull { it.code == currentLanguageCode }
     }
 
-    fun openUrl(url: String) {
-        if (url.isBlank()) {
-            Toast.makeText(
-                context,
-                context.getString(R.string.settings_link_missing),
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-    }
+    // GDPR: bắt buộc có entry point đổi consent với user thuộc khu vực yêu cầu
+    val showPrivacyOptions = remember { ConsentManager.isPrivacyOptionsRequired(context) }
 
-    fun shareApp() {
-        val link = "https://play.google.com/store/apps/details?id=${context.packageName}"
-        val share = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
-            putExtra(Intent.EXTRA_TEXT, context.getString(R.string.share_app_message, link))
-        }
-        context.startActivity(Intent.createChooser(share, null))
-    }
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(SnapTheme.colors.page)
+    ) {
+        BaseTopBar(title = stringResource(R.string.settings_title), onBack = onBack)
 
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            BaseTopBar(title = stringResource(R.string.settings_title), onBack = onBack)
-        }
-    ) { innerPadding ->
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .background(SnapTheme.colors.page)
+                .weight(1f)
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -114,49 +94,68 @@ fun SettingsScreen(
             SettingsRow(
                 title = stringResource(R.string.settings_language),
                 subtitle = currentLanguage?.endonym,
+                icon = painterResource(R.drawable.ic_language_24),
                 onClick = onOpenLanguage,
-                icon = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_language_24),
-                        contentDescription = null,
-                        tint = SnapTheme.colors.textBrand,
-                        modifier = Modifier.size(22.dp),
-                    )
-                }
             )
             SettingsRow(
                 title = stringResource(R.string.settings_rate),
                 subtitle = stringResource(R.string.settings_rate_subtitle),
-                onClick = { rateDialogOpen = true },
-                iconVector = Icons.Filled.Star,
+                icon = rememberVectorPainter(Icons.Filled.Star),
+                // Mở thẳng In-App Review (không hỏi sao trước - xem RateApp)
+                onClick = { context.findActivity()?.let { RateApp.launch(it) } },
             )
             SettingsRow(
                 title = stringResource(R.string.settings_share),
-                onClick = ::shareApp,
-                iconVector = Icons.Filled.Share,
+                icon = rememberVectorPainter(Icons.Filled.Share),
+                onClick = {
+                    context.shareText(
+                        context.getString(R.string.share_app_message, AppLinks.playStoreUrl(context))
+                    )
+                },
             )
+            if (AppLinks.SUPPORT_EMAIL.isNotBlank()) {
+                SettingsRow(
+                    title = stringResource(R.string.settings_feedback),
+                    icon = rememberVectorPainter(Icons.Filled.Email),
+                    onClick = {
+                        context.sendEmail(
+                            to = AppLinks.SUPPORT_EMAIL,
+                            subject = context.getString(R.string.feedback_email_subject, appName),
+                            body = "\n\n---\nApp version: ${BuildConfig.VERSION_NAME}\n" +
+                                "Device: ${Build.MODEL} (Android ${Build.VERSION.RELEASE})"
+                        )
+                    },
+                )
+            }
             SettingsRow(
                 title = stringResource(R.string.settings_privacy),
-                onClick = { openUrl(PRIVACY_URL) },
-                iconVector = Icons.Filled.Lock,
+                icon = rememberVectorPainter(Icons.Filled.Lock),
+                onClick = { context.openUrl(AppLinks.PRIVACY_POLICY) },
             )
             SettingsRow(
                 title = stringResource(R.string.settings_terms),
-                onClick = { openUrl(TERMS_URL) },
-                iconVector = Icons.Filled.Info,
+                icon = rememberVectorPainter(Icons.Filled.Info),
+                onClick = { context.openUrl(AppLinks.TERMS_OF_SERVICE) },
             )
+            if (showPrivacyOptions) {
+                SettingsRow(
+                    title = stringResource(R.string.settings_privacy_options),
+                    icon = rememberVectorPainter(Icons.Filled.CheckCircle),
+                    onClick = {
+                        context.findActivity()?.let { ConsentManager.showPrivacyOptionsForm(it) }
+                    },
+                )
+            }
         }
-    }
 
-    if (rateDialogOpen) {
-        RateAppDialog(
-            onSubmit = {
-                rateDialogOpen = false
-                // Số sao chỉ để mở dialog; Play tự hỏi lại sao trong dialog của Google.
-                val activity = context.findActivity()
-                if (activity != null) launchAppReview(activity) else openPlayStorePage(context)
-            },
-            onDismissRequest = { rateDialogOpen = false }
+        Text(
+            text = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
+            style = MaterialTheme.typography.bodySmall,
+            color = SnapTheme.colors.textMuted,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         )
     }
 }
@@ -164,11 +163,10 @@ fun SettingsScreen(
 @Composable
 private fun SettingsRow(
     title: String,
+    icon: Painter,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     subtitle: String? = null,
-    iconVector: ImageVector? = null,
-    icon: (@Composable () -> Unit)? = null,
 ) {
     val colors = SnapTheme.colors
     SnapOutlinedCard(
@@ -187,15 +185,12 @@ private fun SettingsRow(
                     .background(colors.brandTint),
                 contentAlignment = Alignment.Center,
             ) {
-                when {
-                    icon != null -> icon()
-                    iconVector != null -> Icon(
-                        imageVector = iconVector,
-                        contentDescription = null,
-                        tint = colors.textBrand,
-                        modifier = Modifier.size(22.dp),
-                    )
-                }
+                Icon(
+                    painter = icon,
+                    contentDescription = null,
+                    tint = colors.textBrand,
+                    modifier = Modifier.size(22.dp),
+                )
             }
 
             Column(

@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">ప్రకటన</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">భాషా డేటా లోడ్ అవుతోంది…</string>
+    <string name="language_applying">భాషను వర్తింపజేస్తోంది…</string>
+    <string name="language_applied">మార్పులు వర్తింపజేయబడ్డాయి!</string>
+    <string name="onboarding_1_title">ఒక్క ట్యాప్‌తో ఆర్ట్ ఎఫెక్ట్‌లు</string>
+    <string name="onboarding_1_desc">డజన్ల కొద్దీ ఫిల్టర్‌లతో ఏ ఫోటోనైనా కళగా మార్చండి.</string>
+    <string name="onboarding_2_title">ప్రో లాగా ఎడిట్ చేయండి</string>
+    <string name="onboarding_2_desc">క్రాప్, అడ్జస్ట్, రీటచ్ చేసి టెక్స్ట్ లేదా స్టిక్కర్‌లు జోడించండి.</string>
+    <string name="btn_next">తదుపరి</string>
+    <string name="btn_done">పూర్తయింది</string>
+    <string name="start_title">అంతా సిద్ధం!</string>
+    <string name="start_subtitle">మీ మొదటి ఫోటోను ఎడిట్ చేయడానికి ప్రారంభించు నొక్కండి.</string>
+    <string name="btn_start">ప్రారంభించు</string>
+    <string name="cd_close">మూసివేయి</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">అభిప్రాయం</string>
+    <string name="settings_privacy_options">గోప్యతా ఎంపికలు</string>
+    <string name="settings_version">వెర్షన్ %1$s</string>
+    <string name="feedback_email_subject">అభిప్రాయం - %1$s</string>
+    <string name="exit_title">యాప్ నుండి నిష్క్రమించాలా?</string>
+    <string name="exit_message">మీరు ఖచ్చితంగా నిష్క్రమించాలనుకుంటున్నారా?</string>
+    <string name="btn_exit">నిష్క్రమించు</string>
+    <string name="btn_cancel">రద్దు చేయి</string>
 </resources>

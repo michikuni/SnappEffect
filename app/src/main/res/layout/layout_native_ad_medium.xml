@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Native Medium - CTA bottom template -->
-<com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.gms.ads.nativead.NativeAdView xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_native_ad"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="@dimen/ad_template_medium_card_padding">
+        <aapt:attr name="android:background">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/ad_template_medium_card_bg_color" />
+                <stroke android:width="@dimen/ad_template_medium_card_stroke_width" android:color="@color/ad_template_medium_card_stroke_color" />
+                <corners android:radius="@dimen/ad_template_medium_card_radius" />
+            </shape>
+        </aapt:attr>
 
         <!-- Header: icon + headline + body -->
         <LinearLayout
@@ -20,15 +27,15 @@
 
             <ImageView
                 android:id="@+id/ad_app_icon"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="@dimen/ad_template_medium_icon_width"
+                android:layout_height="@dimen/ad_template_medium_icon_height"
                 android:importantForAccessibility="no"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/ad_template_medium_group3_margin_start"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -41,25 +48,31 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_ad_badge"
-                        android:paddingStart="5dp"
-                        android:paddingTop="1dp"
-                        android:paddingEnd="5dp"
-                        android:paddingBottom="1dp"
+                        android:paddingStart="@dimen/ad_template_medium_label_padding_start"
+                        android:paddingTop="@dimen/ad_template_medium_label_padding_top"
+                        android:paddingEnd="@dimen/ad_template_medium_label_padding_end"
+                        android:paddingBottom="@dimen/ad_template_medium_label_padding_bottom"
                         android:text="@string/ad_attribution"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/ad_template_medium_label_text_color"
+                        android:textSize="@dimen/ad_template_medium_label_text_size"
+                        android:textStyle="bold">
+                        <aapt:attr name="android:background">
+                            <shape android:shape="rectangle">
+                                <solid android:color="@color/ad_template_medium_label_bg_color" />
+                                <corners android:radius="@dimen/ad_template_medium_label_radius" />
+                            </shape>
+                        </aapt:attr>
+                    </TextView>
 
                     <TextView
                         android:id="@+id/ad_headline"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
+                        android:layout_marginStart="@dimen/ad_template_medium_title_margin_start"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textColor="@color/ad_text_primary"
-                        android:textSize="14sp"
+                        android:textColor="@color/ad_template_medium_title_text_color"
+                        android:textSize="@dimen/ad_template_medium_title_text_size"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -67,11 +80,11 @@
                     android:id="@+id/ad_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="@dimen/ad_template_medium_desc_margin_top"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:textColor="@color/ad_text_secondary"
-                    android:textSize="12sp" />
+                    android:textColor="@color/ad_template_medium_desc_text_color"
+                    android:textSize="@dimen/ad_template_medium_desc_text_size" />
             </LinearLayout>
         </LinearLayout>
 
@@ -79,21 +92,27 @@
         <com.google.android.gms.ads.nativead.MediaView
             android:id="@+id/ad_media"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="10dp" />
+            android:layout_height="@dimen/ad_template_medium_media_height"
+            android:layout_marginTop="@dimen/ad_template_medium_media_margin_top" />
 
         <!-- CTA bottom -->
         <Button
             android:id="@+id/ad_call_to_action"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_cta_button"
+            android:layout_height="@dimen/ad_template_medium_cta_height"
+            android:layout_marginTop="@dimen/ad_template_medium_cta_margin_top"
             android:stateListAnimator="@null"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textColor="@color/ad_template_medium_cta_text_color"
+            android:textSize="@dimen/ad_template_medium_cta_text_size"
+            android:textStyle="bold">
+            <aapt:attr name="android:background">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/ad_template_medium_cta_bg_color" />
+                    <corners android:radius="@dimen/ad_template_medium_cta_radius" />
+                </shape>
+            </aapt:attr>
+        </Button>
     </LinearLayout>
 
 </com.google.android.gms.ads.nativead.NativeAdView>

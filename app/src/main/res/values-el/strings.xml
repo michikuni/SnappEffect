@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Διαφήμιση</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Φόρτωση δεδομένων γλώσσας…</string>
+    <string name="language_applying">Εφαρμογή γλώσσας…</string>
+    <string name="language_applied">Οι αλλαγές εφαρμόστηκαν!</string>
+    <string name="onboarding_1_title">Καλλιτεχνικά εφέ με ένα πάτημα</string>
+    <string name="onboarding_1_desc">Μετατρέψτε κάθε φωτογραφία σε έργο τέχνης με δεκάδες φίλτρα.</string>
+    <string name="onboarding_2_title">Επεξεργαστείτε σαν επαγγελματίας</string>
+    <string name="onboarding_2_desc">Περικοπή, ρύθμιση, ρετούς και προσθήκη κειμένου ή αυτοκόλλητων.</string>
+    <string name="btn_next">Επόμενο</string>
+    <string name="btn_done">Τέλος</string>
+    <string name="start_title">Όλα έτοιμα!</string>
+    <string name="start_subtitle">Πατήστε Έναρξη για να επεξεργαστείτε την πρώτη σας φωτογραφία.</string>
+    <string name="btn_start">Έναρξη</string>
+    <string name="cd_close">Κλείσιμο</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Σχόλια</string>
+    <string name="settings_privacy_options">Επιλογές απορρήτου</string>
+    <string name="settings_version">Έκδοση %1$s</string>
+    <string name="feedback_email_subject">Σχόλια - %1$s</string>
+    <string name="exit_title">Έξοδος από την εφαρμογή;</string>
+    <string name="exit_message">Σίγουρα θέλετε να βγείτε;</string>
+    <string name="btn_exit">Έξοδος</string>
+    <string name="btn_cancel">Άκυρο</string>
 </resources>

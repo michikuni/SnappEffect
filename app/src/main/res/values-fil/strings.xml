@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Ad</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Nilo-load ang data ng wika…</string>
+    <string name="language_applying">Inilalapat ang wika…</string>
+    <string name="language_applied">Nailapat na ang mga pagbabago!</string>
+    <string name="onboarding_1_title">Mga art effect sa isang tap</string>
+    <string name="onboarding_1_desc">Gawing sining ang anumang larawan gamit ang dose-dosenang filter.</string>
+    <string name="onboarding_2_title">Mag-edit na parang pro</string>
+    <string name="onboarding_2_desc">Mag-crop, mag-adjust, mag-retouch at magdagdag ng text o sticker.</string>
+    <string name="btn_next">Susunod</string>
+    <string name="btn_done">Tapos na</string>
+    <string name="start_title">Handa ka na!</string>
+    <string name="start_subtitle">I-tap ang Simulan para i-edit ang una mong larawan.</string>
+    <string name="btn_start">Simulan</string>
+    <string name="cd_close">Isara</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_privacy_options">Mga Opsyon sa Privacy</string>
+    <string name="settings_version">Bersyon %1$s</string>
+    <string name="feedback_email_subject">Feedback - %1$s</string>
+    <string name="exit_title">Lumabas sa app?</string>
+    <string name="exit_message">Sigurado kang gusto mong lumabas?</string>
+    <string name="btn_exit">Lumabas</string>
+    <string name="btn_cancel">Kanselahin</string>
 </resources>

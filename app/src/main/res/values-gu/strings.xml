@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash_loading">લોડ થઈ રહ્યું છે ...</string>
+    <string name="language_title">ભાષા</string>
+    <string name="language_subtitle">તમારી ભાષા પસંદ કરો</string>
+    <string name="onboarding_title">તમને કઈ ઇફેક્ટ્સ ગમે છે?</string>
+    <string name="onboarding_subtitle">ચાલુ રાખવા માટે ઓછામાં ઓછી એક પસંદ કરો</string>
+    <string name="btn_continue">ચાલુ રાખો</string>
+    <string name="ad_attribution">જાહેરાત</string>
+    <string name="language_loading">ભાષાનો ડેટા લોડ થઈ રહ્યો છે…</string>
+    <string name="language_applying">ભાષા લાગુ થઈ રહી છે…</string>
+    <string name="language_applied">ફેરફારો લાગુ થયા!</string>
+    <string name="onboarding_1_title">એક ટેપમાં આર્ટ ઇફેક્ટ્સ</string>
+    <string name="onboarding_1_desc">ડઝનબંધ ફિલ્ટર્સથી કોઈપણ ફોટોને કલામાં બદલો.</string>
+    <string name="onboarding_2_title">પ્રોની જેમ એડિટ કરો</string>
+    <string name="onboarding_2_desc">ક્રોપ, એડજસ્ટ, રીટચ કરો અને ટેક્સ્ટ કે સ્ટિકર ઉમેરો.</string>
+    <string name="btn_next">આગળ</string>
+    <string name="btn_done">થઈ ગયું</string>
+    <string name="start_title">બધું તૈયાર છે!</string>
+    <string name="start_subtitle">તમારો પહેલો ફોટો એડિટ કરવા શરૂ કરો પર ટેપ કરો.</string>
+    <string name="btn_start">શરૂ કરો</string>
+    <string name="cd_close">બંધ કરો</string>
+    <string name="settings_feedback">પ્રતિસાદ</string>
+    <string name="settings_privacy_options">પ્રાઇવસીના વિકલ્પો</string>
+    <string name="settings_version">વર્ઝન %1$s</string>
+    <string name="feedback_email_subject">પ્રતિસાદ - %1$s</string>
+    <string name="exit_title">ઍપમાંથી બહાર નીકળવું છે?</string>
+    <string name="exit_message">શું તમે ખરેખર બહાર નીકળવા માંગો છો?</string>
+    <string name="btn_exit">બહાર નીકળો</string>
+    <string name="btn_cancel">રદ કરો</string>
+</resources>

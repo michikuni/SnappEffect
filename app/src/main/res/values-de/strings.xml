@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Anzeige</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Sprachdaten werden geladen…</string>
+    <string name="language_applying">Sprache wird angewendet…</string>
+    <string name="language_applied">Änderungen übernommen!</string>
+    <string name="onboarding_1_title">Kunsteffekte mit einem Tipp</string>
+    <string name="onboarding_1_desc">Verwandle jedes Foto mit Dutzenden Filtern in Kunst.</string>
+    <string name="onboarding_2_title">Bearbeite wie ein Profi</string>
+    <string name="onboarding_2_desc">Zuschneiden, anpassen, retuschieren und Text oder Sticker hinzufügen.</string>
+    <string name="btn_next">Weiter</string>
+    <string name="btn_done">Fertig</string>
+    <string name="start_title">Alles bereit!</string>
+    <string name="start_subtitle">Tippe auf Starten, um dein erstes Foto zu bearbeiten.</string>
+    <string name="btn_start">Starten</string>
+    <string name="cd_close">Schließen</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_privacy_options">Datenschutzoptionen</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="feedback_email_subject">Feedback - %1$s</string>
+    <string name="exit_title">App beenden?</string>
+    <string name="exit_message">Möchtest du die App wirklich beenden?</string>
+    <string name="btn_exit">Beenden</string>
+    <string name="btn_cancel">Abbrechen</string>
 </resources>

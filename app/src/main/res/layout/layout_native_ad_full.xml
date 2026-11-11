@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Native Full - media chiếm phần cao còn lại, header + CTA ở đáy. Text không đè lên media. -->
+<com.google.android.gms.ads.nativead.NativeAdView xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ad_template_full_card_bg_color"
+        android:orientation="vertical"
+        android:padding="@dimen/ad_template_full_card_padding">
+
+        <com.google.android.gms.ads.nativead.MediaView
+            android:id="@+id/ad_media"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Header: icon + (badge + headline) + body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ad_template_full_group2_margin_top"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ad_app_icon"
+                android:layout_width="@dimen/ad_template_full_icon_width"
+                android:layout_height="@dimen/ad_template_full_icon_height"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ad_template_full_group3_margin_start"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/ad_template_full_label_padding_start"
+                        android:paddingTop="@dimen/ad_template_full_label_padding_top"
+                        android:paddingEnd="@dimen/ad_template_full_label_padding_end"
+                        android:paddingBottom="@dimen/ad_template_full_label_padding_bottom"
+                        android:text="@string/ad_attribution"
+                        android:textColor="@color/ad_template_full_label_text_color"
+                        android:textSize="@dimen/ad_template_full_label_text_size"
+                        android:textStyle="bold">
+                        <aapt:attr name="android:background">
+                            <shape android:shape="rectangle">
+                                <solid android:color="@color/ad_template_full_label_bg_color" />
+                                <corners android:radius="@dimen/ad_template_full_label_radius" />
+                            </shape>
+                        </aapt:attr>
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/ad_headline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/ad_template_full_title_margin_start"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/ad_template_full_title_text_color"
+                        android:textSize="@dimen/ad_template_full_title_text_size"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ad_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ad_template_full_desc_margin_top"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/ad_template_full_desc_text_color"
+                    android:textSize="@dimen/ad_template_full_desc_text_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/ad_call_to_action"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ad_template_full_cta_height"
+            android:layout_marginTop="@dimen/ad_template_full_cta_margin_top"
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            android:textColor="@color/ad_template_full_cta_text_color"
+            android:textSize="@dimen/ad_template_full_cta_text_size"
+            android:textStyle="bold">
+            <aapt:attr name="android:background">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/ad_template_full_cta_bg_color" />
+                    <corners android:radius="@dimen/ad_template_full_cta_radius" />
+                </shape>
+            </aapt:attr>
+        </Button>
+    </LinearLayout>
+
+</com.google.android.gms.ads.nativead.NativeAdView>

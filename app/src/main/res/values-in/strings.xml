@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Iklan</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Memuat data bahasa…</string>
+    <string name="language_applying">Menerapkan bahasa…</string>
+    <string name="language_applied">Perubahan diterapkan!</string>
+    <string name="onboarding_1_title">Efek seni dalam satu ketukan</string>
+    <string name="onboarding_1_desc">Ubah foto apa pun menjadi karya seni dengan puluhan filter.</string>
+    <string name="onboarding_2_title">Edit seperti pro</string>
+    <string name="onboarding_2_desc">Pangkas, sesuaikan, retus, dan tambahkan teks atau stiker.</string>
+    <string name="btn_next">Berikutnya</string>
+    <string name="btn_done">Selesai</string>
+    <string name="start_title">Semua sudah siap!</string>
+    <string name="start_subtitle">Ketuk Mulai untuk mengedit foto pertamamu.</string>
+    <string name="btn_start">Mulai</string>
+    <string name="cd_close">Tutup</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Masukan</string>
+    <string name="settings_privacy_options">Opsi Privasi</string>
+    <string name="settings_version">Versi %1$s</string>
+    <string name="feedback_email_subject">Masukan - %1$s</string>
+    <string name="exit_title">Keluar dari aplikasi?</string>
+    <string name="exit_message">Yakin ingin keluar?</string>
+    <string name="btn_exit">Keluar</string>
+    <string name="btn_cancel">Batal</string>
 </resources>

@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">Hirdetés</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">Nyelvi adatok betöltése…</string>
+    <string name="language_applying">Nyelv alkalmazása…</string>
+    <string name="language_applied">Módosítások alkalmazva!</string>
+    <string name="onboarding_1_title">Művészi effektek egy koppintással</string>
+    <string name="onboarding_1_desc">Varázsolj bármilyen fotót műalkotássá több tucat szűrővel.</string>
+    <string name="onboarding_2_title">Szerkessz profiként</string>
+    <string name="onboarding_2_desc">Vágás, igazítás, retusálás, szöveg vagy matrica hozzáadása.</string>
+    <string name="btn_next">Tovább</string>
+    <string name="btn_done">Kész</string>
+    <string name="start_title">Minden készen áll!</string>
+    <string name="start_subtitle">Koppints a Kezdés gombra az első fotód szerkesztéséhez.</string>
+    <string name="btn_start">Kezdés</string>
+    <string name="cd_close">Bezárás</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">Visszajelzés</string>
+    <string name="settings_privacy_options">Adatvédelmi beállítások</string>
+    <string name="settings_version">Verzió: %1$s</string>
+    <string name="feedback_email_subject">Visszajelzés - %1$s</string>
+    <string name="exit_title">Kilépsz az appból?</string>
+    <string name="exit_message">Biztosan kilépsz?</string>
+    <string name="btn_exit">Kilépés</string>
+    <string name="btn_cancel">Mégse</string>
 </resources>

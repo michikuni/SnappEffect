@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">تبلیغ</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">در حال بارگیری داده‌های زبان…</string>
+    <string name="language_applying">در حال اعمال زبان…</string>
+    <string name="language_applied">تغییرات اعمال شد!</string>
+    <string name="onboarding_1_title">افکت‌های هنری با یک لمس</string>
+    <string name="onboarding_1_desc">هر عکسی را با ده‌ها فیلتر به اثری هنری تبدیل کنید.</string>
+    <string name="onboarding_2_title">مثل حرفه‌ای‌ها ویرایش کنید</string>
+    <string name="onboarding_2_desc">برش، تنظیم، روتوش و افزودن متن یا استیکر.</string>
+    <string name="btn_next">بعدی</string>
+    <string name="btn_done">انجام شد</string>
+    <string name="start_title">همه‌چیز آماده است!</string>
+    <string name="start_subtitle">برای ویرایش اولین عکس خود روی شروع بزنید.</string>
+    <string name="btn_start">شروع</string>
+    <string name="cd_close">بستن</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">بازخورد</string>
+    <string name="settings_privacy_options">گزینه‌های حریم خصوصی</string>
+    <string name="settings_version">نسخه %1$s</string>
+    <string name="feedback_email_subject">بازخورد - %1$s</string>
+    <string name="exit_title">از برنامه خارج می‌شوید؟</string>
+    <string name="exit_message">مطمئنید می‌خواهید خارج شوید؟</string>
+    <string name="btn_exit">خروج</string>
+    <string name="btn_cancel">لغو</string>
 </resources>

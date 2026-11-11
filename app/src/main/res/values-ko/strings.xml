@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">광고</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">언어 데이터를 불러오는 중…</string>
+    <string name="language_applying">언어를 적용하는 중…</string>
+    <string name="language_applied">변경 사항이 적용되었습니다!</string>
+    <string name="onboarding_1_title">탭 한 번으로 아트 효과</string>
+    <string name="onboarding_1_desc">수십 가지 필터로 어떤 사진이든 작품으로 바꿔 보세요.</string>
+    <string name="onboarding_2_title">전문가처럼 편집</string>
+    <string name="onboarding_2_desc">자르기, 조정, 보정, 텍스트나 스티커 추가까지.</string>
+    <string name="btn_next">다음</string>
+    <string name="btn_done">완료</string>
+    <string name="start_title">모든 준비가 끝났습니다!</string>
+    <string name="start_subtitle">시작을 탭해 첫 사진을 편집해 보세요.</string>
+    <string name="btn_start">시작</string>
+    <string name="cd_close">닫기</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">피드백</string>
+    <string name="settings_privacy_options">개인정보 옵션</string>
+    <string name="settings_version">버전 %1$s</string>
+    <string name="feedback_email_subject">피드백 - %1$s</string>
+    <string name="exit_title">앱을 종료할까요?</string>
+    <string name="exit_message">정말 종료하시겠어요?</string>
+    <string name="btn_exit">종료</string>
+    <string name="btn_cancel">취소</string>
 </resources>

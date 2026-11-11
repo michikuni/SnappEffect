@@ -14,4 +14,29 @@
 
     <!-- Ads -->
     <string name="ad_attribution">מודעה</string>
+
+    <!-- Luồng mở app (theo AdmobBase) -->
+    <string name="language_loading">טוען נתוני שפה…</string>
+    <string name="language_applying">מחיל את השפה…</string>
+    <string name="language_applied">השינויים הוחלו!</string>
+    <string name="onboarding_1_title">אפקטים אמנותיים בנגיעה אחת</string>
+    <string name="onboarding_1_desc">הפכו כל תמונה ליצירת אמנות עם עשרות מסננים.</string>
+    <string name="onboarding_2_title">ערכו כמו מקצוענים</string>
+    <string name="onboarding_2_desc">חיתוך, כוונון, ריטוש והוספת טקסט או מדבקות.</string>
+    <string name="btn_next">הבא</string>
+    <string name="btn_done">סיום</string>
+    <string name="start_title">הכול מוכן!</string>
+    <string name="start_subtitle">הקישו על התחלה כדי לערוך את התמונה הראשונה שלכם.</string>
+    <string name="btn_start">התחלה</string>
+    <string name="cd_close">סגירה</string>
+
+    <!-- Cài đặt / thoát app -->
+    <string name="settings_feedback">משוב</string>
+    <string name="settings_privacy_options">אפשרויות פרטיות</string>
+    <string name="settings_version">גרסה %1$s</string>
+    <string name="feedback_email_subject">משוב - %1$s</string>
+    <string name="exit_title">לצאת מהאפליקציה?</string>
+    <string name="exit_message">בטוח שברצונך לצאת?</string>
+    <string name="btn_exit">יציאה</string>
+    <string name="btn_cancel">ביטול</string>
 </resources>

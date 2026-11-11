@@ -29,8 +29,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.mpcorporation.snapeffect.R
 
 /*
  * Skeleton + shimmer cho các ad inline (Native / Banner) lúc đang load.
@@ -80,10 +82,12 @@ private fun Bone(
     Box(modifier = modifier.clip(shape).background(brush))
 }
 
-/** Khung card giữ chỗ, mô phỏng nền + viền của native ad thật (bg_native_ad). */
+/** Khung card giữ chỗ, mô phỏng nền + viền của native ad thật. */
 @Composable
 private fun SkeletonCard(
     height: Dp,
+    padding: Dp,
+    radius: Dp,
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -91,10 +95,10 @@ private fun SkeletonCard(
         modifier = modifier
             .fillMaxWidth()
             .height(height)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(radius))
             .background(MaterialTheme.colorScheme.surface)
-            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(12.dp))
-            .padding(12.dp),
+            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(radius))
+            .padding(padding),
         content = content,
     )
 }
@@ -103,9 +107,14 @@ private fun SkeletonCard(
 @Composable
 fun NativeAdMediumSkeleton(placeholderHeight: Dp, modifier: Modifier = Modifier) {
     val brush = rememberShimmerBrush()
-    SkeletonCard(height = placeholderHeight, modifier = modifier) {
+    SkeletonCard(
+        height = placeholderHeight,
+        padding = dimensionResource(R.dimen.ad_template_medium_card_padding),
+        radius = dimensionResource(R.dimen.ad_template_medium_card_radius),
+        modifier = modifier,
+    ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Bone(Modifier.size(44.dp), brush, RoundedCornerShape(10.dp))
+            Bone(Modifier.size(dimensionResource(R.dimen.ad_template_medium_icon_width)), brush, RoundedCornerShape(10.dp))
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
                 Bone(Modifier.fillMaxWidth(0.5f).height(13.dp), brush)
@@ -117,7 +126,11 @@ fun NativeAdMediumSkeleton(placeholderHeight: Dp, modifier: Modifier = Modifier)
         // Media chiếm hết phần cao còn lại để tổng đúng bằng placeholderHeight.
         Bone(Modifier.fillMaxWidth().weight(1f), brush, RoundedCornerShape(8.dp))
         Spacer(Modifier.height(10.dp))
-        Bone(Modifier.fillMaxWidth().height(46.dp), brush, RoundedCornerShape(10.dp))
+        Bone(
+            Modifier.fillMaxWidth().height(dimensionResource(R.dimen.ad_template_medium_cta_height)),
+            brush,
+            RoundedCornerShape(dimensionResource(R.dimen.ad_template_medium_cta_radius)),
+        )
     }
 }
 
@@ -125,13 +138,22 @@ fun NativeAdMediumSkeleton(placeholderHeight: Dp, modifier: Modifier = Modifier)
 @Composable
 fun NativeAdHorizontalSkeleton(placeholderHeight: Dp, modifier: Modifier = Modifier) {
     val brush = rememberShimmerBrush()
-    SkeletonCard(height = placeholderHeight, modifier = modifier) {
+    SkeletonCard(
+        height = placeholderHeight,
+        padding = dimensionResource(R.dimen.ad_template_horizontal_card_padding),
+        radius = dimensionResource(R.dimen.ad_template_horizontal_card_radius),
+        modifier = modifier,
+    ) {
         Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
-            Bone(Modifier.width(130.dp).fillMaxHeight(), brush, RoundedCornerShape(8.dp))
+            Bone(
+                Modifier.width(dimensionResource(R.dimen.ad_template_horizontal_media_width)).fillMaxHeight(),
+                brush,
+                RoundedCornerShape(8.dp),
+            )
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f).fillMaxHeight()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Bone(Modifier.size(40.dp), brush, RoundedCornerShape(10.dp))
+                    Bone(Modifier.size(dimensionResource(R.dimen.ad_template_horizontal_icon_width)), brush, RoundedCornerShape(10.dp))
                     Spacer(Modifier.width(8.dp))
                     Column(Modifier.weight(1f)) {
                         Bone(Modifier.fillMaxWidth(0.45f).height(10.dp), brush)
@@ -148,7 +170,41 @@ fun NativeAdHorizontalSkeleton(placeholderHeight: Dp, modifier: Modifier = Modif
             }
         }
         Spacer(Modifier.height(10.dp))
-        Bone(Modifier.fillMaxWidth().height(46.dp), brush, RoundedCornerShape(10.dp))
+        Bone(
+            Modifier.fillMaxWidth().height(dimensionResource(R.dimen.ad_template_horizontal_cta_height)),
+            brush,
+            RoundedCornerShape(dimensionResource(R.dimen.ad_template_horizontal_cta_radius)),
+        )
+    }
+}
+
+/** Skeleton cho Native Full: media chiếm phần cao còn lại, (icon + text) và CTA ở đáy. */
+@Composable
+fun NativeAdFullSkeleton(modifier: Modifier = Modifier) {
+    val brush = rememberShimmerBrush()
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(dimensionResource(R.dimen.ad_template_full_card_padding))
+    ) {
+        Bone(Modifier.fillMaxWidth().weight(1f), brush, RoundedCornerShape(8.dp))
+        Spacer(Modifier.height(12.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Bone(Modifier.size(dimensionResource(R.dimen.ad_template_full_icon_width)), brush, RoundedCornerShape(10.dp))
+            Spacer(Modifier.width(10.dp))
+            Column(Modifier.weight(1f)) {
+                Bone(Modifier.fillMaxWidth(0.5f).height(13.dp), brush)
+                Spacer(Modifier.height(7.dp))
+                Bone(Modifier.fillMaxWidth(0.85f).height(11.dp), brush)
+            }
+        }
+        Spacer(Modifier.height(12.dp))
+        Bone(
+            Modifier.fillMaxWidth().height(dimensionResource(R.dimen.ad_template_full_cta_height)),
+            brush,
+            RoundedCornerShape(dimensionResource(R.dimen.ad_template_full_cta_radius)),
+        )
     }
 }
 
