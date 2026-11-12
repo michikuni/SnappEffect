@@ -103,7 +103,9 @@ android {
                 buildConfigField("String", name, "\"$id\"")
             }
 
-            isMinifyEnabled = false
+            // R8: rút gọn + làm rối mã DEX (Play Console yêu cầu tỷ lệ làm rối >= 25%)
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
