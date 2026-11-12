@@ -82,6 +82,8 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags("")
+                // Hỗ trợ page size 16KB (xem CMakeLists.txt)
+                arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
     }
