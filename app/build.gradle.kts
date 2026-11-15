@@ -75,13 +75,15 @@ android {
         applicationId = "com.mpcorporation.snapeffect"
         minSdk = 28
         targetSdk = 36
-        versionCode = 18
-        versionName = "3.0.1"
+        versionCode = 19
+        versionName = "3.0.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         externalNativeBuild {
             cmake {
                 cppFlags("")
+                // Hỗ trợ page size 16KB (xem CMakeLists.txt)
+                arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
     }
@@ -101,7 +103,9 @@ android {
                 buildConfigField("String", name, "\"$id\"")
             }
 
-            isMinifyEnabled = false
+            // R8: rút gọn + làm rối mã DEX (Play Console yêu cầu tỷ lệ làm rối >= 25%)
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

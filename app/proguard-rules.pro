@@ -19,3 +19,16 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# ---------------------------------------------------------------------------
+# SnapEffect
+# ---------------------------------------------------------------------------
+
+# Giữ số dòng cho stack trace Crashlytics (mapping.txt được plugin Crashlytics upload)
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
+
+# JNI: tên class + method native phải khớp symbol Java_com_mpcorporation_..._NativeImageProcessor_* trong libsnapeffect.so
+-keep class com.mpcorporation.snapeffect.data.image.NativeImageProcessor {
+    native <methods>;
+}
